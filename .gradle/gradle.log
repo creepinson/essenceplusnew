@@ -11,43 +11,39 @@ This mapping 'snapshot_20161220' was designed for MC 1.11! Use at your own peril
 #################################################
 :deobfCompileDummyTask
 :deobfProvidedDummyTask
-:getVersionJson
-:extractUserdev UP-TO-DATE
-:extractDependencyATs SKIPPED
+:sourceApiJava UP-TO-DATE
+:compileApiJava UP-TO-DATE
+:processApiResources UP-TO-DATE
+:apiClasses UP-TO-DATE
+:sourceMainJava UP-TO-DATE
+:compileJavaNote: Some input files use or override a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+Note: Some input files use unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+
+:processResources
+:classes
+:jar
+:sourceTestJava
+:compileTestJava UP-TO-DATE
+:processTestResources UP-TO-DATE
+:testClasses UP-TO-DATE
+:test UP-TO-DATE
 :extractMcpData SKIPPED
 :extractMcpMappings SKIPPED
+:getVersionJson
+:extractUserdev UP-TO-DATE
 :genSrgs SKIPPED
-:downloadClient SKIPPED
-:downloadServer SKIPPED
-:splitServerJar SKIPPED
-:mergeJars SKIPPED
-:deobfMcSRG SKIPPED
-:decompileMc SKIPPED
-:fixMcSources
-:applySourcePatches
-:remapMcSources
-:recompileMc
-:extractNatives SKIPPED
-:getAssetIndex UP-TO-DATE
-:getAssets
-Current status: 166/1196   13%
-Current status: 278/1196   23%
-Current status: 496/1196   41%
-Current status: 673/1196   56%
-Current status: 883/1196   73%
-Current status: 977/1196   81%
-Current status: 1058/1196   88%
-Current status: 1193/1196   99%
-:makeStart
-:setupDecompWorkspace
-:eclipseClasspath
-Download https://libraries.minecraft.net/com/mojang/authlib/1.5.24/authlib-1.5.24-sources.jar
-:eclipseJdt
-:eclipseProject
-:makeEclipseCleanRunClient
-:makeEclipseCleanRunServer
-:eclipse
+:reobfJar
+:extractRangemapReplacedMain
+/Users/theo/Desktop/MC/essenceplusnew/build/sources/main/java
+:retromapReplacedMain
+remapping source...
+:sourceJar
+:assemble
+:check UP-TO-DATE
+:build
 
 BUILD SUCCESSFUL
 
-Total time: 4 mins 30.693 secs
+Total time: 38.436 secs
