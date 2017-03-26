@@ -11,39 +11,41 @@ This mapping 'snapshot_20161220' was designed for MC 1.11! Use at your own peril
 #################################################
 :deobfCompileDummyTask
 :deobfProvidedDummyTask
-:sourceApiJava UP-TO-DATE
-:compileApiJava UP-TO-DATE
-:processApiResources UP-TO-DATE
-:apiClasses UP-TO-DATE
-:sourceMainJava UP-TO-DATE
-:compileJavaNote: Some input files use or override a deprecated API.
-Note: Recompile with -Xlint:deprecation for details.
-Note: Some input files use unchecked or unsafe operations.
-Note: Recompile with -Xlint:unchecked for details.
-
-:processResources
-:classes
-:jar
-:sourceTestJava
-:compileTestJava UP-TO-DATE
-:processTestResources UP-TO-DATE
-:testClasses UP-TO-DATE
-:test UP-TO-DATE
+:getVersionJson
+:extractUserdev
+:extractDependencyATs SKIPPED
 :extractMcpData SKIPPED
 :extractMcpMappings SKIPPED
-:getVersionJson
-:extractUserdev UP-TO-DATE
 :genSrgs SKIPPED
-:reobfJar
-:extractRangemapReplacedMain
-/Users/theo/Desktop/MC/essenceplusnew/build/sources/main/java
-:retromapReplacedMain
-remapping source...
-:sourceJar
-:assemble
-:check UP-TO-DATE
-:build
+:downloadClient SKIPPED
+:downloadServer SKIPPED
+:splitServerJar SKIPPED
+:mergeJars SKIPPED
+:deobfMcSRG
+Applying SpecialSource...
+Applying Exceptor...
+:decompileMc
+:fixMcSources
+:applySourcePatches
+:remapMcSources
+:recompileMc
+:extractNatives SKIPPED
+:getAssetIndex UP-TO-DATE
+:getAssets
+Current status: 226/1196   18%
+Current status: 460/1196   38%
+Current status: 685/1196   57%
+Current status: 921/1196   77%
+Current status: 1056/1196   88%
+:makeStart
+:setupDecompWorkspace
+:eclipseClasspath
+:eclipseJdt
+:eclipseProject
+:makeEclipseCleanRunClient UP-TO-DATE
+:makeEclipseCleanRunServer UP-TO-DATE
+:eclipse
 
 BUILD SUCCESSFUL
 
-Total time: 38.436 secs
+Total time: 6 mins 31.134 secs
