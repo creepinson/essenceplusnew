@@ -62,6 +62,7 @@ public class EntitySheep extends EntityAnimal implements net.minecraftforge.comm
             return false;
         }
     }, 2, 1);
+    /** Map from EnumDyeColor to RGB values for passage to GlStateManager.color() */
     private static final Map<EnumDyeColor, float[]> DYE_TO_RGB = Maps.newEnumMap(EnumDyeColor.class);
     /**
      * Used to control movement as well as wool regrowth. Set to 40 on handleHealthUpdate and counts down with each

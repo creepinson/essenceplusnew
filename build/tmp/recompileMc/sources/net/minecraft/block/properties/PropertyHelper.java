@@ -18,6 +18,9 @@ public abstract class PropertyHelper<T extends Comparable<T>> implements IProper
         return this.name;
     }
 
+    /**
+     * The class of the values of this property
+     */
     public Class<T> getValueClass()
     {
         return this.valueClass;

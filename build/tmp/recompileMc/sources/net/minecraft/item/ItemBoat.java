@@ -29,6 +29,9 @@ public class ItemBoat extends Item
         this.setUnlocalizedName("boat." + typeIn.getName());
     }
 
+    /**
+     * Called when the equipped item is right clicked.
+     */
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn)
     {
         ItemStack itemstack = playerIn.getHeldItem(handIn);

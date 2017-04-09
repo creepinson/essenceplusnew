@@ -97,6 +97,7 @@ public abstract class Entity implements ICommandSender, net.minecraftforge.commo
      * prevent spawning.
      */
     public boolean preventEntitySpawning;
+    /** List of entities that are riding this entity */
     private final List<Entity> riddenByEntities;
     protected int rideCooldown;
     private Entity ridingEntity;
@@ -3585,6 +3586,10 @@ public abstract class Entity implements ICommandSender, net.minecraftforge.commo
         return false;
     }
 
+    /**
+     * Recursively collects the passengers of this entity. This differs from getPassengers() in that passengers of
+     * passengers are recursively collected.
+     */
     public Collection<Entity> getRecursivePassengers()
     {
         Set<Entity> set = Sets.<Entity>newHashSet();
@@ -3592,6 +3597,9 @@ public abstract class Entity implements ICommandSender, net.minecraftforge.commo
         return set;
     }
 
+    /**
+     * Recursively collects the passengers of this entity with type denoted by the given class.
+     */
     public <T extends Entity> Collection<T> getRecursivePassengersByType(Class<T> entityClass)
     {
         Set<T> set = Sets.<T>newHashSet();
@@ -3599,6 +3607,9 @@ public abstract class Entity implements ICommandSender, net.minecraftforge.commo
         return set;
     }
 
+    /**
+     * Recursively collects the passengers of this entity with the type denoted by the given class into the given Set.
+     */
     private <T extends Entity> void getRecursivePassengersByType(Class<T> entityClass, Set<T> theSet)
     {
         for (Entity entity : this.getPassengers())

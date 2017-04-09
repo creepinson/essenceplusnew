@@ -67,6 +67,7 @@ public class EntityWither extends EntityMob implements IRangedAttackMob
     /** Time before the Wither tries to break blocks */
     private int blockBreakCounter;
     private final BossInfoServer bossInfo = (BossInfoServer)(new BossInfoServer(this.getDisplayName(), BossInfo.Color.PURPLE, BossInfo.Overlay.PROGRESS)).setDarkenSky(true);
+    /** Selector used to determine the entities a wither boss should attack. */
     private static final Predicate<Entity> NOT_UNDEAD = new Predicate<Entity>()
     {
         public boolean apply(@Nullable Entity p_apply_1_)

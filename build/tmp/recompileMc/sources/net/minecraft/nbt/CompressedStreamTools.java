@@ -88,9 +88,6 @@ public class CompressedStreamTools
      */
     public static NBTTagCompound read(DataInputStream inputStream) throws IOException
     {
-        /**
-         * Reads the given DataInput, constructs, and returns an NBTTagCompound with the data from the DataInput
-         */
         return read(inputStream, NBTSizeTracker.INFINITE);
     }
 

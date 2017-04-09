@@ -22,6 +22,7 @@ import org.apache.logging.log4j.Logger;
 public class NBTTagCompound extends NBTBase
 {
     private static final Logger field_191551_b = LogManager.getLogger();
+    /** The key-value pairs for the tag. Each key is a UTF string, each value is a tag. */
     private final Map<String, NBTBase> tagMap = Maps.<String, NBTBase>newHashMap();
 
     /**
@@ -65,6 +66,9 @@ public class NBTTagCompound extends NBTBase
         }
     }
 
+    /**
+     * Gets a set with the names of the keys in the tag compound.
+     */
     public Set<String> getKeySet()
     {
         return this.tagMap.keySet();

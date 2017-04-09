@@ -58,6 +58,9 @@ public abstract class Enchantment extends net.minecraftforge.fml.common.registry
         this.applicableEquipmentTypes = slots;
     }
 
+    /**
+     * Gets list of all the entity's currently equipped gear that this enchantment can go on
+     */
     public List<ItemStack> getEntityEquipment(EntityLivingBase entityIn)
     {
         List<ItemStack> list = Lists.<ItemStack>newArrayList();

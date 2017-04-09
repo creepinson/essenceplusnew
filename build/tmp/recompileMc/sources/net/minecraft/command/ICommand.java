@@ -19,6 +19,9 @@ public interface ICommand extends Comparable<ICommand>
      */
     String getUsage(ICommandSender sender);
 
+    /**
+     * Get a list of aliases for this command. <b>Never return null!</b>
+     */
     List<String> getAliases();
 
     /**
@@ -38,6 +41,14 @@ public interface ICommand extends Comparable<ICommand>
      */
     boolean checkPermission(MinecraftServer server, ICommandSender sender);
 
+    /**
+     * Get a list of options for when the user presses the TAB key
+     *  
+     * @param server The server instance
+     * @param sender The ICommandSender to get tab completions for
+     * @param args Any arguments that were present when TAB was pressed
+     * @param targetPos The block that the player's mouse is over, <tt>null</tt> if the mouse is not over a block
+     */
     List<String> getTabCompletions(MinecraftServer server, ICommandSender sender, String[] args, @Nullable BlockPos targetPos);
 
     /**

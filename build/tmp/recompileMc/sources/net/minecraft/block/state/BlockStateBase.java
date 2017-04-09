@@ -34,11 +34,18 @@ public abstract class BlockStateBase implements IBlockState
         }
     };
 
+    /**
+     * Create a version of this BlockState with the given property cycled to the next value in order. If the property
+     * was at the highest possible value, it is set to the lowest one instead.
+     */
     public <T extends Comparable<T>> IBlockState cycleProperty(IProperty<T> property)
     {
         return this.withProperty(property, cyclePropertyValue(property.getAllowedValues(), this.getValue(property)));
     }
 
+    /**
+     * Helper method for cycleProperty.
+     */
     protected static <T> T cyclePropertyValue(Collection<T> values, T currentValue)
     {
         Iterator<T> iterator = values.iterator();

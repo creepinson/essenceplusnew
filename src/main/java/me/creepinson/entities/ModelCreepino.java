@@ -29,13 +29,13 @@ public class ModelCreepino extends ModelBase {
 
         this.Head = new ModelRenderer(this, 0, 50);
         this.Head.setRotationPoint(-10.0F, -30.0F, 0.0F);
-        this.Head.addBox(0.0F, 0.0F, 0.0F, 16, 16, 16);
+        this.Head.addBox(0.0F, 2.0F, 0.0F, 16, 16, 16);
         this.Body = new ModelRenderer(this, 0, 0);
         this.Body.setRotationPoint(-6.5F, -20.0F, 1.5F);
-        this.Body.addBox(0.0F, 0.0F, 0.0F, 10, 24, 13);
+        this.Body.addBox(0.0F, 2.0F, 0.0F, 10, 24, 13);
         this.Leg = new ModelRenderer(this, 0, 0);
         this.Leg.setRotationPoint(-4.0F, 4.0F, 5.5F);
-        this.Leg.addBox(0.0F, 0.0F, 0.0F, 5, 22, 5);
+        this.Leg.addBox(0.0F, 2.0F, 0.0F, 5, 22, 5);
         this.ArmR = new ModelRenderer(this, 0, 0);
         this.ArmR.setRotationPoint(-4.0F, -6.0F, 14.5F);
         this.ArmR.addBox(0.0F, 0.0F, 0.0F, 5, 22, 5);
@@ -60,10 +60,7 @@ public class ModelCreepino extends ModelBase {
         this.Head.render(scale);
         this.Body.render(scale);
         this.Leg.render(scale);
-        this.ArmR.render(scale);
-        this.ShoulderR.render(scale);
-        this.ArmL.render(scale);
-        this.ShoulderL.render(scale);
+       
     }
 
     public void setRotation(ModelRenderer modelRenderer, float x, float y, float z) {
@@ -78,18 +75,14 @@ public class ModelCreepino extends ModelBase {
         
     }
     @Override
-    public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw,
-    		float headPitch, float scaleFactor, Entity entityIn) {
+    public void setRotationAngles(float f1, float f2, float f3, float f4,
+    		float f5, float f6, Entity f7) {
     	
-    	super.setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scaleFactor, entityIn);
-    	 this.Head.rotateAngleX = headPitch * 0.017453292F;
-         this.Head.rotateAngleY = netHeadYaw * 0.017453292F;
-         this.Body.rotateAngleX = ((float)Math.PI / 2F);
-         this.Leg.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;
-         this.ArmR.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float)Math.PI) * 1.4F * limbSwingAmount;
-         this.ArmL.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float)Math.PI) * 1.4F * limbSwingAmount;
-        
-    
+       	super.setRotationAngles(f1, f2, f3, f4, f5, f6, f7);
+   	 
+         this.Head.rotateAngleX = f4 / (180F / (float)Math.PI);
+         this.Head.rotateAngleY = f3 / (180F / (float)Math.PI);
+         this.Leg.rotateAngleX = MathHelper.cos(f1 * 0.6662F) * 1.4F * f2;
     
     }
     

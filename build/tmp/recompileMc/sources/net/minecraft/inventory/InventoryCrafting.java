@@ -9,6 +9,7 @@ import net.minecraft.util.text.TextComponentTranslation;
 
 public class InventoryCrafting implements IInventory
 {
+    /** List of the stacks in the crafting matrix. */
     private final NonNullList<ItemStack> stackList;
     /** the width of the crafting inventory */
     private final int inventoryWidth;

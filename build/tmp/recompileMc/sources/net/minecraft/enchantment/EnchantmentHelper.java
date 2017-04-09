@@ -68,6 +68,9 @@ public class EnchantmentHelper
         }
     }
 
+    /**
+     * Return the enchantments for the specified stack.
+     */
     public static Map<Enchantment, Integer> getEnchantments(ItemStack stack)
     {
         Map<Enchantment, Integer> map = Maps.<Enchantment, Integer>newLinkedHashMap();
@@ -277,17 +280,11 @@ public class EnchantmentHelper
 
     public static int func_191529_b(ItemStack p_191529_0_)
     {
-        /**
-         * Returns the level of enchantment on the ItemStack passed.
-         */
         return getEnchantmentLevel(Enchantments.LUCK_OF_THE_SEA, p_191529_0_);
     }
 
     public static int func_191528_c(ItemStack p_191528_0_)
     {
-        /**
-         * Returns the level of enchantment on the ItemStack passed.
-         */
         return getEnchantmentLevel(Enchantments.LURE, p_191528_0_);
     }
 
@@ -312,17 +309,11 @@ public class EnchantmentHelper
 
     public static boolean hasBindingCurse(ItemStack p_190938_0_)
     {
-        /**
-         * Returns the level of enchantment on the ItemStack passed.
-         */
         return getEnchantmentLevel(Enchantments.BINDING_CURSE, p_190938_0_) > 0;
     }
 
     public static boolean hasVanishingCurse(ItemStack p_190939_0_)
     {
-        /**
-         * Returns the level of enchantment on the ItemStack passed.
-         */
         return getEnchantmentLevel(Enchantments.VANISHING_CURSE, p_190939_0_) > 0;
     }
 
@@ -403,6 +394,10 @@ public class EnchantmentHelper
         return p_77504_1_;
     }
 
+    /**
+     * Create a list of random EnchantmentData (enchantments) that can be added together to the ItemStack, the 3rd
+     * parameter is the total enchantability level.
+     */
     public static List<EnchantmentData> buildEnchantmentList(Random randomIn, ItemStack itemStackIn, int p_77513_2_, boolean allowTreasure)
     {
         List<EnchantmentData> list = Lists.<EnchantmentData>newArrayList();

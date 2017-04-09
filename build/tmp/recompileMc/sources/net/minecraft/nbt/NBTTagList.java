@@ -11,6 +11,7 @@ import org.apache.logging.log4j.Logger;
 public class NBTTagList extends NBTBase
 {
     private static final Logger LOGGER = LogManager.getLogger();
+    /** The array list containing the tags encapsulated in this list. */
     private List<NBTBase> tagList = Lists.<NBTBase>newArrayList();
     /** The type byte for the tags in the list - they must all be of the same type. */
     private byte tagType = 0;

@@ -292,6 +292,14 @@ public class CommandSpreadPlayers extends CommandBase
         return acommandspreadplayers$position;
     }
 
+    /**
+     * Get a list of options for when the user presses the TAB key
+     *  
+     * @param server The server instance
+     * @param sender The ICommandSender to get tab completions for
+     * @param args Any arguments that were present when TAB was pressed
+     * @param targetPos The block that the player's mouse is over, <tt>null</tt> if the mouse is not over a block
+     */
     public List<String> getTabCompletions(MinecraftServer server, ICommandSender sender, String[] args, @Nullable BlockPos targetPos)
     {
         return args.length >= 1 && args.length <= 2 ? getTabCompletionCoordinateXZ(args, 0, targetPos) : Collections.<String>emptyList();

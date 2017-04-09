@@ -61,6 +61,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public abstract class EntityLiving extends EntityLivingBase
 {
+    /** First bit used for AI disabling, second bit used for marking entity as left handed */
     private static final DataParameter<Byte> AI_FLAGS = EntityDataManager.<Byte>createKey(EntityLiving.class, DataSerializers.BYTE);
     /** Number of ticks since this EntityLiving last produced its sound */
     public int livingSoundTime;

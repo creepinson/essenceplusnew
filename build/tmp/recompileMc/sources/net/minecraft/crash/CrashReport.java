@@ -29,6 +29,7 @@ public class CrashReport
     private final Throwable cause;
     /** Category of crash */
     private final CrashReportCategory theReportCategory = new CrashReportCategory(this, "System Details");
+    /** Holds the keys and values of all crash report sections. */
     private final List<CrashReportCategory> crashReportSections = Lists.<CrashReportCategory>newArrayList();
     /** File of crash report. */
     private File crashReportFile;

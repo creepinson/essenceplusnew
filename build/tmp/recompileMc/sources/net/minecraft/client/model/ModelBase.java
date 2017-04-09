@@ -15,7 +15,9 @@ public abstract class ModelBase
     public float swingProgress;
     public boolean isRiding;
     public boolean isChild = true;
+    /** This is a list of all the boxes (ModelRenderer.class) in the current model. */
     public List<ModelRenderer> boxList = Lists.<ModelRenderer>newArrayList();
+    /** A mapping for all texture offsets */
     private final Map<String, TextureOffset> modelTextureMap = Maps.<String, TextureOffset>newHashMap();
     public int textureWidth = 64;
     public int textureHeight = 32;

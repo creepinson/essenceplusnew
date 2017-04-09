@@ -268,6 +268,14 @@ public class CommandClone extends CommandBase
         }
     }
 
+    /**
+     * Get a list of options for when the user presses the TAB key
+     *  
+     * @param server The server instance
+     * @param sender The ICommandSender to get tab completions for
+     * @param args Any arguments that were present when TAB was pressed
+     * @param targetPos The block that the player's mouse is over, <tt>null</tt> if the mouse is not over a block
+     */
     public List<String> getTabCompletions(MinecraftServer server, ICommandSender sender, String[] args, @Nullable BlockPos targetPos)
     {
         return args.length > 0 && args.length <= 3 ? getTabCompletionCoordinate(args, 0, targetPos) : (args.length > 3 && args.length <= 6 ? getTabCompletionCoordinate(args, 3, targetPos) : (args.length > 6 && args.length <= 9 ? getTabCompletionCoordinate(args, 6, targetPos) : (args.length == 10 ? getListOfStringsMatchingLastWord(args, new String[] {"replace", "masked", "filtered"}): (args.length == 11 ? getListOfStringsMatchingLastWord(args, new String[] {"normal", "force", "move"}): (args.length == 12 && "filtered".equals(args[9]) ? getListOfStringsMatchingLastWord(args, Block.REGISTRY.getKeys()) : Collections.<String>emptyList())))));

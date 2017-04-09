@@ -79,7 +79,9 @@ public class MetadataSerializer
     @SideOnly(Side.CLIENT)
     class Registration<T extends IMetadataSection>
     {
+        /** The IMetadataSectionSerializer associated with the class registered */
         final IMetadataSectionSerializer<T> section;
+        /** The class registered */
         final Class<T> clazz;
 
         private Registration(IMetadataSectionSerializer<T> metadataSectionSerializer, Class<T> clazzToRegister)

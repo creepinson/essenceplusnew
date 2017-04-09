@@ -26,7 +26,9 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class InventoryPlayer implements IInventory
 {
+    /** An array of 36 item stacks indicating the main player inventory (including the visible bar). */
     public final NonNullList<ItemStack> mainInventory = NonNullList.<ItemStack>withSize(36, ItemStack.EMPTY);
+    /** An array of 4 item stacks containing the currently worn armor pieces. */
     public final NonNullList<ItemStack> armorInventory = NonNullList.<ItemStack>withSize(4, ItemStack.EMPTY);
     public final NonNullList<ItemStack> offHandInventory = NonNullList.<ItemStack>withSize(1, ItemStack.EMPTY);
     private final List<NonNullList<ItemStack>> allInventories;

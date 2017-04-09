@@ -118,6 +118,9 @@ public class ItemSword extends Item
         return super.getIsRepairable(toRepair, repair);
     }
 
+    /**
+     * Gets a map of item attribute modifiers, used by ItemSword to increase hit damage.
+     */
     public Multimap<String, AttributeModifier> getItemAttributeModifiers(EntityEquipmentSlot equipmentSlot)
     {
         Multimap<String, AttributeModifier> multimap = super.getItemAttributeModifiers(equipmentSlot);

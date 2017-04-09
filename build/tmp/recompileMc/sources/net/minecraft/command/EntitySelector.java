@@ -72,6 +72,10 @@ public class EntitySelector
             return p_apply_1_ != null && (EntitySelector.VALID_ARGUMENTS.contains(p_apply_1_) || p_apply_1_.length() > "score_".length() && p_apply_1_.startsWith("score_"));
         }
     };
+    /**
+     * A set of arguments that will change the selector's world list to the sender's world instead of all the worlds
+     * when present
+     */
     private static final Set<String> WORLD_BINDING_ARGS = Sets.newHashSet(new String[] {ARGUMENT_COORDINATE_X, ARGUMENT_COORDINATE_Y, ARGUMENT_COORDINATE_Z, ARGUMENT_DELTA_X, ARGUMENT_DELTA_Y, ARGUMENT_DELTA_Z, ARGUMENT_RANGE_MIN, ARGUMENT_RANGE_MAX});
 
     private static String addArgument(String argument)
@@ -89,6 +93,10 @@ public class EntitySelector
         return (EntityPlayerMP)matchOneEntity(sender, token, EntityPlayerMP.class);
     }
 
+    /**
+     * Returns one entity of the given class that matches the given at-token. Returns null if more than one entity
+     * matches.
+     */
     @Nullable
     public static <T extends Entity> T matchOneEntity(ICommandSender sender, String token, Class <? extends T > targetClass) throws CommandException
     {
@@ -118,6 +126,9 @@ public class EntitySelector
         }
     }
 
+    /**
+     * Returns all entities of the given class that matches the given at-token in a list.
+     */
     public static <T extends Entity> List<T> matchEntities(ICommandSender sender, String token, Class <? extends T > targetClass) throws CommandException
     {
         Matcher matcher = TOKEN_PATTERN.matcher(token);
@@ -166,6 +177,10 @@ public class EntitySelector
         }
     }
 
+    /**
+     * Returns the worlds to match the entities in for the specified command sender and token. This returns the sender's
+     * world if the selector specifies a location or all currently loaded worlds on the server if not.
+     */
     private static List<World> getWorlds(ICommandSender sender, Map<String, String> argumentMap)
     {
         List<World> list = Lists.<World>newArrayList();
@@ -182,6 +197,9 @@ public class EntitySelector
         return list;
     }
 
+    /**
+     * Checks to make sure that the specified type is valid
+     */
     private static <T extends Entity> boolean isEntityTypeValid(ICommandSender commandSender, Map<String, String> params)
     {
         String s = getArgument(params, ARGUMENT_ENTITY_TYPE);
@@ -549,6 +567,9 @@ public class EntitySelector
         return list;
     }
 
+    /**
+     * Filters the results based on the paramaters of the selector
+     */
     private static <T extends Entity> List<T> filterResults(Map<String, String> params, Class <? extends T > entityClass, List<Predicate<Entity>> inputList, String type, World worldIn, BlockPos position)
     {
         List<T> list = Lists.<T>newArrayList();
@@ -753,6 +774,9 @@ public class EntitySelector
         return TOKEN_PATTERN.matcher(selectorStr).matches();
     }
 
+    /**
+     * Parses the given argument string, turning it into a HashMap&lt;String, String&gt; of name-&gt;value.
+     */
     private static Map<String, String> getArgumentMap(@Nullable String argumentString) throws CommandException
     {
         Map<String, String> map = Maps.<String, String>newHashMap();

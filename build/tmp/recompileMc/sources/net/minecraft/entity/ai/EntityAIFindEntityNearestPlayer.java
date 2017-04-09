@@ -21,6 +21,7 @@ public class EntityAIFindEntityNearestPlayer extends EntityAIBase
     private static final Logger LOGGER = LogManager.getLogger();
     /** The entity that use this AI */
     private final EntityLiving entityLiving;
+    /** Use to determine if an entity correspond to specification */
     private final Predicate<Entity> predicate;
     /** Used to compare two entities */
     private final EntityAINearestAttackableTarget.Sorter sorter;

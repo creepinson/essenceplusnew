@@ -71,7 +71,9 @@ public class NetworkSystem
     private final MinecraftServer mcServer;
     /** True if this NetworkSystem has never had his endpoints terminated */
     public volatile boolean isAlive;
+    /** Contains all endpoints added to this NetworkSystem */
     private final List<ChannelFuture> endpoints = Collections.<ChannelFuture>synchronizedList(Lists.<ChannelFuture>newArrayList());
+    /** A list containing all NetworkManager instances of all endpoints */
     private final List<NetworkManager> networkManagers = Collections.<NetworkManager>synchronizedList(Lists.<NetworkManager>newArrayList());
 
     public NetworkSystem(MinecraftServer server)

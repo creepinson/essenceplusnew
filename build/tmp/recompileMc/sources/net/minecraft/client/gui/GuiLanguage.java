@@ -103,7 +103,9 @@ public class GuiLanguage extends GuiScreen
     @SideOnly(Side.CLIENT)
     class List extends GuiSlot
     {
+        /** A list containing the many different locale language codes. */
         private final java.util.List<String> langCodeList = Lists.<String>newArrayList();
+        /** The map containing the Locale-Language pairs. */
         private final Map<String, Language> languageMap = Maps.<String, Language>newHashMap();
 
         public List(Minecraft mcIn)

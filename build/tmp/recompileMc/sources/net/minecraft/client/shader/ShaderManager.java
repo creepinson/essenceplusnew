@@ -35,6 +35,7 @@ public class ShaderManager
     private static ShaderManager staticShaderManager;
     private static int currentProgram = -1;
     private static boolean lastCull = true;
+    /** maps sampler names to their texture */
     private final Map<String, Object> shaderSamplers = Maps.<String, Object>newHashMap();
     private final List<String> samplerNames = Lists.<String>newArrayList();
     private final List<Integer> shaderSamplerLocations = Lists.<Integer>newArrayList();

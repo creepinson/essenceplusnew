@@ -87,6 +87,9 @@ public abstract class CommandBase implements ICommand
         return 4;
     }
 
+    /**
+     * Get a list of aliases for this command. <b>Never return null!</b>
+     */
     public List<String> getAliases()
     {
         return Collections.<String>emptyList();
@@ -103,6 +106,14 @@ public abstract class CommandBase implements ICommand
         return sender.canUseCommand(this.getRequiredPermissionLevel(), this.getName());
     }
 
+    /**
+     * Get a list of options for when the user presses the TAB key
+     *  
+     * @param server The server instance
+     * @param sender The ICommandSender to get tab completions for
+     * @param args Any arguments that were present when TAB was pressed
+     * @param targetPos The block that the player's mouse is over, <tt>null</tt> if the mouse is not over a block
+     */
     public List<String> getTabCompletions(MinecraftServer server, ICommandSender sender, String[] args, @Nullable BlockPos targetPos)
     {
         return Collections.<String>emptyList();
@@ -797,10 +808,6 @@ public abstract class CommandBase implements ICommand
      */
     public static String joinNiceStringFromCollection(Collection<String> strings)
     {
-        /**
-         * Creates a linguistic series joining the input objects together.  Examples: 1) {} --> "",  2) {"Steve"} -->
-         * "Steve",  3) {"Steve", "Phil"} --> "Steve and Phil",  4) {"Steve", "Phil", "Mark"} --> "Steve, Phil and Mark"
-         */
         return joinNiceString(strings.toArray(new String[strings.size()]));
     }
 
@@ -874,6 +881,10 @@ public abstract class CommandBase implements ICommand
         return region.regionMatches(true, 0, original, 0, original.length());
     }
 
+    /**
+     * Returns a List of strings (chosen from the given strings) which the last word in the given string array is a
+     * beginning-match for. (Tab completion).
+     */
     public static List<String> getListOfStringsMatchingLastWord(String[] args, String... possibilities)
     {
         return getListOfStringsMatchingLastWord(args, Arrays.asList(possibilities));

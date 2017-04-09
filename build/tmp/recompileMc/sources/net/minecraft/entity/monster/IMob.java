@@ -7,6 +7,7 @@ import net.minecraft.entity.passive.IAnimals;
 
 public interface IMob extends IAnimals
 {
+    /** Entity selector for IMob types. */
     Predicate<Entity> MOB_SELECTOR = new Predicate<Entity>()
     {
         public boolean apply(@Nullable Entity p_apply_1_)
@@ -14,6 +15,7 @@ public interface IMob extends IAnimals
             return p_apply_1_ instanceof IMob;
         }
     };
+    /** Entity selector for IMob types that are not invisible */
     Predicate<Entity> VISIBLE_MOB_SELECTOR = new Predicate<Entity>()
     {
         public boolean apply(@Nullable Entity p_apply_1_)

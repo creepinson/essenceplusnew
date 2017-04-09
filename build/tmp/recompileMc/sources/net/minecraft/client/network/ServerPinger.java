@@ -50,6 +50,7 @@ public class ServerPinger
 {
     private static final Splitter PING_RESPONSE_SPLITTER = Splitter.on('\u0000').limit(6);
     private static final Logger LOGGER = LogManager.getLogger();
+    /** A list of NetworkManagers that have pending pings */
     private final List<NetworkManager> pingDestinations = Collections.<NetworkManager>synchronizedList(Lists.<NetworkManager>newArrayList());
 
     public void ping(final ServerData server) throws UnknownHostException

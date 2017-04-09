@@ -105,7 +105,9 @@ public class RenderGlobal implements IWorldEventListener, IResourceManagerReload
     private final RenderManager renderManager;
     private WorldClient world;
     private Set<RenderChunk> chunksToUpdate = Sets.<RenderChunk>newLinkedHashSet();
+    /** List of OpenGL lists for the current render pass */
     private List<RenderGlobal.ContainerLocalRenderInformation> renderInfos = Lists.<RenderGlobal.ContainerLocalRenderInformation>newArrayListWithCapacity(69696);
+    /** Global tile entities, always rendered (beacon, end teleporter, structures) */
     private final Set<TileEntity> setTileEntities = Sets.<TileEntity>newHashSet();
     private ViewFrustum viewFrustum;
     /** The star GL Call list */
@@ -120,7 +122,12 @@ public class RenderGlobal implements IWorldEventListener, IResourceManagerReload
     private net.minecraft.client.renderer.vertex.VertexBuffer sky2VBO;
     /** counts the cloud render updates. Used with mod to stagger some updates */
     private int cloudTickCounter;
+    /**
+     * Stores blocks currently being broken. Key is entity ID of the thing doing the breaking. Value is a
+     * DestroyBlockProgress
+     */
     private final Map<Integer, DestroyBlockProgress> damagedBlocks = Maps.<Integer, DestroyBlockProgress>newHashMap();
+    /** Currently playing sounds.  Type:  HashMap<ChunkCoordinates, ISound> */
     private final Map<BlockPos, ISound> mapSoundPositions = Maps.<BlockPos, ISound>newHashMap();
     private final TextureAtlasSprite[] destroyBlockIcons = new TextureAtlasSprite[10];
     private Framebuffer entityOutlineFramebuffer;

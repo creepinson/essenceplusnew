@@ -105,6 +105,7 @@ public class EntityTrackerEntry
     private boolean ridingEntity;
     private boolean onGround;
     public boolean playerEntitiesUpdated;
+    /** Holds references to all the players that are currently receiving position updates for this entity. */
     public final Set<EntityPlayerMP> trackingPlayers = Sets.<EntityPlayerMP>newHashSet();
 
     public EntityTrackerEntry(Entity entityIn, int rangeIn, int maxRangeIn, int updateFrequencyIn, boolean sendVelocityUpdatesIn)
@@ -502,6 +503,9 @@ public class EntityTrackerEntry
         }
     }
 
+    /**
+     * Creates a spawn packet for the entity managed by this entry.
+     */
     private Packet<?> createSpawnPacket()
     {
         if (this.trackedEntity.isDead)

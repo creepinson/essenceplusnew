@@ -114,14 +114,18 @@ public class CommandWhitelist extends CommandBase
         }
     }
 
+    /**
+     * Get a list of options for when the user presses the TAB key
+     *  
+     * @param server The server instance
+     * @param sender The ICommandSender to get tab completions for
+     * @param args Any arguments that were present when TAB was pressed
+     * @param targetPos The block that the player's mouse is over, <tt>null</tt> if the mouse is not over a block
+     */
     public List<String> getTabCompletions(MinecraftServer server, ICommandSender sender, String[] args, @Nullable BlockPos targetPos)
     {
         if (args.length == 1)
         {
-            /**
-             * Returns a List of strings (chosen from the given strings) which the last word in the given string array
-             * is a beginning-match for. (Tab completion).
-             */
             return getListOfStringsMatchingLastWord(args, new String[] {"on", "off", "list", "add", "remove", "reload"});
         }
         else
@@ -130,19 +134,11 @@ public class CommandWhitelist extends CommandBase
             {
                 if ("remove".equals(args[0]))
                 {
-                    /**
-                     * Returns a List of strings (chosen from the given strings) which the last word in the given string
-                     * array is a beginning-match for. (Tab completion).
-                     */
                     return getListOfStringsMatchingLastWord(args, server.getPlayerList().getWhitelistedPlayerNames());
                 }
 
                 if ("add".equals(args[0]))
                 {
-                    /**
-                     * Returns a List of strings (chosen from the given strings) which the last word in the given string
-                     * array is a beginning-match for. (Tab completion).
-                     */
                     return getListOfStringsMatchingLastWord(args, server.getPlayerProfileCache().getUsernames());
                 }
             }

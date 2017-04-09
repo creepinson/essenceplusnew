@@ -123,6 +123,10 @@ public class EntityPlayerMP extends EntityPlayer implements IContainerListener
     public double managedPosX;
     /** player Z position as seen by PlayerManager */
     public double managedPosZ;
+    /**
+     * This is a queue that contains the entity IDs of entties that need to be removed on the client. Adding an entity
+     * ID to this queue will cause a SPacketDestroyEntities to be sent to the client.
+     */
     private final List<Integer> entityRemoveQueue = Lists.<Integer>newLinkedList();
     private final StatisticsManagerServer statsFile;
     /** the total health of the player, includes actual health and absorption health. Updated every tick. */

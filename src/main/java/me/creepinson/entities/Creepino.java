@@ -115,7 +115,10 @@ public EntityArrowCustom(World worldIn, EntityLivingBase shooter) {super(worldIn
 	        this.isImmuneToFire = false;
 	        addRandomArmor();
 			setNoAI(!true);
-        	this.tasks.addTask(0, new EntityAISwimming(this));
+            setCustomNameTag("Dinnerbone"); 
+            setAlwaysRenderNameTag(false);
+			
+			this.tasks.addTask(0, new EntityAISwimming(this));
 this.tasks.addTask(6, new EntityAIWander(this, 1.0D));
 this.tasks.addTask(8, new EntityAILookIdle(this));
 this.tasks.addTask(2, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
@@ -224,6 +227,7 @@ this.world.spawnEntity(entityarrow);
 			
 			
 		}
+
 
 		@Override
 		public void fall(float l, float d){
@@ -335,8 +339,13 @@ armL.render(par7);
 armR.render(par7);
 }
 @Override
-public void setRotationAngles(float par1, float par2, float par3, float par4, float par5, float par6, Entity par7Entity) {}
+public void setRotationAngles(float par1, float par2, float par3, float par4, float par5, float par6, Entity par7Entity) {
 
+this.head.rotateAngleX = par4 / (180F / (float)Math.PI);
+this.head.rotateAngleY = par3 / (180F / (float)Math.PI);
+this.leg.rotateAngleX = MathHelper.cos(par1 * 0.6662F) * 1.4F * par2;
+
+}
 public ModelRenderer getModelRendererFromName(String name)
 {
 return parts.get(name);

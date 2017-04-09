@@ -57,11 +57,16 @@ public class SoundManager
     private boolean loaded;
     /** A counter for how long the sound manager has been running */
     private int playTime;
+    /** Identifiers of all currently playing sounds. Type: HashBiMap<String, ISound> */
     private final Map<String, ISound> playingSounds = HashBiMap.<String, ISound>create();
+    /** Inverse map of currently playing sounds, automatically mirroring changes in original map */
     private final Map<ISound, String> invPlayingSounds;
     private final Multimap<SoundCategory, String> categorySounds;
+    /** A subset of playingSounds, this contains only ITickableSounds */
     private final List<ITickableSound> tickableSounds;
+    /** Contains sounds to play in n ticks.  Type: HashMap<ISound, Integer> */
     private final Map<ISound, Integer> delayedSounds;
+    /** The future time in which to stop this sound.  Type: HashMap<String, Integer> */
     private final Map<String, Integer> playingSoundsStopTime;
     private final List<ISoundEventListener> listeners;
     private final List<String> pausedChannels;

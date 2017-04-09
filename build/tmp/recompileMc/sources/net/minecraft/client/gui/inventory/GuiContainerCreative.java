@@ -978,6 +978,7 @@ public class GuiContainerCreative extends InventoryEffectRenderer
     @SideOnly(Side.CLIENT)
     static class ContainerCreative extends Container
         {
+            /** the list of items in this container */
             public NonNullList<ItemStack> itemList = NonNullList.<ItemStack>create();
 
             public ContainerCreative(EntityPlayer player)

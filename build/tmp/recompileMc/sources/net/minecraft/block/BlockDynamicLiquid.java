@@ -214,6 +214,9 @@ public class BlockDynamicLiquid extends BlockLiquid
         return this.blockMaterial == Material.LAVA && !worldIn.provider.doesWaterVaporize() ? 2 : 4;
     }
 
+    /**
+     * This method returns a Set of EnumFacing
+     */
     private Set<EnumFacing> getPossibleFlowDirections(World worldIn, BlockPos pos)
     {
         int i = 1000;

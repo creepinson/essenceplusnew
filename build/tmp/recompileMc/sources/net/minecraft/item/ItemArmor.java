@@ -227,6 +227,9 @@ public class ItemArmor extends Item
         return super.getIsRepairable(toRepair, repair);
     }
 
+    /**
+     * Called when the equipped item is right clicked.
+     */
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn)
     {
         ItemStack itemstack = playerIn.getHeldItem(handIn);
@@ -245,6 +248,9 @@ public class ItemArmor extends Item
         }
     }
 
+    /**
+     * Gets a map of item attribute modifiers, used by ItemSword to increase hit damage.
+     */
     public Multimap<String, AttributeModifier> getItemAttributeModifiers(EntityEquipmentSlot equipmentSlot)
     {
         Multimap<String, AttributeModifier> multimap = super.getItemAttributeModifiers(equipmentSlot);

@@ -1454,9 +1454,6 @@ public class Block extends net.minecraftforge.fml.common.registry.IForgeRegistry
      */
     public int quantityDropped(IBlockState state, int fortune, Random random)
     {
-        /**
-         * Get the quantity dropped based on the given fortune level
-         */
         return quantityDroppedWithBonus(fortune, random);
     }
 
@@ -1595,10 +1592,6 @@ public class Block extends net.minecraftforge.fml.common.registry.IForgeRegistry
      */
     public boolean isBedFoot(IBlockAccess world, BlockPos pos)
     {
-        /**
-         * Get the actual Block state of this Block at the given position. This applies properties not visible in the
-         * metadata, such as fence connections.
-         */
         return getActualState(world.getBlockState(pos), world, pos).getValue(BlockBed.PART) == BlockBed.EnumPartType.FOOT;
     }
 
@@ -1686,9 +1679,6 @@ public class Block extends net.minecraftforge.fml.common.registry.IForgeRegistry
      */
     public float getExplosionResistance(World world, BlockPos pos, Entity exploder, Explosion explosion)
     {
-        /**
-         * Returns how much this block can resist explosions from the passed in entity.
-         */
         return getExplosionResistance(exploder);
     }
 
@@ -2342,10 +2332,6 @@ public class Block extends net.minecraftforge.fml.common.registry.IForgeRegistry
      */
     public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand)
     {
-        /**
-         * Called by ItemBlocks just before a block is actually set in the world, to allow for adjustments to the
-         * IBlockstate
-         */
         return getStateForPlacement(world, pos, facing, hitX, hitY, hitZ, meta, placer);
     }
 

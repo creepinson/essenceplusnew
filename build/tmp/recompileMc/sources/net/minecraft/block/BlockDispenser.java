@@ -36,6 +36,7 @@ public class BlockDispenser extends BlockContainer
 {
     public static final PropertyDirection FACING = BlockDirectional.FACING;
     public static final PropertyBool TRIGGERED = PropertyBool.create("triggered");
+    /** Registry for all dispense behaviors. */
     public static final RegistryDefaulted<Item, IBehaviorDispenseItem> DISPENSE_BEHAVIOR_REGISTRY = new RegistryDefaulted(new BehaviorDefaultDispenseItem());
     protected Random rand = new Random();
 

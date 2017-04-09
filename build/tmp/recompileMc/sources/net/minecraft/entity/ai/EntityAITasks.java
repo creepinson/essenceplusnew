@@ -11,7 +11,9 @@ import org.apache.logging.log4j.Logger;
 public class EntityAITasks
 {
     private static final Logger LOGGER = LogManager.getLogger();
+    /** A list of EntityAITaskEntrys in EntityAITasks. */
     public final Set<EntityAITasks.EntityAITaskEntry> taskEntries = Sets.<EntityAITasks.EntityAITaskEntry>newLinkedHashSet();
+    /** A list of EntityAITaskEntrys that are currently being executed. */
     private final Set<EntityAITasks.EntityAITaskEntry> executingTaskEntries = Sets.<EntityAITasks.EntityAITaskEntry>newLinkedHashSet();
     /** Instance of Profiler. */
     private final Profiler theProfiler;

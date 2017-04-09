@@ -127,6 +127,9 @@ public class ShaderLoader
             return this.shaderMode;
         }
 
+        /**
+         * gets a map of loaded shaders for the ShaderType.
+         */
         private Map<String, ShaderLoader> getLoadedShaders()
         {
             return this.loadedShaders;

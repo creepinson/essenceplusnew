@@ -8,7 +8,9 @@ import net.minecraft.entity.EntityLiving;
 public class EntitySenses
 {
     EntityLiving entityObj;
+    /** Cache of entities which we can see */
     List<Entity> seenEntities = Lists.<Entity>newArrayList();
+    /** Cache of entities which we cannot see */
     List<Entity> unseenEntities = Lists.<Entity>newArrayList();
 
     public EntitySenses(EntityLiving entityObjIn)

@@ -52,7 +52,9 @@ public class EntityTracker
 {
     private static final Logger LOGGER = LogManager.getLogger();
     private final WorldServer world;
+    /** List of tracked entities, used for iteration operations on tracked entities. */
     private final Set<EntityTrackerEntry> entries = Sets.<EntityTrackerEntry>newHashSet();
+    /** Used for identity lookup of tracked entities. */
     private final IntHashMap<EntityTrackerEntry> trackedEntityHashTable = new IntHashMap();
     private int maxTrackingDistanceThreshold;
 

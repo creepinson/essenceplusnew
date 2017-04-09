@@ -85,6 +85,9 @@ public class ItemFood extends Item
         return EnumAction.EAT;
     }
 
+    /**
+     * Called when the equipped item is right clicked.
+     */
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn)
     {
         ItemStack itemstack = playerIn.getHeldItem(handIn);

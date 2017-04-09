@@ -121,6 +121,9 @@ public class ItemHoe extends Item
         return this.theToolMaterial.toString();
     }
 
+    /**
+     * Gets a map of item attribute modifiers, used by ItemSword to increase hit damage.
+     */
     public Multimap<String, AttributeModifier> getItemAttributeModifiers(EntityEquipmentSlot equipmentSlot)
     {
         Multimap<String, AttributeModifier> multimap = super.getItemAttributeModifiers(equipmentSlot);

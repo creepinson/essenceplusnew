@@ -76,6 +76,7 @@ public class NetworkManager extends SimpleChannelInboundHandler < Packet<? >>
         }
     };
     private final EnumPacketDirection direction;
+    /** The queue for packets that require transmission */
     private final Queue<NetworkManager.InboundHandlerTuplePacketListener> outboundPacketsQueue = Queues.<NetworkManager.InboundHandlerTuplePacketListener>newConcurrentLinkedQueue();
     private final ReentrantReadWriteLock readWriteLock = new ReentrantReadWriteLock();
     /** The active channel */

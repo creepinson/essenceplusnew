@@ -11,6 +11,7 @@ public class ShapelessRecipes implements IRecipe
 {
     /** Is the ItemStack that you get when craft the recipe. */
     private final ItemStack recipeOutput;
+    /** Is a List of ItemStack that composes the recipe. */
     public final List<ItemStack> recipeItems;
 
     public ShapelessRecipes(ItemStack output, List<ItemStack> inputList)

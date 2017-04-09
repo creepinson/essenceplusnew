@@ -10,8 +10,12 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class SoundRegistry extends RegistrySimple<ResourceLocation, SoundEventAccessor>
 {
+    /** Contains all registered sound */
     private Map<ResourceLocation, SoundEventAccessor> soundRegistry;
 
+    /**
+     * Creates the Map we will use to map keys to their registered values.
+     */
     protected Map<ResourceLocation, SoundEventAccessor> createUnderlyingMap()
     {
         this.soundRegistry = Maps.<ResourceLocation, SoundEventAccessor>newHashMap();

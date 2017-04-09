@@ -17,6 +17,9 @@ import net.minecraft.util.text.TextFormatting;
 
 public class CommandMessage extends CommandBase
 {
+    /**
+     * Get a list of aliases for this command. <b>Never return null!</b>
+     */
     public List<String> getAliases()
     {
         return Arrays.<String>asList(new String[] {"w", "msg"});
@@ -82,12 +85,16 @@ public class CommandMessage extends CommandBase
         }
     }
 
+    /**
+     * Get a list of options for when the user presses the TAB key
+     *  
+     * @param server The server instance
+     * @param sender The ICommandSender to get tab completions for
+     * @param args Any arguments that were present when TAB was pressed
+     * @param targetPos The block that the player's mouse is over, <tt>null</tt> if the mouse is not over a block
+     */
     public List<String> getTabCompletions(MinecraftServer server, ICommandSender sender, String[] args, @Nullable BlockPos targetPos)
     {
-        /**
-         * Returns a List of strings (chosen from the given strings) which the last word in the given string array is a
-         * beginning-match for. (Tab completion).
-         */
         return getListOfStringsMatchingLastWord(args, server.getOnlinePlayerNames());
     }
 

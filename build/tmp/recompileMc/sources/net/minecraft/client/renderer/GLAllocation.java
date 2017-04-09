@@ -60,10 +60,6 @@ public class GLAllocation
      */
     public static IntBuffer createDirectIntBuffer(int capacity)
     {
-        /**
-         * Creates and returns a direct byte buffer with the specified capacity. Applies native ordering to speed up
-         * access.
-         */
         return createDirectByteBuffer(capacity << 2).asIntBuffer();
     }
 
@@ -73,10 +69,6 @@ public class GLAllocation
      */
     public static FloatBuffer createDirectFloatBuffer(int capacity)
     {
-        /**
-         * Creates and returns a direct byte buffer with the specified capacity. Applies native ordering to speed up
-         * access.
-         */
         return createDirectByteBuffer(capacity << 2).asFloatBuffer();
     }
 }

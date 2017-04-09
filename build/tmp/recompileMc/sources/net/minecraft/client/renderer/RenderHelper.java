@@ -53,9 +53,6 @@ public class RenderHelper
      */
     private static FloatBuffer setColorBuffer(double p_74517_0_, double p_74517_2_, double p_74517_4_, double p_74517_6_)
     {
-        /**
-         * Update and return colorBuffer with the RGBA values passed as arguments
-         */
         return setColorBuffer((float)p_74517_0_, (float)p_74517_2_, (float)p_74517_4_, (float)p_74517_6_);
     }
 

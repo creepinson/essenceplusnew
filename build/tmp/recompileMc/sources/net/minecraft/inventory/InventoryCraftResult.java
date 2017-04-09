@@ -9,6 +9,7 @@ import net.minecraft.util.text.TextComponentTranslation;
 
 public class InventoryCraftResult implements IInventory
 {
+    /** A list of one item containing the result of the crafting formula */
     private final NonNullList<ItemStack> stackResult = NonNullList.<ItemStack>withSize(1, ItemStack.EMPTY);
 
     /**

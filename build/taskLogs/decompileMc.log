@@ -1,10 +1,10 @@
-INFO:  Adding File to context from classpath: /Users/theo/.gradle/wrapper/dists/gradle-2.14-bin/76oc0mnc3ieqtsukq90mp0rxk/gradle-2.14/lib/gradle-launcher-2.14.jar
-INFO:  Adding File to context from classpath: /Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/jre/lib/resources.jar
-INFO:  Adding File to context from classpath: /Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/jre/lib/rt.jar
-INFO:  Adding File to context from classpath: /Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/jre/lib/jsse.jar
-INFO:  Adding File to context from classpath: /Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/jre/lib/jce.jar
-INFO:  Adding File to context from classpath: /Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/jre/lib/charsets.jar
-INFO:  Adding File to context from classpath: /Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/jre/lib/jfr.jar
+INFO:  Adding File to context from classpath: C:\Users\thebo\.gradle\wrapper\dists\gradle-2.14-bin\76oc0mnc3ieqtsukq90mp0rxk\gradle-2.14\lib\gradle-launcher-2.14.jar
+INFO:  Adding File to context from classpath: C:\Program Files\Java\jdk1.8.0_121\jre\lib\resources.jar
+INFO:  Adding File to context from classpath: C:\Program Files\Java\jdk1.8.0_121\jre\lib\rt.jar
+INFO:  Adding File to context from classpath: C:\Program Files\Java\jdk1.8.0_121\jre\lib\jsse.jar
+INFO:  Adding File to context from classpath: C:\Program Files\Java\jdk1.8.0_121\jre\lib\jce.jar
+INFO:  Adding File to context from classpath: C:\Program Files\Java\jdk1.8.0_121\jre\lib\charsets.jar
+INFO:  Adding File to context from classpath: C:\Program Files\Java\jdk1.8.0_121\jre\lib\jfr.jar
 INFO:  Decompiling class net/minecraft/client/audio/SoundList
 INFO:  ... done
 INFO:  Decompiling class net/minecraft/client/audio/ISound

@@ -42,6 +42,7 @@ public class GuiTextField extends Gui
     /** True if this textbox is visible */
     private boolean visible = true;
     private GuiPageButtonList.GuiResponder guiResponder;
+    /** Called to check if the text is valid */
     private Predicate<String> validator = Predicates.<String>alwaysTrue();
 
     public GuiTextField(int componentId, FontRenderer fontrendererObj, int x, int y, int par5Width, int par6Height)

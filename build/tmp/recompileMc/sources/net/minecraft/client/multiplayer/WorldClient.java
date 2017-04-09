@@ -53,7 +53,12 @@ public class WorldClient extends World
     private final NetHandlerPlayClient connection;
     /** The ChunkProviderClient instance */
     private ChunkProviderClient clientChunkProvider;
+    /** Contains all entities for this client, both spawned and non-spawned. */
     private final Set<Entity> entityList = Sets.<Entity>newHashSet();
+    /**
+     * Contains all entities for this client that were not spawned due to a non-present chunk. The game will attempt to
+     * spawn up to 10 pending entities with each subsequent tick until the spawn queue is empty.
+     */
     private final Set<Entity> entitySpawnQueue = Sets.<Entity>newHashSet();
     private final Minecraft mc = Minecraft.getMinecraft();
     private final Set<ChunkPos> previousActiveChunkSet = Sets.<ChunkPos>newHashSet();

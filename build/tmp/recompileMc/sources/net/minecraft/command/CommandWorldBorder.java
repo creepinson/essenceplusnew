@@ -210,6 +210,14 @@ public class CommandWorldBorder extends CommandBase
         return server.worlds[0].getWorldBorder();
     }
 
+    /**
+     * Get a list of options for when the user presses the TAB key
+     *  
+     * @param server The server instance
+     * @param sender The ICommandSender to get tab completions for
+     * @param args Any arguments that were present when TAB was pressed
+     * @param targetPos The block that the player's mouse is over, <tt>null</tt> if the mouse is not over a block
+     */
     public List<String> getTabCompletions(MinecraftServer server, ICommandSender sender, String[] args, @Nullable BlockPos targetPos)
     {
         return args.length == 1 ? getListOfStringsMatchingLastWord(args, new String[] {"set", "center", "damage", "warning", "add", "get"}): (args.length == 2 && "damage".equals(args[0]) ? getListOfStringsMatchingLastWord(args, new String[] {"buffer", "amount"}): (args.length >= 2 && args.length <= 3 && "center".equals(args[0]) ? getTabCompletionCoordinateXZ(args, 1, targetPos) : (args.length == 2 && "warning".equals(args[0]) ? getListOfStringsMatchingLastWord(args, new String[] {"time", "distance"}): Collections.<String>emptyList())));

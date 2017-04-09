@@ -57,6 +57,9 @@ public class BlockWorldState
         return this.pos;
     }
 
+    /**
+     * Creates a new {@link Predicate} that will match when the given {@link IBlockState} predicate matches.
+     */
     public static Predicate<BlockWorldState> hasState(final Predicate<IBlockState> predicatesIn)
     {
         return new Predicate<BlockWorldState>()

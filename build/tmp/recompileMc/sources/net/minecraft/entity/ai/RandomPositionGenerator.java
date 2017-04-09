@@ -23,10 +23,6 @@ public class RandomPositionGenerator
     @Nullable
     public static Vec3d findRandomTarget(EntityCreature entitycreatureIn, int xz, int y)
     {
-        /**
-         * searches 10 blocks at random in a within par1(x,z) and par2 (y) distance, ignores those not in the direction
-         * of par3Vec3, then points to the tile for which creature.getBlockPathWeight returns the highest number
-         */
         return findRandomTargetBlock(entitycreatureIn, xz, y, (Vec3d)null);
     }
 
@@ -43,10 +39,6 @@ public class RandomPositionGenerator
     public static Vec3d findRandomTargetBlockTowards(EntityCreature entitycreatureIn, int xz, int y, Vec3d targetVec3)
     {
         staticVector = targetVec3.subtract(entitycreatureIn.posX, entitycreatureIn.posY, entitycreatureIn.posZ);
-        /**
-         * searches 10 blocks at random in a within par1(x,z) and par2 (y) distance, ignores those not in the direction
-         * of par3Vec3, then points to the tile for which creature.getBlockPathWeight returns the highest number
-         */
         return findRandomTargetBlock(entitycreatureIn, xz, y, staticVector);
     }
 
@@ -57,10 +49,6 @@ public class RandomPositionGenerator
     public static Vec3d findRandomTargetBlockAwayFrom(EntityCreature entitycreatureIn, int xz, int y, Vec3d targetVec3)
     {
         staticVector = (new Vec3d(entitycreatureIn.posX, entitycreatureIn.posY, entitycreatureIn.posZ)).subtract(targetVec3);
-        /**
-         * searches 10 blocks at random in a within par1(x,z) and par2 (y) distance, ignores those not in the direction
-         * of par3Vec3, then points to the tile for which creature.getBlockPathWeight returns the highest number
-         */
         return findRandomTargetBlock(entitycreatureIn, xz, y, staticVector);
     }
 

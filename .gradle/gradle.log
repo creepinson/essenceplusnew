@@ -1,7 +1,7 @@
 This mapping 'snapshot_20161220' was designed for MC 1.11! Use at your own peril.This mapping 'snapshot_20161220' was designed for MC 1.11! Use at your own peril.
 
 #################################################
-         ForgeGradle 2.2-SNAPSHOT-2112b0a        
+         ForgeGradle 2.2-SNAPSHOT-7f5a769        
   https://github.com/MinecraftForge/ForgeGradle  
 #################################################
                Powered by MCP unknown               
@@ -12,7 +12,7 @@ This mapping 'snapshot_20161220' was designed for MC 1.11! Use at your own peril
 :deobfCompileDummyTask
 :deobfProvidedDummyTask
 :getVersionJson
-:extractUserdev
+:extractUserdev UP-TO-DATE
 :extractDependencyATs SKIPPED
 :extractMcpData SKIPPED
 :extractMcpMappings SKIPPED
@@ -21,22 +21,16 @@ This mapping 'snapshot_20161220' was designed for MC 1.11! Use at your own peril
 :downloadServer SKIPPED
 :splitServerJar SKIPPED
 :mergeJars SKIPPED
-:deobfMcSRG
-Applying SpecialSource...
-Applying Exceptor...
-:decompileMc
+:deobfMcSRG SKIPPED
+:decompileMc SKIPPED
 :fixMcSources
-:applySourcePatches
-:remapMcSources
-:recompileMc
+:applySourcePatches SKIPPED
+:remapMcSources SKIPPED
+:recompileMc SKIPPED
 :extractNatives SKIPPED
 :getAssetIndex UP-TO-DATE
 :getAssets
-Current status: 226/1196   18%
-Current status: 460/1196   38%
-Current status: 685/1196   57%
-Current status: 921/1196   77%
-Current status: 1056/1196   88%
+Current status: 722/1196   60%
 :makeStart
 :setupDecompWorkspace
 :eclipseClasspath
@@ -48,4 +42,4 @@ Current status: 1056/1196   88%
 
 BUILD SUCCESSFUL
 
-Total time: 6 mins 31.134 secs
+Total time: 44.839 secs

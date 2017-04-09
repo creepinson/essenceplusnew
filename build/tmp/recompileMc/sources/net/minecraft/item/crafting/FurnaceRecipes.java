@@ -15,7 +15,9 @@ import net.minecraft.item.ItemStack;
 public class FurnaceRecipes
 {
     private static final FurnaceRecipes SMELTING_BASE = new FurnaceRecipes();
+    /** The list of smelting results. */
     private final Map<ItemStack, ItemStack> smeltingList = Maps.<ItemStack, ItemStack>newHashMap();
+    /** A list which contains how many experience points each recipe output will give. */
     private final Map<ItemStack, Float> experienceList = Maps.<ItemStack, Float>newHashMap();
 
     /**

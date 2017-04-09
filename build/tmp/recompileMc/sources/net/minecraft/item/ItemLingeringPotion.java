@@ -31,6 +31,9 @@ public class ItemLingeringPotion extends ItemPotion
         PotionUtils.addPotionTooltip(stack, tooltip, 0.25F);
     }
 
+    /**
+     * Called when the equipped item is right clicked.
+     */
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn)
     {
         ItemStack itemstack = playerIn.getHeldItem(handIn);

@@ -18,6 +18,7 @@ public class ServerList
     private static final Logger LOGGER = LogManager.getLogger();
     /** The Minecraft instance. */
     private final Minecraft mc;
+    /** List of ServerData instances. */
     private final List<ServerData> servers = Lists.<ServerData>newArrayList();
 
     public ServerList(Minecraft mcIn)

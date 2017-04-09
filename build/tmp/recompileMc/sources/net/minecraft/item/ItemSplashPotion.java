@@ -19,6 +19,9 @@ public class ItemSplashPotion extends ItemPotion
         return I18n.translateToLocal(PotionUtils.getPotionFromItem(stack).getNamePrefixed("splash_potion.effect."));
     }
 
+    /**
+     * Called when the equipped item is right clicked.
+     */
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn)
     {
         ItemStack itemstack = playerIn.getHeldItem(handIn);

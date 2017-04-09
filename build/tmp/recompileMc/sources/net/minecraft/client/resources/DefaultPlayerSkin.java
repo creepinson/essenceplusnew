@@ -27,10 +27,6 @@ public class DefaultPlayerSkin
      */
     public static ResourceLocation getDefaultSkin(UUID playerUUID)
     {
-        /**
-         * Checks if a players skin model is slim or the default. The Alex model is slime while the Steve model is
-         * default.
-         */
         return isSlimSkin(playerUUID) ? TEXTURE_ALEX : TEXTURE_STEVE;
     }
 
@@ -39,10 +35,6 @@ public class DefaultPlayerSkin
      */
     public static String getSkinType(UUID playerUUID)
     {
-        /**
-         * Checks if a players skin model is slim or the default. The Alex model is slime while the Steve model is
-         * default.
-         */
         return isSlimSkin(playerUUID) ? "slim" : "default";
     }
 

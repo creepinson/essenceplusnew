@@ -90,6 +90,7 @@ public abstract class EntityLivingBase extends Entity
     private final CombatTracker _combatTracker = new CombatTracker(this);
     private final Map<Potion, PotionEffect> activePotionsMap = Maps.<Potion, PotionEffect>newHashMap();
     private final NonNullList<ItemStack> handInventory = NonNullList.<ItemStack>withSize(2, ItemStack.EMPTY);
+    /** The array of item stacks that are used for armor in a living inventory. */
     private final NonNullList<ItemStack> armorArray = NonNullList.<ItemStack>withSize(4, ItemStack.EMPTY);
     /** Whether an arm swing is currently in progress. */
     public boolean isSwingInProgress;

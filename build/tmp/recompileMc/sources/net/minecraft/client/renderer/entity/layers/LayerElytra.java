@@ -18,6 +18,7 @@ public class LayerElytra implements LayerRenderer<EntityLivingBase>
 {
     /** The basic Elytra texture. */
     private static final ResourceLocation TEXTURE_ELYTRA = new ResourceLocation("textures/entity/elytra.png");
+    /** Instance of the player renderer. */
     protected final RenderLivingBase<?> renderPlayer;
     /** The model used by the Elytra. */
     private final ModelElytra modelElytra = new ModelElytra();

@@ -38,6 +38,9 @@ public class ItemFirework extends Item
         return EnumActionResult.SUCCESS;
     }
 
+    /**
+     * Called when the equipped item is right clicked.
+     */
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn)
     {
         if (playerIn.isElytraFlying())

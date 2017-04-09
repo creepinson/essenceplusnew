@@ -17,7 +17,9 @@ public class BlockPistonStructureHelper
     private final BlockPos pistonPos;
     private final BlockPos blockToMove;
     private final EnumFacing moveDirection;
+    /** This is a List<BlockPos> of all blocks that will be moved by the piston. */
     private final List<BlockPos> toMove = Lists.<BlockPos>newArrayList();
+    /** This is a List<BlockPos> of blocks that will be destroyed when a piston attempts to move them. */
     private final List<BlockPos> toDestroy = Lists.<BlockPos>newArrayList();
 
     public BlockPistonStructureHelper(World worldIn, BlockPos posIn, EnumFacing pistonFacing, boolean extending)
@@ -215,11 +217,17 @@ public class BlockPistonStructureHelper
         return true;
     }
 
+    /**
+     * Returns a List<BlockPos> of all the blocks that are being moved by the piston.
+     */
     public List<BlockPos> getBlocksToMove()
     {
         return this.toMove;
     }
 
+    /**
+     * Returns an List<BlockPos> of all the blocks that are being destroyed by the piston.
+     */
     public List<BlockPos> getBlocksToDestroy()
     {
         return this.toDestroy;

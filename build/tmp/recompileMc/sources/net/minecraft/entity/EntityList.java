@@ -105,6 +105,7 @@ public class EntityList
     public static final ResourceLocation LIGHTNING_BOLT = new ResourceLocation("lightning_bolt");
     private static final ResourceLocation PLAYER = new ResourceLocation("player");
     private static final Logger LOGGER = LogManager.getLogger();
+    /** This is a HashMap of the Creative Entity Eggs/Spawners. */
     public static final Map<ResourceLocation, EntityList.EntityEggInfo> ENTITY_EGGS = Maps.<ResourceLocation, EntityList.EntityEggInfo>newLinkedHashMap();
     private static final Set<ResourceLocation> EXTRA_NAMES = Sets.newHashSet();
 

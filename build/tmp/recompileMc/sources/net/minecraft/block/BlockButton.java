@@ -80,9 +80,6 @@ public abstract class BlockButton extends BlockDirectional
      */
     public boolean canPlaceBlockOnSide(World worldIn, BlockPos pos, EnumFacing side)
     {
-        /**
-         * Check whether this block can be placed on the block in the given direction.
-         */
         return canPlaceBlock(worldIn, pos, side.getOpposite());
     }
 
@@ -114,9 +111,6 @@ public abstract class BlockButton extends BlockDirectional
      */
     public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
     {
-        /**
-         * Check whether this block can be placed on the block in the given direction.
-         */
         return canPlaceBlock(worldIn, pos, facing.getOpposite()) ? this.getDefaultState().withProperty(FACING, facing).withProperty(POWERED, Boolean.valueOf(false)) : this.getDefaultState().withProperty(FACING, EnumFacing.DOWN).withProperty(POWERED, Boolean.valueOf(false));
     }
 

@@ -19,6 +19,9 @@ public class ItemEnderPearl extends Item
         this.setCreativeTab(CreativeTabs.MISC);
     }
 
+    /**
+     * Called when the equipped item is right clicked.
+     */
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn)
     {
         ItemStack itemstack = playerIn.getHeldItem(handIn);

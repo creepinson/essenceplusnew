@@ -20,7 +20,9 @@ import org.apache.logging.log4j.Logger;
 public abstract class CommandHandler implements ICommandManager
 {
     private static final Logger LOGGER = LogManager.getLogger();
+    /** Map of Strings to the ICommand objects they represent */
     private final Map<String, ICommand> commandMap = Maps.<String, ICommand>newHashMap();
+    /** The set of ICommand objects currently loaded. */
     private final Set<ICommand> commandSet = Sets.<ICommand>newHashSet();
 
     /**
@@ -183,6 +185,11 @@ public abstract class CommandHandler implements ICommandManager
         return astring;
     }
 
+    /**
+     * Get a list of possible completion options for when the TAB key is pressed. This can be a list of commands if no
+     * command is specified or a partial command is specified. It could also be a list of arguments for the command that
+     * is specified.
+     */
     public List<String> getTabCompletions(ICommandSender sender, String input, @Nullable BlockPos pos)
     {
         String[] astring = input.split(" ", -1);
@@ -218,6 +225,9 @@ public abstract class CommandHandler implements ICommandManager
         }
     }
 
+    /**
+     * Get a list of commands that the given command sender has access to execute.
+     */
     public List<ICommand> getPossibleCommands(ICommandSender sender)
     {
         List<ICommand> list = Lists.<ICommand>newArrayList();
@@ -233,6 +243,9 @@ public abstract class CommandHandler implements ICommandManager
         return list;
     }
 
+    /**
+     * Get a Map of all the name to command pairs stored in this command manager.
+     */
     public Map<String, ICommand> getCommands()
     {
         return this.commandMap;

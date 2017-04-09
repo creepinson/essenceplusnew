@@ -80,6 +80,7 @@ public class ItemFishFood extends ItemFood
         CLOWNFISH(2, "clownfish", 1, 0.1F),
         PUFFERFISH(3, "pufferfish", 1, 0.1F);
 
+        /** Maps an item damage value for an ItemStack to the corresponding FishType value. */
         private static final Map<Integer, ItemFishFood.FishType> META_LOOKUP = Maps.<Integer, ItemFishFood.FishType>newHashMap();
         /** The item damage value on an ItemStack that represents this fish type */
         private final int meta;

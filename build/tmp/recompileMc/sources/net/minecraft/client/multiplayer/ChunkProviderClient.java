@@ -24,6 +24,7 @@ public class ChunkProviderClient implements IChunkProvider
      * coordinates.
      */
     private final Chunk blankChunk;
+    /** The mapping between ChunkCoordinates and Chunks that ChunkProviderClient maintains. */
     private final Long2ObjectMap<Chunk> chunkMapping = new Long2ObjectOpenHashMap<Chunk>(8192)
     {
         protected void rehash(int p_rehash_1_)

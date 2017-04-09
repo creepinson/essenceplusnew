@@ -192,6 +192,9 @@ public class BlockStateContainer
                 return Collections. < IProperty<? >> unmodifiableCollection(this.properties.keySet());
             }
 
+            /**
+             * Get the value of the given Property for this BlockState
+             */
             public <T extends Comparable<T>> T getValue(IProperty<T> property)
             {
                 Comparable<?> comparable = (Comparable)this.properties.get(property);
@@ -206,6 +209,9 @@ public class BlockStateContainer
                 }
             }
 
+            /**
+             * Get a version of this BlockState with the given Property now set to the given value
+             */
             public <T extends Comparable<T>, V extends T> IBlockState withProperty(IProperty<T> property, V value)
             {
                 Comparable<?> comparable = (Comparable)this.properties.get(property);

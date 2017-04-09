@@ -272,6 +272,7 @@ public class NetHandlerPlayClient implements INetHandlerPlayClient
      * reset upon respawning
      */
     private boolean doneLoadingTerrain;
+    /** A mapping from player names to their respective GuiPlayerInfo (specifies the clients response time to the server) */
     private final Map<UUID, NetworkPlayerInfo> playerInfoMap = Maps.<UUID, NetworkPlayerInfo>newHashMap();
     public int currentServerMaxPlayers = 20;
     private boolean hasStatistics;
