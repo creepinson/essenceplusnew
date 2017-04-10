@@ -29,7 +29,7 @@ public class mcreator_bullet {
 	public void load(FMLInitializationEvent event) {
 		if (event.getSide() == Side.CLIENT)
 			Minecraft.getMinecraft().getRenderItem().getItemModelMesher()
-					.register(block, 0, new ModelResourceLocation("daddiomod:Bullet", "inventory"));
+					.register(block, 0, new ModelResourceLocation("meepersplus:Bullet", "inventory"));
 	}
 
 	public void generateNether(World world, Random random, int chunkX, int chunkZ) {

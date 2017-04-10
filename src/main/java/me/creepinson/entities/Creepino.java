@@ -138,7 +138,7 @@ this.tasks.addTask(1, new EntityAIAttackRanged(this, 1.25D, 20, 10.0F));
 
 protected void applyEntityAttributes(){
 super.applyEntityAttributes();
-this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.35D);
+this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.15D);
 this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(12D);
 if(this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE)!=null)this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(1.5D);
 }
@@ -291,24 +291,28 @@ textureHeight = 128;
 
 head = new ModelRenderer(this, 82, 6);
 head.mirror = false;
-head.addBox(0.0F, 0.0F, 0.0F, 8, 8, 9);
-head.setRotationPoint(-2.0F, 15.0F, -5.0F);
+head.addBox(0.0F, 10.0F, 5.0F, 8, 8, 9);
+head.setRotationPoint(-2.0F, 0.0F, -5.0F);
 
 head.setTextureSize(128, 128);
+head.offsetY = 0.5F;
 parts.put(head.boxName, head);
 
 body = new ModelRenderer(this, 66, 31);
 body.mirror = false;
-body.addBox(0.0F, 0.0F, 0.0F, 5, 15, 5);
-body.setRotationPoint(-1.0F, 0.0F, -3.0F);
+body.addBox(0.0F, 3.0F, 0.0F, 6, 15, 6);
+body.setRotationPoint(2.0F, 0.0F, 0.0F);
 body.setTextureSize(128, 128);
+body.offsetY = 0.5F;
 parts.put(body.boxName, body);
 
 leg = new ModelRenderer(this, 102, 59);
 leg.mirror = false;
-leg.addBox(0.0F, 0.0F, 0.0F, 3, 20, 3);
-leg.setRotationPoint(0.0F, -20.0F, -2.0F);
+leg.addBox(0.0F, -10.0F, 0.5F, 3, 20, 3);
+leg.setRotationPoint(2.0F, 10.0F, 0.0F);
 leg.setTextureSize(128, 128);
+
+
 parts.put(leg.boxName, leg);
 
 armL = new ModelRenderer(this, 30, 62);
@@ -335,15 +339,14 @@ public void render(Entity par1Entity, float par2, float par3, float par4, float 
 head.render(par7);
 body.render(par7);
 leg.render(par7);
-armL.render(par7);
-armR.render(par7);
+
 }
 @Override
 public void setRotationAngles(float par1, float par2, float par3, float par4, float par5, float par6, Entity par7Entity) {
+	float pi = (float)Math.PI;
+	head.rotateAngleY = par3 * (pi/180F);
 
-this.head.rotateAngleX = par4 / (180F / (float)Math.PI);
-this.head.rotateAngleY = par3 / (180F / (float)Math.PI);
-this.leg.rotateAngleX = MathHelper.cos(par1 * 0.6662F) * 1.4F * par2;
+	this.leg.rotateAngleX = MathHelper.cos(par1 * 0.6662F) * 1.2F * par2;
 
 }
 public ModelRenderer getModelRendererFromName(String name)
