@@ -6,8 +6,7 @@ import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 
 import me.creepinson.blocks.mcreator_mobChamber;
-import me.creepinson.entities.Creepino;
-
+import me.creepinson.entities.Creepino.EntityCreepino;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
@@ -22,8 +21,6 @@ import net.minecraft.inventory.InventoryBasic;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionEffect;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
@@ -313,7 +310,7 @@ public class mcreator_mobChamberGUI {
 			if (button.id == 0) {
 
 				if (inherited.getStackInSlot(0) == new ItemStack(Items.EGG) && inherited.getStackInSlot(1) == new ItemStack(Items.SLIME_BALL) && inherited.getStackInSlot(2) == ItemStack.EMPTY && inherited.getStackInSlot(3) == ItemStack.EMPTY) {
-		  			Entity creepino = new Creepino.EntitysheepGunner(world);
+		  			Entity creepino = new EntityCreepino(world);
 					if (creepino != null && !world.isRemote) {
 						creepino.setLocationAndAngles(i, j + 1, k, world.rand.nextFloat() * 360F, 0.0F);
 						world.spawnEntity(creepino);

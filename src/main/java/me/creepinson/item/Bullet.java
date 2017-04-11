@@ -18,9 +18,9 @@ import net.minecraft.block.Block;
 import java.util.Random;
 
 @SuppressWarnings("unchecked")
-public class mcreator_bullet {
+public class Bullet {
 
-	public mcreator_bullet() {
+	public Bullet() {
 	}
 
 	public static Item block;

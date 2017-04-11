@@ -2,21 +2,23 @@
 <projectDescription>
 	<name>essenceplusnew</name>
 	<comment></comment>
-	<projects/>
-	<natures>
-		<nature>org.eclipse.jdt.core.javanature</nature>
-	</natures>
+	<projects>
+	</projects>
 	<buildSpec>
 		<buildCommand>
 			<name>org.eclipse.jdt.core.javabuilder</name>
-			<arguments/>
+			<arguments>
+			</arguments>
 		</buildCommand>
 	</buildSpec>
+	<natures>
+		<nature>org.eclipse.jdt.core.javanature</nature>
+	</natures>
 	<linkedResources>
 		<link>
-			<name>.link1</name>
+			<name>.link0</name>
 			<type>2</type>
-			<location>/Users/theo/.gradle/caches/minecraft/net/minecraftforge/forge/1.11.2-13.20.0.2259/start</location>
+			<location>C:/Users/thebo/.gradle/caches/minecraft/net/minecraftforge/forge/1.11.2-13.20.0.2259/start</location>
 		</link>
 	</linkedResources>
 </projectDescription>

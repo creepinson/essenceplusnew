@@ -2,19 +2,16 @@ package me.creepinson.entities;
 
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Random;
 
-import org.lwjgl.util.vector.Quaternion;
-
 import me.creepinson.handlers.ItemHandler;
-import me.creepinson.item.mcreator_bullet;
+import me.creepinson.item.Bullet;
 import me.creepinson.lib.RefStrings;
+import me.creepinson.render.RenderCreepino;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
-import net.minecraft.client.renderer.Matrix4f;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderSnowball;
 import net.minecraft.entity.Entity;
@@ -36,9 +33,12 @@ import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.passive.EntityChicken;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityTippedArrow;
-import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
@@ -71,9 +71,9 @@ public class Creepino {
 	
 	@SideOnly(Side.CLIENT)
 	public void registerRenderers(){
-		RenderLiving customRender = new RenderLiving(Minecraft.getMinecraft().getRenderManager(), new Creepino.ModelCreepino(), 0){protected ResourceLocation getEntityTexture(Entity par1Entity){return new ResourceLocation(RefStrings.MODID + ":" + "textures/entity/creepino_tex.png");}};
-		RenderingRegistry.registerEntityRenderingHandler(Creepino.EntitysheepGunner.class, customRender);
-		RenderingRegistry.registerEntityRenderingHandler(EntityArrowCustom.class, new RenderSnowball(Minecraft.getMinecraft().getRenderManager(), new ItemStack(mcreator_bullet.block).getItem() ,Minecraft.getMinecraft().getRenderItem()));
+		RenderLiving customRender = new RenderLiving(Minecraft.getMinecraft().getRenderManager(), new Creepino.ModelCreepino(), 0){protected ResourceLocation getEntityTexture(Entity par1Entity){return new ResourceLocation(RefStrings.MODID + ":" + "textures/entity/Creepino-texturemap.png");}};
+		RenderingRegistry.registerEntityRenderingHandler(EntityCreepino.class, new RenderCreepino(Minecraft.getMinecraft().getRenderManager()));
+		RenderingRegistry.registerEntityRenderingHandler(EntityArrowCustom.class, new RenderSnowball(Minecraft.getMinecraft().getRenderManager(), new ItemStack(Bullet.block).getItem() ,Minecraft.getMinecraft().getRenderItem()));
 
 	}
 	
@@ -82,7 +82,7 @@ public class Creepino {
 		int entityID = MathHelper.getRandomUUID().hashCode();
 		mobid = entityID;
 
-		EntityRegistry.addSpawn(Creepino.EntitysheepGunner.class, 20, 3, 30, EnumCreatureType.MONSTER , Biome.REGISTRY.getObject(new ResourceLocation("forest")));
+		EntityRegistry.addSpawn(EntityCreepino.class, 20, 3, 30, EnumCreatureType.MONSTER , Biome.REGISTRY.getObject(new ResourceLocation("forest")));
 
         
 		
@@ -104,10 +104,19 @@ public class Creepino {
 public EntityArrowCustom(World worldIn, double x, double y, double z) {super(worldIn, x, y, z);}
 public EntityArrowCustom(World worldIn, EntityLivingBase shooter) {super(worldIn, shooter);}}
 
-   public static class EntitysheepGunner extends EntityMob  implements IRangedAttackMob 
+   public static class EntityCreepino extends EntityMob  implements IRangedAttackMob 
 	{
+
+	   
+	    private static final DataParameter<Integer> SPOT_COLOR = EntityDataManager.<Integer>createKey(EntityCreepino.class, DataSerializers.VARINT);
+	    private static final String[] TEXTURES = new String[] {"creepino_white.png", "creepino_red.png"};
+	    private final String[] TexturesArray = new String[3];
+	    private String texturePrefix;
+	    private static final String[] TEXTURES_ABBR = new String[] {"cw", "cr"};
+	    
+	   
 		World world = null;
-	    public EntitysheepGunner(World var1)
+	    public EntityCreepino(World var1)
 	    {
 	        super(var1);
 	        world = var1;
@@ -115,9 +124,7 @@ public EntityArrowCustom(World worldIn, EntityLivingBase shooter) {super(worldIn
 	        this.isImmuneToFire = false;
 	        addRandomArmor();
 			setNoAI(!true);
-            setCustomNameTag("Dinnerbone"); 
-            setAlwaysRenderNameTag(false);
-			
+        
 			this.tasks.addTask(0, new EntityAISwimming(this));
 this.tasks.addTask(6, new EntityAIWander(this, 1.0D));
 this.tasks.addTask(8, new EntityAILookIdle(this));
@@ -133,9 +140,75 @@ this.tasks.addTask(1, new EntityAIAttackRanged(this, 1.25D, 20, 10.0F));
 
 			
 	    }
+	    public void setSpot(int variant)
+	    {
+	        this.dataManager.set(SPOT_COLOR, Integer.valueOf(variant));
+	    }
+	    
+	    public int getSpot()
+	    {
+	        return ((Integer)this.dataManager.get(SPOT_COLOR)).intValue();
+	    }
 
+	    protected void entityInit()
+	    {
+	        super.entityInit();
+	        this.dataManager.register(SPOT_COLOR, Integer.valueOf(0));
+	    }
+	    public void writeEntityToNBT(NBTTagCompound compound)
+	    {
+	        super.writeEntityToNBT(compound);
+	        compound.setInteger("Variant", this.getSpot());
+	    }
+	    public void readEntityFromNBT(NBTTagCompound compound)
+	    {
+	        super.readEntityFromNBT(compound);
+	        this.setSpot(compound.getInteger("Variant"));
+	    }
+
+	    private void resetTexturePrefix()
+	    {
+	        this.texturePrefix = null;
+	    }
+
+	    @SideOnly(Side.CLIENT)
+	    private void setTexturePaths()
+	    {
+	        int i = this.getSpot();
+
+	     
+	        this.TexturesArray[0] = TexturesArray[i];
+	        this.texturePrefix = "textures/entity/creepino/" + TEXTURES[i];
+	        
+	       
+	     
+	    }
+
+
+	    @SideOnly(Side.CLIENT)
+	    public String[] getVariantTexturePaths()
+	    {
+	        if (this.texturePrefix == null)
+	        {
+	            this.setTexturePaths();
+	        }
+
+	        return this.TexturesArray;
+	    }
+
+	    @SideOnly(Side.CLIENT)
+	    public String getTexture()
+	    {
+	        if (this.texturePrefix == null)
+	        {
+	            this.setTexturePaths();
+	        }
+
+	        return this.texturePrefix;
+	    }
 	    
 
+	    
 protected void applyEntityAttributes(){
 super.applyEntityAttributes();
 this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.15D);
@@ -274,85 +347,47 @@ protected boolean processInteract(EntityPlayer entity, EnumHand hand) {
 
 
 public static class ModelCreepino extends ModelBase {
-public final int MCA_MIN_REQUESTED_VERSION = 5;
-public HashMap<String, ModelRenderer> parts = new HashMap<String, ModelRenderer>();
+    public ModelRenderer Body;
+    public ModelRenderer Leg;
+    public ModelRenderer Head;
 
-ModelRenderer head;
-ModelRenderer body;
-ModelRenderer leg;
-ModelRenderer armL;
-ModelRenderer armR;
+    public ModelCreepino() {
+        this.textureWidth = 128;
+        this.textureHeight = 128;
+        this.Leg = new ModelRenderer(this, 39, 44);
+        this.Leg.setRotationPoint(-2.0F, 9.0F, -2.0F);
+        this.Leg.addBox(0.0F, 0.0F, 0.0F, 4, 15, 4, 0.0F);
+        this.Body = new ModelRenderer(this, 92, 0);
+        this.Body.setRotationPoint(-4.0F, -5.2F, -4.0F);
+        this.Body.addBox(0.0F, 0.0F, 0.0F, 8, 14, 8, 0.0F);
+        this.Head = new ModelRenderer(this, 0, 8);
+        this.Head.setRotationPoint(-3.0F, -11.2F, -3.0F);
+        this.Head.addBox(0.0F, 0.0F, 0.0F, 6, 6, 6, 0.0F);
+        this.setRotateAngle(Head, 0.0F, -0.03717551306747922F, 0.0F);
+    }
 
-public ModelCreepino()
-{
+    @Override
+    public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) { 
+        this.Leg.render(f5);
+        this.Body.render(f5);
+        this.Head.render(f5);
+    }
 
-textureWidth = 128;
-textureHeight = 128;
-
-head = new ModelRenderer(this, 82, 6);
-head.mirror = false;
-head.addBox(0.0F, 10.0F, 5.0F, 8, 8, 9);
-head.setRotationPoint(-2.0F, 0.0F, -5.0F);
-
-head.setTextureSize(128, 128);
-head.offsetY = 0.5F;
-parts.put(head.boxName, head);
-
-body = new ModelRenderer(this, 66, 31);
-body.mirror = false;
-body.addBox(0.0F, 3.0F, 0.0F, 6, 15, 6);
-body.setRotationPoint(2.0F, 0.0F, 0.0F);
-body.setTextureSize(128, 128);
-body.offsetY = 0.5F;
-parts.put(body.boxName, body);
-
-leg = new ModelRenderer(this, 102, 59);
-leg.mirror = false;
-leg.addBox(0.0F, -10.0F, 0.5F, 3, 20, 3);
-leg.setRotationPoint(2.0F, 10.0F, 0.0F);
-leg.setTextureSize(128, 128);
-
-
-parts.put(leg.boxName, leg);
-
-armL = new ModelRenderer(this, 30, 62);
-armL.mirror = false;
-armL.addBox(0.0F, 0.0F, 0.0F, 2, 12, 2);
-armL.setRotationPoint(0.0F, 11.0F, 2.0F);
-armL.setTextureSize(128, 128);
-parts.put(armL.boxName, armL);
-
-armR = new ModelRenderer(this, 46, 19);
-armR.mirror = false;
-armR.addBox(0.0F, 0.0F, 0.0F, 2, 12, 2);
-armR.setRotationPoint(0.0F, 11.0F, -5.0F);
-armR.setTextureSize(128, 128);
-parts.put(armR.boxName, armR);
-
-}
-
-@Override
-public void render(Entity par1Entity, float par2, float par3, float par4, float par5, float par6, float par7)
-{
-
-//Render every non-child part
-head.render(par7);
-body.render(par7);
-leg.render(par7);
-
-}
-@Override
-public void setRotationAngles(float par1, float par2, float par3, float par4, float par5, float par6, Entity par7Entity) {
-	float pi = (float)Math.PI;
-	head.rotateAngleY = par3 * (pi/180F);
-
-	this.leg.rotateAngleX = MathHelper.cos(par1 * 0.6662F) * 1.2F * par2;
-
-}
-public ModelRenderer getModelRendererFromName(String name)
-{
-return parts.get(name);
-}
+    /**
+     * This is a helper function from Tabula to set the rotation of model parts
+     */
+    public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z) {
+        modelRenderer.rotateAngleX = x;
+        modelRenderer.rotateAngleY = y;
+        modelRenderer.rotateAngleZ = z;
+    }
+    @Override
+    public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw,
+    		float headPitch, float scaleFactor, Entity entityIn) {
+    
+    	this.Leg.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 1.2F * limbSwingAmount;
+    	super.setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scaleFactor, entityIn);
+    }
 }
 
 }

@@ -5,12 +5,13 @@ import java.util.Random;
 
 import me.creepinson.entities.Creepino;
 import me.creepinson.entities.Creepino.EntityArrowCustom;
+import me.creepinson.entities.Creepino.EntityCreepino;
 import me.creepinson.events.EventHandlerMOD;
 import me.creepinson.gui.mcreator_mobChamberGUI;
 import me.creepinson.handlers.GuiHandler;
 import me.creepinson.handlers.MobDropsHandler;
 import me.creepinson.item.ButtKicker;
-import me.creepinson.item.mcreator_bullet;
+import me.creepinson.item.Bullet;
 import me.creepinson.lib.RefStrings;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -48,7 +49,7 @@ public class Main  implements IFuelHandler, IWorldGenerator{
 
 	
 public static Creepino mcreator_0 = new Creepino();
-public static mcreator_bullet mcreator_1 = new mcreator_bullet();
+public static Bullet mcreator_1 = new Bullet();
 
 me.creepinson.blocks.mcreator_mobChamber mcreator_2 = new me.creepinson.blocks.mcreator_mobChamber();
 mcreator_mobChamberGUI mcreator_3 = new mcreator_mobChamberGUI();
@@ -119,7 +120,7 @@ public int getBurnTime(ItemStack fuel) {
     		ResourceLocation sound2 = new ResourceLocation("meepersplus", "creepinoScreech");
     		GameRegistry.register(new net.minecraft.util.SoundEvent(sound2).setRegistryName(sound2));
 
-        	registerEntity(Creepino.EntitysheepGunner.class, "Creepino", 0, (0 << 16) + (255 << 8) + 51, (204 << 16) + (0 << 8) + 0);
+        	registerEntity(EntityCreepino.class, "Creepino", 0, (0 << 16) + (255 << 8) + 51, (204 << 16) + (0 << 8) + 0);
         registerEntityNoEgg(EntityArrowCustom.class, "entityBullet", 1);
 		proxy.preInit();
      
