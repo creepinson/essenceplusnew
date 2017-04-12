@@ -25,7 +25,7 @@ public class RenderCreepino extends RenderLiving<EntityCreepino>{
         String s = entity.getTexture();
 		
         
-        return new ResourceLocation(RefStrings.MODID + ":" + entity.getVariantTexturePaths());
+        return new ResourceLocation(RefStrings.MODID + ":" + "textures/entity/creepino/creepino_red.png");
         
     }
 
