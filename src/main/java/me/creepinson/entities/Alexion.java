@@ -44,6 +44,7 @@ import net.minecraft.client.Minecraft;
 
 import java.util.Random;
 
+import me.creepinson.handlers.ItemHandler;
 import me.creepinson.lib.RefStrings;
 
 import java.util.Iterator;
@@ -179,7 +180,7 @@ this.world.spawnEntity(entityarrow);
 		@Override
 		protected Item getDropItem()
 		{
-			return new ItemStack(Items.GOLD_INGOT).getItem();
+			return new ItemStack(ItemHandler.Essence, 3).getItem();
 		}
 
 	    @Override

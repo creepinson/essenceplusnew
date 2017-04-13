@@ -1,8 +1,12 @@
 {
-"creepinoDeath": {"category": "hostile","sounds": [{"name": "meepersplus:creepinoDeath","stream": false}]},
-"creepinoHurt": {"category": "hostile","sounds": [{"name": "meepersplus:creepinoHurt","stream": false}]},
-"creepinoScreech": {"category": "hostile","sounds": [{"name": "meepersplus:creepinoScreech","stream": false}]},
-"alexion.death": {"category": "hostile","sounds": [{"name": "meepersplus:alexiondeath","stream": false}]},
-"alexion.ambient": {"category": "hostile","sounds": [{"name": "meepersplus:alexionliving","stream": false}]},
-"alexion.hurt": {"category": "hostile","sounds": [{"name": "meepersplus:alexionhurt","stream": false}]}
+"creepinoDeath": {"category": "hostile","sounds": [{"name": "meepersplus:mob/creepino/creepinoDeath","stream": false}]},
+"creepinoHurt": {"category": "hostile","sounds": [{"name": "meepersplus:mob/creepino/creepinoHurt","stream": false}]},
+"creepinoScreech": {"category": "hostile","sounds": [{"name": "meepersplus:mob/creepino/creepinoScreech","stream": false}]},
+"alexion.death": {"category": "hostile","sounds": [{"name": "meepersplus:mob/alexion/alexiondeath","stream": false}]},
+"alexion.ambient": {"category": "hostile","sounds": [{"name": "meepersplus:mob/alexion/alexionliving","stream": false}]},
+"neote.hurt": {"category": "hostile","sounds": [{"name": "meepersplus:mob/alexion/alexionhurt","stream": false}]},
+"neote.death": {"category": "hostile","sounds": [{"name": "meepersplus:mob/neote/neotedeath","stream": false}]},
+"neote.ambient": {"category": "hostile","sounds": [{"name": "meepersplus:mob/neote/neoteliving-1","stream": false},{"name": "meepersplus:mob/neote/neoteliving-2","stream": false}]},
+"neote.hurt": {"category": "hostile","sounds": [{"name": "meepersplus:mob/neote/neotehurt","stream": false}]}
+
 }

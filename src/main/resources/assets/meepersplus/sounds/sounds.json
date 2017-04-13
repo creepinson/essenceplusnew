@@ -1,0 +1,546 @@
+{
+    "alexion:death": {
+        "category": "hostile",
+        "sounds": [
+            "mob/alexion/alexiondeath",
+            "mob/alexion/alexiondeath",
+            "mob/alexion/alexiondeath",
+            "mob/alexion/alexiondeath"
+        ]
+    },
+    "alexiondeath": {
+        "category": "hostile",
+        "sounds": [
+            "mob/alexion/alexiondeath"
+        ]
+    },
+    "alexion:hurt": {
+        "category": "hostile",
+        "sounds": [
+            "mob/alexion/alexionhurt",
+            "mob/alexion/alexionhurt",
+            "mob/alexion/alexionhurt",
+            "mob/alexion/alexionhurt"
+        ]
+    },
+    "alexionhurt": {
+        "category": "hostile",
+        "sounds": [
+            "mob/alexion/alexionhurt"
+        ]
+    },
+    "alexion:living": {
+        "category": "hostile",
+        "sounds": [
+            "mob/alexion/alexionliving",
+            "mob/alexion/alexionliving",
+            "mob/alexion/alexionliving",
+            "mob/alexion/alexionliving"
+        ]
+    },
+    "alexionliving": {
+        "category": "hostile",
+        "sounds": [
+            "mob/alexion/alexionliving"
+        ]
+    },
+    "creepino:death": {
+        "category": "hostile",
+        "sounds": [
+            "mob/creepino/creepinodeath",
+            "mob/creepino/creepinodeath",
+            "mob/creepino/creepinodeath",
+            "mob/creepino/creepinodeath"
+        ]
+    },
+    "creepinodeath": {
+        "category": "hostile",
+        "sounds": [
+            "mob/creepino/creepinodeath"
+        ]
+    },
+    "creepino:hurt": {
+        "category": "hostile",
+        "sounds": [
+            "mob/creepino/creepinohurt",
+            "mob/creepino/creepinohurt",
+            "mob/creepino/creepinohurt",
+            "mob/creepino/creepinohurt"
+        ]
+    },
+    "creepinohurt": {
+        "category": "hostile",
+        "sounds": [
+            "mob/creepino/creepinohurt"
+        ]
+    },
+    "creepinoscreech": {
+        "category": "hostile",
+        "sounds": [
+            "mob/creepino/creepinoscreech"
+        ]
+    },
+    "neote:living": {
+        "category": "hostile",
+        "sounds": [
+            "mob/neote/living/neoteliving-1",
+            "mob/neote/living/neoteliving-2",
+            "mob/neote/living/neoteliving-1",
+            "mob/neote/living/neoteliving-2",
+            "mob/neote/living/neoteliving-1",
+            "mob/neote/living/neoteliving-2",
+            "mob/neote/living/neoteliving-1",
+            "mob/neote/living/neoteliving-2"
+        ]
+    },
+    "living": {
+        "category": "hostile",
+        "sounds": [
+            "mob/neote/living/neoteliving-1"
+        ]
+    },
+    "living": {
+        "category": "hostile",
+        "sounds": [
+            "mob/neote/living/neoteliving-2"
+        ]
+    },
+    "neote:death": {
+        "category": "hostile",
+        "sounds": [
+            "mob/neote/neotedeath",
+            "mob/neote/neotedeath",
+            "mob/neote/neotedeath",
+            "mob/neote/neotedeath"
+        ]
+    },
+    "neotedeath": {
+        "category": "hostile",
+        "sounds": [
+            "mob/neote/neotedeath"
+        ]
+    },
+    "neote:hurt": {
+        "category": "hostile",
+        "sounds": [
+            "mob/neote/neotehurt",
+            "mob/neote/neotehurt",
+            "mob/neote/neotehurt",
+            "mob/neote/neotehurt"
+        ]
+    },
+    "neotehurt": {
+        "category": "hostile",
+        "sounds": [
+            "mob/neote/neotehurt"
+        ]
+    },
+    "alexion:death": {
+        "category": "hostile",
+        "sounds": [
+            "mob/alexion/alexiondeath",
+            "mob/alexion/alexiondeath",
+            "mob/alexion/alexiondeath",
+            "mob/alexion/alexiondeath"
+        ]
+    },
+    "alexiondeath": {
+        "category": "hostile",
+        "sounds": [
+            "mob/alexion/alexiondeath"
+        ]
+    },
+    "alexion:hurt": {
+        "category": "hostile",
+        "sounds": [
+            "mob/alexion/alexionhurt",
+            "mob/alexion/alexionhurt",
+            "mob/alexion/alexionhurt",
+            "mob/alexion/alexionhurt"
+        ]
+    },
+    "alexionhurt": {
+        "category": "hostile",
+        "sounds": [
+            "mob/alexion/alexionhurt"
+        ]
+    },
+    "alexion:living": {
+        "category": "hostile",
+        "sounds": [
+            "mob/alexion/alexionliving",
+            "mob/alexion/alexionliving",
+            "mob/alexion/alexionliving",
+            "mob/alexion/alexionliving"
+        ]
+    },
+    "alexionliving": {
+        "category": "hostile",
+        "sounds": [
+            "mob/alexion/alexionliving"
+        ]
+    },
+    "creepino:death": {
+        "category": "hostile",
+        "sounds": [
+            "mob/creepino/creepinodeath",
+            "mob/creepino/creepinodeath",
+            "mob/creepino/creepinodeath",
+            "mob/creepino/creepinodeath"
+        ]
+    },
+    "creepinodeath": {
+        "category": "hostile",
+        "sounds": [
+            "mob/creepino/creepinodeath"
+        ]
+    },
+    "creepino:hurt": {
+        "category": "hostile",
+        "sounds": [
+            "mob/creepino/creepinohurt",
+            "mob/creepino/creepinohurt",
+            "mob/creepino/creepinohurt",
+            "mob/creepino/creepinohurt"
+        ]
+    },
+    "creepinohurt": {
+        "category": "hostile",
+        "sounds": [
+            "mob/creepino/creepinohurt"
+        ]
+    },
+    "creepinoscreech": {
+        "category": "hostile",
+        "sounds": [
+            "mob/creepino/creepinoscreech"
+        ]
+    },
+    "neote:living": {
+        "category": "hostile",
+        "sounds": [
+            "mob/neote/living/neoteliving-1",
+            "mob/neote/living/neoteliving-2",
+            "mob/neote/living/neoteliving-1",
+            "mob/neote/living/neoteliving-2",
+            "mob/neote/living/neoteliving-1",
+            "mob/neote/living/neoteliving-2",
+            "mob/neote/living/neoteliving-1",
+            "mob/neote/living/neoteliving-2"
+        ]
+    },
+    "living": {
+        "category": "hostile",
+        "sounds": [
+            "mob/neote/living/neoteliving-1"
+        ]
+    },
+    "living": {
+        "category": "hostile",
+        "sounds": [
+            "mob/neote/living/neoteliving-2"
+        ]
+    },
+    "neote:death": {
+        "category": "hostile",
+        "sounds": [
+            "mob/neote/neotedeath",
+            "mob/neote/neotedeath",
+            "mob/neote/neotedeath",
+            "mob/neote/neotedeath"
+        ]
+    },
+    "neotedeath": {
+        "category": "hostile",
+        "sounds": [
+            "mob/neote/neotedeath"
+        ]
+    },
+    "neote:hurt": {
+        "category": "hostile",
+        "sounds": [
+            "mob/neote/neotehurt",
+            "mob/neote/neotehurt",
+            "mob/neote/neotehurt",
+            "mob/neote/neotehurt"
+        ]
+    },
+    "neotehurt": {
+        "category": "hostile",
+        "sounds": [
+            "mob/neote/neotehurt"
+        ]
+    },
+    "alexion:death": {
+        "category": "hostile",
+        "sounds": [
+            "mob/alexion/alexiondeath",
+            "mob/alexion/alexiondeath",
+            "mob/alexion/alexiondeath",
+            "mob/alexion/alexiondeath"
+        ]
+    },
+    "alexiondeath": {
+        "category": "hostile",
+        "sounds": [
+            "mob/alexion/alexiondeath"
+        ]
+    },
+    "alexion:hurt": {
+        "category": "hostile",
+        "sounds": [
+            "mob/alexion/alexionhurt",
+            "mob/alexion/alexionhurt",
+            "mob/alexion/alexionhurt",
+            "mob/alexion/alexionhurt"
+        ]
+    },
+    "alexionhurt": {
+        "category": "hostile",
+        "sounds": [
+            "mob/alexion/alexionhurt"
+        ]
+    },
+    "alexion:living": {
+        "category": "hostile",
+        "sounds": [
+            "mob/alexion/alexionliving",
+            "mob/alexion/alexionliving",
+            "mob/alexion/alexionliving",
+            "mob/alexion/alexionliving"
+        ]
+    },
+    "alexionliving": {
+        "category": "hostile",
+        "sounds": [
+            "mob/alexion/alexionliving"
+        ]
+    },
+    "creepino:death": {
+        "category": "hostile",
+        "sounds": [
+            "mob/creepino/creepinodeath",
+            "mob/creepino/creepinodeath",
+            "mob/creepino/creepinodeath",
+            "mob/creepino/creepinodeath"
+        ]
+    },
+    "creepinodeath": {
+        "category": "hostile",
+        "sounds": [
+            "mob/creepino/creepinodeath"
+        ]
+    },
+    "creepino:hurt": {
+        "category": "hostile",
+        "sounds": [
+            "mob/creepino/creepinohurt",
+            "mob/creepino/creepinohurt",
+            "mob/creepino/creepinohurt",
+            "mob/creepino/creepinohurt"
+        ]
+    },
+    "creepinohurt": {
+        "category": "hostile",
+        "sounds": [
+            "mob/creepino/creepinohurt"
+        ]
+    },
+    "creepinoscreech": {
+        "category": "hostile",
+        "sounds": [
+            "mob/creepino/creepinoscreech"
+        ]
+    },
+    "neote:living": {
+        "category": "hostile",
+        "sounds": [
+            "mob/neote/living/neoteliving-1",
+            "mob/neote/living/neoteliving-2",
+            "mob/neote/living/neoteliving-1",
+            "mob/neote/living/neoteliving-2",
+            "mob/neote/living/neoteliving-1",
+            "mob/neote/living/neoteliving-2",
+            "mob/neote/living/neoteliving-1",
+            "mob/neote/living/neoteliving-2"
+        ]
+    },
+    "living": {
+        "category": "hostile",
+        "sounds": [
+            "mob/neote/living/neoteliving-1"
+        ]
+    },
+    "living": {
+        "category": "hostile",
+        "sounds": [
+            "mob/neote/living/neoteliving-2"
+        ]
+    },
+    "neote:death": {
+        "category": "hostile",
+        "sounds": [
+            "mob/neote/neotedeath",
+            "mob/neote/neotedeath",
+            "mob/neote/neotedeath",
+            "mob/neote/neotedeath"
+        ]
+    },
+    "neotedeath": {
+        "category": "hostile",
+        "sounds": [
+            "mob/neote/neotedeath"
+        ]
+    },
+    "neote:hurt": {
+        "category": "hostile",
+        "sounds": [
+            "mob/neote/neotehurt",
+            "mob/neote/neotehurt",
+            "mob/neote/neotehurt",
+            "mob/neote/neotehurt"
+        ]
+    },
+    "neotehurt": {
+        "category": "hostile",
+        "sounds": [
+            "mob/neote/neotehurt"
+        ]
+    },
+    "alexion:death": {
+        "category": "hostile",
+        "sounds": [
+            "mob/alexion/alexiondeath",
+            "mob/alexion/alexiondeath",
+            "mob/alexion/alexiondeath",
+            "mob/alexion/alexiondeath"
+        ]
+    },
+    "alexiondeath": {
+        "category": "hostile",
+        "sounds": [
+            "mob/alexion/alexiondeath"
+        ]
+    },
+    "alexion:hurt": {
+        "category": "hostile",
+        "sounds": [
+            "mob/alexion/alexionhurt",
+            "mob/alexion/alexionhurt",
+            "mob/alexion/alexionhurt",
+            "mob/alexion/alexionhurt"
+        ]
+    },
+    "alexionhurt": {
+        "category": "hostile",
+        "sounds": [
+            "mob/alexion/alexionhurt"
+        ]
+    },
+    "alexion:living": {
+        "category": "hostile",
+        "sounds": [
+            "mob/alexion/alexionliving",
+            "mob/alexion/alexionliving",
+            "mob/alexion/alexionliving",
+            "mob/alexion/alexionliving"
+        ]
+    },
+    "alexionliving": {
+        "category": "hostile",
+        "sounds": [
+            "mob/alexion/alexionliving"
+        ]
+    },
+    "creepino:death": {
+        "category": "hostile",
+        "sounds": [
+            "mob/creepino/creepinodeath",
+            "mob/creepino/creepinodeath",
+            "mob/creepino/creepinodeath",
+            "mob/creepino/creepinodeath"
+        ]
+    },
+    "creepinodeath": {
+        "category": "hostile",
+        "sounds": [
+            "mob/creepino/creepinodeath"
+        ]
+    },
+    "creepino:hurt": {
+        "category": "hostile",
+        "sounds": [
+            "mob/creepino/creepinohurt",
+            "mob/creepino/creepinohurt",
+            "mob/creepino/creepinohurt",
+            "mob/creepino/creepinohurt"
+        ]
+    },
+    "creepinohurt": {
+        "category": "hostile",
+        "sounds": [
+            "mob/creepino/creepinohurt"
+        ]
+    },
+    "creepinoscreech": {
+        "category": "hostile",
+        "sounds": [
+            "mob/creepino/creepinoscreech"
+        ]
+    },
+    "neote:living": {
+        "category": "hostile",
+        "sounds": [
+            "mob/neote/living/neoteliving-1",
+            "mob/neote/living/neoteliving-2",
+            "mob/neote/living/neoteliving-1",
+            "mob/neote/living/neoteliving-2",
+            "mob/neote/living/neoteliving-1",
+            "mob/neote/living/neoteliving-2",
+            "mob/neote/living/neoteliving-1",
+            "mob/neote/living/neoteliving-2"
+        ]
+    },
+    "living": {
+        "category": "hostile",
+        "sounds": [
+            "mob/neote/living/neoteliving-1"
+        ]
+    },
+    "living": {
+        "category": "hostile",
+        "sounds": [
+            "mob/neote/living/neoteliving-2"
+        ]
+    },
+    "neote:death": {
+        "category": "hostile",
+        "sounds": [
+            "mob/neote/neotedeath",
+            "mob/neote/neotedeath",
+            "mob/neote/neotedeath",
+            "mob/neote/neotedeath"
+        ]
+    },
+    "neotedeath": {
+        "category": "hostile",
+        "sounds": [
+            "mob/neote/neotedeath"
+        ]
+    },
+    "neote:hurt": {
+        "category": "hostile",
+        "sounds": [
+            "mob/neote/neotehurt",
+            "mob/neote/neotehurt",
+            "mob/neote/neotehurt",
+            "mob/neote/neotehurt"
+        ]
+    },
+    "neotehurt": {
+        "category": "hostile",
+        "sounds": [
+            "mob/neote/neotehurt"
+        ]
+    }
+}
