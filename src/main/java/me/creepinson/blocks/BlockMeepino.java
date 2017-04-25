@@ -1,12 +1,11 @@
 package me.creepinson.blocks;
-
 import java.util.List;
 import java.util.Random;
 
 import com.mojang.realmsclient.gui.ChatFormatting;
 
 import me.creepinson.entities.tileentity.TileEntityMeepino;
-import net.minecraft.block.BlockFalling;
+import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -27,7 +26,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockMeepino extends BlockFalling implements ITileEntityProvider {
+public class BlockMeepino extends Block implements ITileEntityProvider {
 
 	public static boolean isActivated;
 	

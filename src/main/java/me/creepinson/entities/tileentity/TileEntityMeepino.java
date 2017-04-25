@@ -12,9 +12,7 @@ import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
 public class TileEntityMeepino extends TileEntity implements ITickable, ICapabilityProvider{
 
-Minecraft mc = Minecraft.getMinecraft();
-WorldClient world = mc.world;
-	
+
 	public TileEntityMeepino() {
 		
 
@@ -26,12 +24,27 @@ WorldClient world = mc.world;
 			
 			BlockPos frontC = new BlockPos(this.getPos().getX(), this.getPos().getY(), this.getPos().getZ() + 1);
 			BlockPos backC = new BlockPos(this.getPos().getX(), this.getPos().getY(), this.getPos().getZ() - 1);
+			BlockPos leftC = new BlockPos(this.getPos().getX() + 1, this.getPos().getY(), this.getPos().getZ() + 1);
+			BlockPos rightC = new BlockPos(this.getPos().getX() - 1, this.getPos().getY(), this.getPos().getZ() - 1);
+			
+			BlockPos frontL = new BlockPos(this.getPos().getX() - 1, this.getPos().getY(), this.getPos().getZ() + 1);
+			BlockPos backL = new BlockPos(this.getPos().getX() - 1, this.getPos().getY(), this.getPos().getZ() - 1);
+			BlockPos frontR = new BlockPos(this.getPos().getX() - 1, this.getPos().getY(), this.getPos().getZ() + 1);
+			BlockPos backR = new BlockPos(this.getPos().getX() + 1, this.getPos().getY(), this.getPos().getZ() - 1);
+				
+			
 			BlockPos veryCenterBlock = new BlockPos(this.getPos().getX(), this.getPos().getY(), this.getPos().getZ());
 		
-	this.world.setBlockToAir(veryCenterBlock);
+	this.world.setBlockState(veryCenterBlock, Blocks.MOSSY_COBBLESTONE.getDefaultState());
 	this.world.setBlockState(backC, Blocks.LAPIS_BLOCK.getDefaultState());
 	this.world.setBlockState(frontC, Blocks.LAPIS_BLOCK.getDefaultState());
-	    BlockMeepino.isActivated = false;
+	this.world.setBlockState(frontL, Blocks.LAPIS_BLOCK.getDefaultState());
+	this.world.setBlockState(frontR, Blocks.LAPIS_BLOCK.getDefaultState());
+	this.world.setBlockState(backL, Blocks.LAPIS_BLOCK.getDefaultState());
+	this.world.setBlockState(backR, Blocks.LAPIS_BLOCK.getDefaultState());
+	this.world.setBlockState(leftC, Blocks.LAPIS_BLOCK.getDefaultState());
+	this.world.setBlockState(rightC, Blocks.LAPIS_BLOCK.getDefaultState());
+	BlockMeepino.isActivated = false;
 		}
 		
 		
