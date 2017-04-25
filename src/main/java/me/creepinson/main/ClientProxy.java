@@ -13,13 +13,14 @@ import net.minecraftforge.fml.common.network.NetworkRegistry;
 public class ClientProxy extends CommonProxy {
 	@Override
 	public void registerRenderers(Main ins) {
-		ins.maa0.registerRenderers();
-		ins.maa1.registerRenderers();
-		ins.maa2.registerRenderers();
-		ins.maa3.registerRenderers();
-		ins.maa4.registerRenderers();
-		ins.maa5.registerRenderers();
-		
+
+		ins.creepino.registerRenderers();
+		ins.bullet.registerRenderers();
+		ins.buttKicker.registerRenderers();
+		ins.mobChamber.registerRenderers();
+		ins.alexion.registerRenderers();
+		ins.craeol.registerRenderers();
+        ins.neote.registerRenderers();
 		
 		
 	}

@@ -1,6 +1,6 @@
 package me.creepinson.main;
 
-import me.creepinson.entities.tileentity.TileEntityMobChamber;
+import me.creepinson.entities.tileentity.TileEntityMeepino;
 import me.creepinson.entities.tileentity.TileEntityPedastal_Magic;
 import me.creepinson.handlers.BlockHandler;
 import me.creepinson.handlers.CraftingHandler;
@@ -34,7 +34,7 @@ public class CommonProxy implements IProxy{
 	@Override
 	public void init() {
 	
-		GameRegistry.registerTileEntity(TileEntityMobChamber.class, RefStrings.MODID + ":"+ "mobchamber");
+
 		GameRegistry.registerTileEntity(TileEntityPedastal_Magic.class, RefStrings.MODID + ":"+ "tileEntityPedastalMagic");
 
 			

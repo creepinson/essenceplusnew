@@ -2,8 +2,8 @@
 	"parent": "block/cube_all",
 	"__comment": "Designed by Creepinson with Cubik Studio - https://cubik.studio",
 	"textures": {
-		"texture": "daddiomod:blocks/creepinobrick",
-		"particle": "daddiomod:blocks/creepinobrick"
+		"texture": "meepersplus:blocks/meepino",
+		"particle": "meepersplus:blocks/meepino"
 	},
 	"elements": [
 		{

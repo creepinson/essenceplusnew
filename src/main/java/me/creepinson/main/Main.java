@@ -4,15 +4,16 @@ package me.creepinson.main;
 import java.util.Random;
 
 import me.creepinson.entities.Alexion;
+import me.creepinson.entities.Craeol;
 import me.creepinson.entities.Creepino;
 import me.creepinson.entities.Creepino.EntityArrowCustom;
 import me.creepinson.entities.Creepino.EntityCreepino;
+import me.creepinson.entities.Neote;
 import me.creepinson.events.EventHandlerMOD;
-import me.creepinson.gui.mcreator_mobChamberGUI;
 import me.creepinson.handlers.GuiHandler;
 import me.creepinson.handlers.MobDropsHandler;
-import me.creepinson.item.ButtKicker;
 import me.creepinson.item.Bullet;
+import me.creepinson.item.ButtKicker;
 import me.creepinson.lib.RefStrings;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -49,26 +50,27 @@ public class Main  implements IFuelHandler, IWorldGenerator{
 	//VARIABLES
 
 	
- Creepino maa0 = new Creepino();
-Bullet maa1 = new Bullet();
- Alexion maa5 = new Alexion();
+ Creepino creepino = new Creepino();
+Bullet bullet = new Bullet();
+ Alexion alexion = new Alexion();
 
-me.creepinson.blocks.mcreator_mobChamber maa2 = new me.creepinson.blocks.mcreator_mobChamber();
-mcreator_mobChamberGUI maa3 = new mcreator_mobChamberGUI();
-ButtKicker maa4 = new ButtKicker();
+me.creepinson.blocks.Meepino mobChamber = new me.creepinson.blocks.Meepino();
+ButtKicker buttKicker = new ButtKicker();
+Craeol craeol = new Craeol();
+Neote neote = new Neote();
 
 
 @EventHandler
 public void severStarting(FMLServerStartingEvent event)
 {
-	maa0.serverLoad(event);
-	maa1.serverLoad(event);
-	maa2.serverLoad(event);
-	maa3.serverLoad(event);
-	maa4.serverLoad(event);
-	maa5.serverLoad(event);
+	creepino.serverLoad(event);
+	bullet.serverLoad(event);
+	buttKicker.serverLoad(event);
+	mobChamber.serverLoad(event);
 
-
+	alexion.serverLoad(event);
+	craeol.serverLoad(event);
+	neote.serverLoad(event);
 }
 
 	@Override
@@ -77,21 +79,21 @@ public void severStarting(FMLServerStartingEvent event)
 		chunkX = chunkX * 16;
 		chunkZ = chunkZ * 16;
 		if (world.provider.getDimension() == -1)
-			maa0.generateNether(world, random, chunkX, chunkZ);
+            creepino.generateNether(world, random, chunkX, chunkZ);
 		if (world.provider.getDimension() == 0)
-			maa0.generateSurface(world, random, chunkX, chunkZ);
+			creepino.generateSurface(world, random, chunkX, chunkZ);
 		if (world.provider.getDimension() == -1)
-			maa1.generateNether(world, random, chunkX, chunkZ);
+			alexion.generateNether(world, random, chunkX, chunkZ);
 		if (world.provider.getDimension() == 0)
-			maa1.generateSurface(world, random, chunkX, chunkZ);
+			alexion.generateSurface(world, random, chunkX, chunkZ);
 
 	}
 @Override
 public int getBurnTime(ItemStack fuel) {
-	if (maa0.addFuel(fuel) != 0)
-		return maa0.addFuel(fuel);
-	if (maa1.addFuel(fuel) != 0)
-		return maa1.addFuel(fuel);
+	if (creepino.addFuel(fuel) != 0)
+		return creepino.addFuel(fuel);
+	if (alexion.addFuel(fuel) != 0)
+		return alexion.addFuel(fuel);
 	return 0;
 }
 
@@ -102,26 +104,52 @@ public int getBurnTime(ItemStack fuel) {
     @net.minecraftforge.fml.common.Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event)
     {
-    	maa0.instance = this.instance;
-    	maa1.instance = this.instance;
-    	maa0.preInit(event);
-    	maa1.preInit(event);
-    	maa2.instance = this.instance;
-    	maa2.instance = this.instance;
-    	maa3.instance = this.instance;
-    	maa5.instance = this.instance;
-    	maa2.preInit(event);
-    	maa3.preInit(event);
-    	maa4.preInit(event);
-    	maa5.preInit(event);
-    			
-    	ResourceLocation sound3 = new ResourceLocation("meepersplus", "alexion.death");
+    	creepino.instance = this.instance;
+    	alexion.instance = this.instance;
+    	creepino.preInit(event);
+    	alexion.preInit(event);
+    
+    	bullet.instance = this.instance;
+    	buttKicker.instance = this.instance;
+    	mobChamber.instance = this.instance;
+    	mobChamber.preInit(event);
+    	bullet.preInit(event);
+    	buttKicker.preInit(event);
+
+    	craeol.instance = this.instance;
+    	craeol.preInit(event);
+    	
+    	neote.instance = this.instance;
+    	neote.preInit(event);
+    	
+    	//SOUNDS
+    	
+    	ResourceLocation sound9 = new ResourceLocation("meepersplus", "craeol.death");
+    	GameRegistry.register(new net.minecraft.util.SoundEvent(sound9).setRegistryName(sound9));
+
+    	ResourceLocation sound10 = new ResourceLocation("meepersplus", "craeol.ambient");
+    	GameRegistry.register(new net.minecraft.util.SoundEvent(sound10).setRegistryName(sound10));
+
+    	ResourceLocation sound11= new ResourceLocation("meepersplus", "craeol.hurt");
+    	GameRegistry.register(new net.minecraft.util.SoundEvent(sound11).setRegistryName(sound11));
+    		
+    	
+ResourceLocation sound6 = new ResourceLocation("meepersplus", "alexion.death");
+GameRegistry.register(new net.minecraft.util.SoundEvent(sound6).setRegistryName(sound6));
+
+ResourceLocation sound7 = new ResourceLocation("meepersplus", "alexion.ambient");
+GameRegistry.register(new net.minecraft.util.SoundEvent(sound7).setRegistryName(sound7));
+
+ResourceLocation sound8= new ResourceLocation("meepersplus", "alexion.hurt");
+GameRegistry.register(new net.minecraft.util.SoundEvent(sound8).setRegistryName(sound8));
+	
+    	ResourceLocation sound3 = new ResourceLocation("meepersplus", "neote.death");
 		GameRegistry.register(new net.minecraft.util.SoundEvent(sound3).setRegistryName(sound3));
 
-		ResourceLocation sound4 = new ResourceLocation("meepersplus", "alexion.ambient");
+		ResourceLocation sound4 = new ResourceLocation("meepersplus", "neote.ambient");
 		GameRegistry.register(new net.minecraft.util.SoundEvent(sound4).setRegistryName(sound4));
 
-		ResourceLocation sound5= new ResourceLocation("meepersplus", "alexion.hurt");
+		ResourceLocation sound5= new ResourceLocation("meepersplus", "neote.hurt");
 		GameRegistry.register(new net.minecraft.util.SoundEvent(sound5).setRegistryName(sound5));
 
     	
@@ -133,7 +161,7 @@ public int getBurnTime(ItemStack fuel) {
 
     		ResourceLocation sound2 = new ResourceLocation("meepersplus", "creepinoScreech");
     		GameRegistry.register(new net.minecraft.util.SoundEvent(sound2).setRegistryName(sound2));
-
+//END SOUNDS
         	registerEntity(EntityCreepino.class, "Creepino", 0, (0 << 16) + (255 << 8) + 51, (204 << 16) + (0 << 8) + 0);
         registerEntityNoEgg(EntityArrowCustom.class, "entityBullet", 1);
 		proxy.preInit();
@@ -149,13 +177,14 @@ public int getBurnTime(ItemStack fuel) {
 		}
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
 		
-		maa0.load(event);
-		maa1.load(event);
-		maa2.load(event);
-		maa3.load(event);
-		maa4.load(event);
-		maa5.load(event);
-		
+		creepino.load(event);
+		bullet.load(event);
+		buttKicker.load(event);
+		mobChamber.load(event);
+		alexion.load(event);
+		craeol.load(event);
+		neote.load(event);
+
 		proxy.registerRenderers(this);
 
 		
