@@ -88,8 +88,8 @@ public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, En
 		EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 	  if (!world.isRemote) {
           TileEntityPedastal_Magic te = getTE(world, pos);
-          if (te.getStack() == null) {
-              if (player.getHeldItem(hand) != ItemStack.EMPTY) {
+          if (te.getStack().isEmpty()) {
+              if (!player.getHeldItem(hand).isEmpty()) {
                   // There is no item in the pedestal and the player is holding an item. We move that item
                   // to the pedestal
                   te.setStack(player.getHeldItem(hand));

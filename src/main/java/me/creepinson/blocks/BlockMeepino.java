@@ -4,14 +4,21 @@ import java.util.Random;
 
 import com.mojang.realmsclient.gui.ChatFormatting;
 
+import me.creepinson.blocks.item.IMetaBlockName;
 import me.creepinson.entities.tileentity.TileEntityMeepino;
+import me.creepinson.handlers.EnumHandler.MeepinoSize;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.properties.IProperty;
+import net.minecraft.block.properties.PropertyEnum;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
@@ -19,6 +26,7 @@ import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
@@ -26,8 +34,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockMeepino extends Block implements ITileEntityProvider {
-
+public class BlockMeepino extends Block implements ITileEntityProvider, IMetaBlockName{
+    public static final PropertyEnum meepinoSize = PropertyEnum.create("meepinosize", MeepinoSize.class);
 	public static boolean isActivated;
 	
 	int a1 = 0, a2 = 0, a3 = 0, a4 = 0, a5 = 0, a6 = 0;
@@ -37,10 +45,35 @@ public class BlockMeepino extends Block implements ITileEntityProvider {
 	protected BlockMeepino() {
 		super(Material.IRON);
 
+		this.setDefaultState(this.blockState.getBaseState().withProperty(meepinoSize, MeepinoSize.size3x3));
 		setSoundType(SoundType.METAL);
 
 	}
+	@Override
+	public int getMetaFromState(IBlockState state) {
+		MeepinoSize type = (MeepinoSize) state.getValue(meepinoSize);
+		
+		return type.getID();
+	}
+	@Override
+	public IBlockState getStateFromMeta(int meta) {
 
+		return this.getDefaultState().withProperty(meepinoSize, MeepinoSize.values()[meta]);
+	}
+	@Override
+	public void getSubBlocks(Item itemIn, CreativeTabs tab, NonNullList<ItemStack> list) {
+		for(int i = 0; i < MeepinoSize.values().length; i++){
+			
+			list.add(new ItemStack(itemIn, 1, i));
+			
+		}
+	}
+	
+@Override
+protected BlockStateContainer createBlockState() {
+	
+	return new BlockStateContainer(this, new IProperty[] {meepinoSize});
+}
 	@Override
 	public TileEntity createNewTileEntity(World worldIn, int meta) {
 		return new TileEntityMeepino();
@@ -144,8 +177,13 @@ public class BlockMeepino extends Block implements ITileEntityProvider {
  @Override
 public void addInformation(ItemStack stack, EntityPlayer player, List<String> tooltip, boolean advanced) {
  tooltip.add(ChatFormatting.GOLD + "Do not right click this block when it is");
- tooltip.add("next to a block of this same type as it will crash your game!!");
+ tooltip.add(ChatFormatting.GOLD + "next to a block of this same type as it will crash your game!!");
  super.addInformation(stack, player, tooltip, advanced);
+}
+@Override
+public String getSpecialName(ItemStack stack) {
+	
+	return MeepinoSize.values()[stack.getItemDamage()].getName();
 }
 }
 

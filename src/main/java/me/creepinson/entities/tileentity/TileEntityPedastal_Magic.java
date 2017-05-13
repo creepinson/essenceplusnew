@@ -9,7 +9,7 @@ import net.minecraft.tileentity.TileEntity;
 
 public class TileEntityPedastal_Magic extends TileEntity {
 
-    private ItemStack stack;
+    private ItemStack stack = ItemStack.EMPTY;
 
     public ItemStack getStack() {
         return stack;
@@ -63,7 +63,7 @@ public class TileEntityPedastal_Magic extends TileEntity {
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound compound) {
        
-        if (stack != ItemStack.EMPTY) {
+        if (!stack.isEmpty()) {
             NBTTagCompound tagCompound = new NBTTagCompound();
         
             compound.setTag("item", tagCompound);

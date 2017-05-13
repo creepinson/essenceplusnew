@@ -2,7 +2,10 @@ package me.creepinson.blocks;
 
 import java.util.Random;
 
+import me.creepinson.blocks.item.ItemMeepino;
 import me.creepinson.entities.tileentity.TileEntityMeepino;
+import me.creepinson.handlers.CreativeTabHandler;
+import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
@@ -22,7 +25,7 @@ public class Meepino {
 	}
 
 	public static BlockMeepino block;
-
+	public static ItemMeepino meepinoItem;
 	public static Object instance;
 
 	public int addFuel(ItemStack fuel) {
@@ -34,9 +37,24 @@ public class Meepino {
 
 	public void preInit(FMLPreInitializationEvent event) {
 		block.setRegistryName("meepino");
-		GameRegistry.register(block);
-		GameRegistry.register(new ItemBlock(block).setRegistryName(block.getRegistryName()));
+        registerBlock(block, meepinoItem, CreativeTabHandler.ESSENCEPLUS_BASE);
+
 	}
+public static void registerBlock(Block block, ItemBlock itemblock, CreativeTabs tab){
+	block.setCreativeTab(tab);
+	GameRegistry.register(block);
+	GameRegistry.register(meepinoItem.setRegistryName(block.getRegistryName()));
+	
+	
+}
+
+static {
+	
+	block = (BlockMeepino) (new BlockMeepino().setHardness(1.95F).setResistance(5.0F).setLightLevel(0.15F).setUnlocalizedName("meepino")
+			.setLightOpacity(7));
+	block.setHarvestLevel("pickaxe", 3);
+	meepinoItem = new ItemMeepino(block);
+}
 
 	public void registerRenderers() {
 	}
@@ -47,13 +65,6 @@ public class Meepino {
 			Minecraft.getMinecraft().getRenderItem().getItemModelMesher()
 					.register(Item.getItemFromBlock(block), 0, new ModelResourceLocation("meepersplus:meepino", "inventory"));
 		}
-	}
-
-	static {
-
-		block = (BlockMeepino) (new BlockMeepino().setHardness(1.95F).setResistance(5.0F).setLightLevel(0.15F).setUnlocalizedName("Meepino")
-				.setLightOpacity(7).setCreativeTab(CreativeTabs.BUILDING_BLOCKS));
-		block.setHarvestLevel("pickaxe", 3);
 	}
 
 	public void generateSurface(World world, Random random, int chunkX, int chunkZ) {

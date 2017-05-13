@@ -98,7 +98,7 @@ public class TESRPedastal_Magic  extends TileEntitySpecialRenderer<TileEntityPed
         ItemStack stack = te.getStack();
         long angle = (System.currentTimeMillis() / 10) % 360;
         
-        if (stack != ItemStack.EMPTY) {
+        if (!stack.isEmpty()) {
             RenderHelper.enableStandardItemLighting();
             GlStateManager.enableLighting();
             GlStateManager.pushMatrix();

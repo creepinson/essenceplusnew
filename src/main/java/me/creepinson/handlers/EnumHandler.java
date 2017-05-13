@@ -6,6 +6,39 @@ import net.minecraft.util.IStringSerializable;
 public class EnumHandler {
 	
 	
+	
+
+	public static enum MeepinoSize implements IStringSerializable
+	{
+		size3x3("3x3", 0),
+		size4x4("4x4", 1);
+
+		
+		private int ID;
+		private String name;
+		
+		private MeepinoSize(String name, int ID){
+			
+			this.ID = ID;
+			this.name = name;
+			
+		}
+
+		@Override
+		public String getName() {
+			
+			return this.name();
+		}
+
+
+		
+		public int getID() {
+			
+			return ID;
+		}
+		
+	}
+	
 	public static enum Wires implements IStringSerializable
 	{
 		copper("copper", 0);
