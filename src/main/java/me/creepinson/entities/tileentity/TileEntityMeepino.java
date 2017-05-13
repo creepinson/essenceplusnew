@@ -1,6 +1,7 @@
 package me.creepinson.entities.tileentity;
 
 import me.creepinson.blocks.BlockMeepino;
+import me.creepinson.handlers.EnumHandler.MeepinoSize;
 import net.minecraft.block.BlockClay;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.WorldClient;
@@ -23,7 +24,7 @@ public class TileEntityMeepino extends TileEntity implements ITickable, ICapabil
 		if(BlockMeepino.isActivated){
 		
 			
-		if(this.world.getBlockState(this.pos).getValue(BlockMeepino.meepinoSize) == "size3x3"){
+		if(this.world.getBlockState(this.pos).getValue(BlockMeepino.meepinoSize) == MeepinoSize.size3x3){
 			
 			state3x3();
 			
