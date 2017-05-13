@@ -23,7 +23,7 @@ public class TileEntityMeepino extends TileEntity implements ITickable, ICapabil
 		if(BlockMeepino.isActivated){
 		
 			
-		if(this.world.getBlockState(this.pos).getValue(BlockMeepino.meepinoSize) == "3x3"){
+		if(this.world.getBlockState(this.pos).getValue(BlockMeepino.meepinoSize) == "size3x3"){
 			
 			state3x3();
 			

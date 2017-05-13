@@ -63,7 +63,7 @@ public class TileEntityPedastal_Magic extends TileEntity {
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound compound) {
        
-        if (!stack.isEmpty()) {
+        if (stack.isEmpty()) {
             NBTTagCompound tagCompound = new NBTTagCompound();
         
             compound.setTag("item", tagCompound);

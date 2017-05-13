@@ -81,35 +81,30 @@ public class Pedastal_Magic extends ModBlocks implements ITileEntityProvider {
         return (TileEntityPedastal_Magic) world.getTileEntity(pos);
     }
 @Override
-public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player,
-		
-		
-		
-		EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-	  if (!world.isRemote) {
+public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+	  if (world.isRemote) {
           TileEntityPedastal_Magic te = getTE(world, pos);
           if (te.getStack().isEmpty()) {
               if (!player.getHeldItem(hand).isEmpty()) {
                   // There is no item in the pedestal and the player is holding an item. We move that item
                   // to the pedestal
                   te.setStack(player.getHeldItem(hand));
-                  player.inventory.setInventorySlotContents(player.inventory.currentItem, te.getStack());
+                  player.inventory.setInventorySlotContents(player.inventory.currentItem, ItemStack.EMPTY);
                   // Make sure the client knows about the changes in the player inventory
-                  player.openContainer.detectAndSendChanges();
+    
               }
        
-          } else {
+          } else if (!te.getStack().isEmpty()){
               // There is a stack in the pedestal. In this case we remove it and try to put it in the
               // players inventory if there is room
               ItemStack stack = te.getStack();
-              te.setStack(ItemStack.EMPTY);
+           
               if (!player.inventory.addItemStackToInventory(stack)) {
                   // Not possible. Throw item in the world
                   EntityItem entityItem = new EntityItem(world, pos.getX(), pos.getY()+1, pos.getZ(), stack);
                   world.spawnEntity(entityItem);
-              } else {
-                  player.openContainer.detectAndSendChanges();
-              }
+              } 
+              te.setStack(ItemStack.EMPTY);
           }
       }
 
