@@ -186,7 +186,7 @@ GameRegistry.register(new net.minecraft.util.SoundEvent(sound8).setRegistryName(
 		neote.load(event);
 
 		proxy.registerRenderers(this);
-
+		proxy.registerModelBakeryStuff();
 		
 		proxy.init();
     	MinecraftForge.EVENT_BUS.register(new EventHandlerMOD());
