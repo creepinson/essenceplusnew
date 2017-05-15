@@ -29,7 +29,7 @@ public class BlockHandler {
 		  
 	    MobChamberCore = (ItemBlock) new ItemBlock(BlockMobChamberCore);
 
-	    BlockPedastal_Magic = new me.creepinson.blocks.Pedastal_Magic(Material.ROCK, "pedastal_magic", CreativeTabHandler.ESSENCEPLUS_BASE, 5F, 15F, 3, "pedastal_magic");
+	    BlockPedastal_Magic = new me.creepinson.blocks.pedestal.Pedastal_Magic(Material.ROCK, "pedastal_magic", CreativeTabHandler.ESSENCEPLUS_BASE, 5F, 15F, 3, "pedastal_magic");
 		  
 	    Pedastal_Magic = (ItemBlock) new ItemBlock(BlockPedastal_Magic);
 	
