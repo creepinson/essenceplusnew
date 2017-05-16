@@ -1,5 +1,6 @@
 package me.creepinson.handlers;
 
+import me.creepinson.handlers.EnumHandler.BaseTypes;
 import me.creepinson.handlers.EnumHandler.Chips;
 import me.creepinson.handlers.EnumHandler.Circuts;
 import me.creepinson.handlers.EnumHandler.Cores;
@@ -8,17 +9,13 @@ import me.creepinson.handlers.EnumHandler.SyringeTypes;
 import me.creepinson.handlers.EnumHandler.Wires;
 import me.creepinson.item.Core;
 import me.creepinson.item.Essence;
+import me.creepinson.item.Key;
 import me.creepinson.item.Large_Bone;
 import me.creepinson.item.StickOfLightning;
+import me.creepinson.item.Upgrade;
 import me.creepinson.lib.RefStrings;
-
-
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.init.PotionTypes;
 import net.minecraft.item.Item;
-import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionEffect;
-import net.minecraftforge.client.event.GuiScreenEvent.PotionShiftEvent;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
@@ -46,8 +43,8 @@ public class ItemHandler {
 	//ESSENCEPLUS BASE
 	public static Item Core;
 	public static Item Essence;
-
-	
+	public static Item upgrade;
+	public static Item key;
 
 	public static void init(){
 		//INITIALIZE ITEMS
@@ -65,6 +62,8 @@ public class ItemHandler {
 		//METADATA ITEMS - INIT START 
 		 Essence = new Essence("essence", CreativeTabHandler.ESSENCEPLUS_BASE);
 		 Core = new Core("core", CreativeTabHandler.ESSENCEPLUS_BASE);
+		 upgrade = new Upgrade("upgrade", CreativeTabHandler.ESSENCEPLUS_TECH);
+		 key = new Key("key", CreativeTabHandler.ESSENCEPLUS_TECH);
 		 Chip = new me.creepinson.item.Chip("chip", CreativeTabHandler.ESSENCEPLUS_TECH);
 		 Wire = new me.creepinson.item.Wire("wire", CreativeTabHandler.ESSENCEPLUS_TECH);
 		 Circut = new me.creepinson.item.Circut("circut", CreativeTabHandler.ESSENCEPLUS_TECH);
@@ -81,6 +80,8 @@ public class ItemHandler {
 
 		 
 		 GameRegistry.register(Core);
+		 GameRegistry.register(key);	
+		 GameRegistry.register(upgrade);	
 		 GameRegistry.register(Chip);
 		 GameRegistry.register(Wire);
 		 GameRegistry.register(Essence);
@@ -128,7 +129,12 @@ public class ItemHandler {
 		{
  	  registerRender(Wire, i, "wire" + EnumHandler.Wires.values()[i].getName());
 		}
-  
+ 
+      for(int i = 0; i < BaseTypes.values().length; i++)
+    		{
+        	  registerRender(upgrade, i, EnumHandler.BaseTypes.values()[i].getName() + "upgrade");
+        	  registerRender(key, i, EnumHandler.BaseTypes.values()[i].getName() + "key");
+    		}
       
       
 	 }

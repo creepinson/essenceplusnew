@@ -6,8 +6,83 @@ import net.minecraft.util.IStringSerializable;
 public class EnumHandler {
 	
 	
-	
+	public static enum BaseTypes implements IStringSerializable
+	{
+		
+		magic("magical", 0);
 
+		
+		private int ID;
+		private String name;
+		
+		private BaseTypes(String name, int ID){
+			
+			this.ID = ID;
+			this.name = name;
+			
+		}
+
+		@Override
+		public String getName() {
+			
+			return this.name();
+		}
+
+
+		
+		public int getID() {
+			
+			return ID;
+		}
+
+		@Override
+		public String toString() {
+			
+			return super.toString();
+		}
+
+		
+		
+	}
+
+	public static enum UpgradeTypes implements IStringSerializable
+	{
+		
+		locking("locking", 0);
+
+		
+		private int ID;
+		private String name;
+		
+		private UpgradeTypes(String name, int ID){
+			
+			this.ID = ID;
+			this.name = name;
+			
+		}
+
+		@Override
+		public String getName() {
+			
+			return this.name();
+		}
+
+
+		
+		public int getID() {
+			
+			return ID;
+		}
+
+		@Override
+		public String toString() {
+			
+			return super.toString();
+		}
+
+		
+		
+	}
 	public static enum MeepinoSize implements IStringSerializable
 	{
 		size3x3("3x3", 0),
