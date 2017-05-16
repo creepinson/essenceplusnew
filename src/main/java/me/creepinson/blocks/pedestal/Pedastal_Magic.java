@@ -3,6 +3,7 @@ package me.creepinson.blocks.pedestal;
 import me.creepinson.blocks.ModBlocks;
 import me.creepinson.entities.tileentity.TESRPedastal_Magic;
 import me.creepinson.entities.tileentity.TileEntityPedastal_Magic;
+import me.creepinson.handlers.ItemHandler;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -10,6 +11,7 @@ import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
@@ -85,17 +87,33 @@ public class Pedastal_Magic extends ModBlocks implements ITileEntityProvider{
 @Override
 public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 	  if (world.isRemote) {
-          TileEntityPedastal_Magic te = getTE(world, pos);
+        
+		
+		  
+		  TileEntityPedastal_Magic te = getTE(world, pos);
           
-          if(te.isLocked()){
-        	  
-        		 player.sendMessage(new TextComponentTranslation(TextFormatting.AQUA + "[EssencePlus] " + TextFormatting.RED + "This pedestal is locked!"));
-        	  
-        	  
-          }
-          else{
+		  if(player.getHeldItem(hand).getItem() == Items.ARROW){
+				if(!te.isLocked()){
+					te.setLocked(true);
+					player.sendMessage(new TextComponentTranslation(TextFormatting.AQUA + "[EssencePlus] " + TextFormatting.DARK_RED + "This pedestal is locked!"));
+				}
+				else {
+					player.sendMessage(new TextComponentTranslation(TextFormatting.AQUA + "[EssencePlus] " + TextFormatting.DARK_GREEN + "This pedestal is has been unlocked!"));
+			  te.setLocked(false);
+				}
+		  }
+		  else{
+	
+		  
           if (te.getStack().isEmpty()) {
-              if (!player.getHeldItem(hand).isEmpty()) {
+        	  if(te.isLocked()){
+            	  
+         		 player.sendMessage(new TextComponentTranslation(TextFormatting.AQUA + "[EssencePlus] " + TextFormatting.RED + "This pedestal is locked!"));
+         	  
+         	  
+           }
+           else{
+        	  if (!player.getHeldItem(hand).isEmpty()) {
                   // There is no item in the pedestal and the player is holding an item. We move that item
                   // to the pedestal
                   te.setStack(player.getHeldItem(hand));
@@ -103,9 +121,16 @@ public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, En
                   // Make sure the client knows about the changes in the player inventory
     
               }
-       
+           }
           } else if (!te.getStack().isEmpty()){
-              // There is a stack in the pedestal. In this case we remove it and try to put it in the
+        	  if(te.isLocked()){
+            	  
+         		 player.sendMessage(new TextComponentTranslation(TextFormatting.AQUA + "[EssencePlus] " + TextFormatting.RED + "This pedestal is locked!"));
+         	  
+         	  
+           }
+           else{
+        	  // There is a stack in the pedestal. In this case we remove it and try to put it in the
               // players inventory if there is room
               ItemStack stack = te.getStack();
            
@@ -118,6 +143,8 @@ public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, En
           }
       }
 	  }
+	  }
+	  
       // Return true also on the client to make sure that MC knows we handled this and will not try to place
       // a block on the client
       return true;

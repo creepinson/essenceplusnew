@@ -10,7 +10,7 @@ import net.minecraft.tileentity.TileEntity;
 
 public class TileEntityPedastal_Magic extends TileEntity {
 
-	public static boolean locked;
+	public boolean locked;
 
 
 	public boolean isLocked() {
@@ -76,9 +76,9 @@ public class TileEntityPedastal_Magic extends TileEntity {
             stack = ItemStack.EMPTY;
         }
         if (compound.hasKey("locked")) {
-        	this.locked = compound.getBoolean("locked");
+        	this.setLocked(compound.getBoolean("locked"));
         } else {
-        	   this.locked = false;
+        	   this.setLocked(false);
         }
     }
 
