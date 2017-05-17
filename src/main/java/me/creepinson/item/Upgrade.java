@@ -2,6 +2,7 @@ package me.creepinson.item;
 
 import me.creepinson.handlers.EnumHandler;
 import me.creepinson.handlers.EnumHandler.BaseTypes;
+import me.creepinson.handlers.EnumHandler.UpgradeTypes;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -17,7 +18,7 @@ public class Upgrade extends ModItems{
 
 	@Override
 	public void getSubItems(Item item, CreativeTabs tab, NonNullList<ItemStack> items) {
-for(int i = 0; i < BaseTypes.values().length; i++)
+for(int i = 0; i < UpgradeTypes.values().length; i++)
 	items.add(new ItemStack(item, 1, i));
 
 	
@@ -26,10 +27,10 @@ for(int i = 0; i < BaseTypes.values().length; i++)
 	
 	@Override
 	public String getUnlocalizedName(ItemStack stack) {
-		for(int i = 0; i <  BaseTypes.values().length; i++)
+		for(int i = 0; i <  UpgradeTypes.values().length; i++)
 		{
 		if(stack.getItemDamage() == i)	{
-		return  EnumHandler.BaseTypes.values()[i].getName() + "upgrade";
+		return  EnumHandler.UpgradeTypes.values()[i].getName() + "upgrade";
 		}
 		
 		else{
@@ -38,7 +39,7 @@ for(int i = 0; i < BaseTypes.values().length; i++)
 		
 	
 		}
-		return EnumHandler.BaseTypes.magic.getName() + "upgrade";
+		return EnumHandler.UpgradeTypes.locking.getName() + "upgrade";
 	
 	}
 	

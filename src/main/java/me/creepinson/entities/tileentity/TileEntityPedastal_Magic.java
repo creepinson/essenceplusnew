@@ -1,29 +1,13 @@
 package me.creepinson.entities.tileentity;
 
-import me.creepinson.blocks.pedestal.Pedastal_Magic;
+import me.creepinson.entities.tileentity.base.TileEntityBase_Lockable;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
-import net.minecraft.tileentity.TileEntity;
 
-public class TileEntityPedastal_Magic extends TileEntity {
-
-	public boolean locked;
-
-
-	public boolean isLocked() {
-
-		return this.locked;
-	}
-
-	public void setLocked(boolean locked) {
-
-		this.locked = locked;
-		
-		
-	}
+public class TileEntityPedastal_Magic extends TileEntityBase_Lockable {
 
 	
     private ItemStack stack = ItemStack.EMPTY;
@@ -80,6 +64,11 @@ public class TileEntityPedastal_Magic extends TileEntity {
         } else {
         	   this.setLocked(false);
         }
+        if (compound.hasKey("lockable")) {
+        	this.setLockable(compound.getBoolean("lockable"));
+        } else {
+        	   this.setLockable(false);
+        }
     }
 
     @Override
@@ -92,6 +81,9 @@ public class TileEntityPedastal_Magic extends TileEntity {
            
         }
         compound.setBoolean("locked", this.locked);
+        compound.setBoolean("lockable", this.lockable);
+        
         return super.writeToNBT(compound);
     }
-}
+   
+    }

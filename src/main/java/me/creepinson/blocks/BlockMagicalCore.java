@@ -6,6 +6,7 @@ import java.util.TimerTask;
 
 import javax.annotation.Nullable;
 
+import me.creepinson.blocks.base.ModBlocks;
 import me.creepinson.entities.tileentity.TileEntityPedastal_Magic;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;

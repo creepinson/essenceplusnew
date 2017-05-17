@@ -1,4 +1,4 @@
-package me.creepinson.blocks;
+package me.creepinson.blocks.base;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;

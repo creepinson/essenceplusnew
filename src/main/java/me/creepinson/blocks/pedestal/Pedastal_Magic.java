@@ -1,6 +1,7 @@
+
 package me.creepinson.blocks.pedestal;
 
-import me.creepinson.blocks.ModBlocks;
+import me.creepinson.blocks.base.ModBlocks;
 import me.creepinson.entities.tileentity.TESRPedastal_Magic;
 import me.creepinson.entities.tileentity.TileEntityPedastal_Magic;
 import me.creepinson.handlers.ItemHandler;
@@ -45,12 +46,14 @@ public class Pedastal_Magic extends ModBlocks implements ITileEntityProvider{
 		
 		if(world.isRemote){
 
-			TileEntity te2 = world.getTileEntity(pos);
-			EntityItem itemDropped = new EntityItem(world, pos.getX(), pos.getY() + 1, pos.getZ(), stack);
-				world.spawnEntity(itemDropped);
-				stack.setCount(0);
+			TileEntityPedastal_Magic teCv = (TileEntityPedastal_Magic)te;
+			if(te instanceof TileEntityPedastal_Magic){
+			EntityItem itemDropped = new EntityItem(world, pos.getX(), pos.getY() + 1, pos.getZ());
+			itemDropped.setEntityItemStack(((TileEntityPedastal_Magic) te).getStack());
+			world.spawnEntity(itemDropped);
+				((TileEntityPedastal_Magic) te).getStack().setCount(0);
 		super.harvestBlock(world, player, pos, state, te, stack);
-	
+			}
 		}
 		}
 	
@@ -92,7 +95,7 @@ public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, En
 		  
 		  TileEntityPedastal_Magic te = getTE(world, pos);
           
-		  if(player.getHeldItem(hand).getItem() == Items.ARROW){
+		  if(player.getHeldItem(hand).getItem() == ItemHandler.upgrade && player.getHeldItem(hand).getMetadata() == 0){
 				if(!te.isLocked()){
 					te.setLocked(true);
 					player.sendMessage(new TextComponentTranslation(TextFormatting.AQUA + "[EssencePlus] " + TextFormatting.DARK_RED + "This pedestal is locked!"));
