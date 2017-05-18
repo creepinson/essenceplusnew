@@ -1,10 +1,21 @@
 package me.creepinson.entities.tileentity.base;
 
+import java.util.UUID;
+
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.tileentity.TileEntity;
 
 public class TileEntityBase_Lockable extends TileEntity{
+
+	
+public UUID lockedPlayerUUID;
+	
+public void setUUID(UUID uuid){
+	
+	lockedPlayerUUID = uuid;
+	
+}
 
 public boolean lockable;
 

@@ -1,10 +1,13 @@
 package me.creepinson.handlers;
 
+import java.util.UUID;
+
 import me.creepinson.blocks.Meepino;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
@@ -18,6 +21,12 @@ public class CraftingHandler {
 		
 	
 		GameRegistry.addShapedRecipe(new ItemStack(Meepino.meepinoItem, 2, 1), " L ", "LCL", " L ", 'L', new ItemStack(Items.DYE, 1, 4), 'C', new ItemStack(ItemHandler.Chip, 1, 0));
+
+		NBTTagCompound c1 = new NBTTagCompound();
+		c1.setUniqueId("playerUUID", UUID.randomUUID());
+		ItemStack output1 = new ItemStack(ItemHandler.upgrade, 2, 0);
+		output1.setTagCompound(c1);
+		GameRegistry.addShapedRecipe(output1, " I ", "ICI", " I ", 'I', Items.IRON_INGOT, 'C', new ItemStack(ItemHandler.Chip, 1, 0));
 	    
 		
 		CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(new ItemStack(ItemHandler.Wire, 3, 0), "   ", "III", "   ", 'I', new ItemStack(ItemHandler.CopperIngot, 1)));

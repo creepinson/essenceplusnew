@@ -15,6 +15,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.tileentity.TileEntity;
@@ -96,6 +97,29 @@ public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, En
 		  TileEntityPedastal_Magic te = getTE(world, pos);
           
 		  if(player.getHeldItem(hand).getItem() == ItemHandler.upgrade && player.getHeldItem(hand).getMetadata() == 0){
+			if(!te.lockable){
+				NBTTagCompound comp = new NBTTagCompound();
+				comp.setUniqueId("playerUUID", player.getHeldItem(hand).getTagCompound().getUniqueId("playerUUID"));
+				ItemStack key = new ItemStack(ItemHandler.key, 1, 0);
+				key.setTagCompound(comp);
+				te.getTileData().setUniqueId("playerUUID", player.getHeldItem(hand).getTagCompound().getUniqueId("playerUUID"));
+				player.inventory.removeStackFromSlot(player.inventory.currentItem);
+				te.setLockable(true);
+			
+				  if (!player.inventory.addItemStackToInventory(key)) {
+	                  // Not possible. Throw item in the world
+	                  EntityItem entityItem = new EntityItem(world, pos.getX(), pos.getY()+1, pos.getZ(), key);
+	                  world.spawnEntity(entityItem);
+	              } 
+			}
+			else{
+				 player.sendMessage(new TextComponentTranslation(TextFormatting.AQUA + "[EssencePlus] " + TextFormatting.RED + "You have already applied this upgrade!"));
+	         	  	
+			}
+		  }
+			  
+		  if(player.getHeldItem(hand) == new ItemStack(ItemHandler.key, 1, 1) && player.getHeldItem(hand).getTagCompound().getUniqueId("playerUUID") == te.getTileData().getUniqueId("playerUUID")){
+	  
 				if(!te.isLocked()){
 					te.setLocked(true);
 					player.sendMessage(new TextComponentTranslation(TextFormatting.AQUA + "[EssencePlus] " + TextFormatting.DARK_RED + "This pedestal is locked!"));

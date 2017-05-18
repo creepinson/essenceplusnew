@@ -82,7 +82,7 @@ public class TileEntityPedastal_Magic extends TileEntityBase_Lockable {
         }
         compound.setBoolean("locked", this.locked);
         compound.setBoolean("lockable", this.lockable);
-        
+  
         return super.writeToNBT(compound);
     }
    
