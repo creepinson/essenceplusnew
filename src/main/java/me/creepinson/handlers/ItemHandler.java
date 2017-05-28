@@ -6,6 +6,7 @@ import me.creepinson.handlers.EnumHandler.Circuts;
 import me.creepinson.handlers.EnumHandler.Cores;
 import me.creepinson.handlers.EnumHandler.Essences;
 import me.creepinson.handlers.EnumHandler.SyringeTypes;
+import me.creepinson.handlers.EnumHandler.UpgradeTypes;
 import me.creepinson.handlers.EnumHandler.Wires;
 import me.creepinson.item.Core;
 import me.creepinson.item.Essence;
@@ -132,11 +133,12 @@ public class ItemHandler {
  
       for(int i = 0; i < BaseTypes.values().length; i++)
     		{
-        	  registerRender(upgrade, i, EnumHandler.BaseTypes.values()[i].getName() + "upgrade");
         	  registerRender(key, i, EnumHandler.BaseTypes.values()[i].getName() + "key");
     		}
-      
-      
+      for(int i = 0; i < UpgradeTypes.values().length; i++)
+		{
+      registerRender(upgrade, i, EnumHandler.UpgradeTypes.values()[i].getName() + "upgrade");
+		}
 	 }
 	 
 	 public static void registerRender(Item item, int meta, String fileName){

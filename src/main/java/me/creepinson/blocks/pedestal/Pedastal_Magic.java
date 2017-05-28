@@ -1,6 +1,10 @@
 
 package me.creepinson.blocks.pedestal;
 
+import java.util.List;
+
+import javax.annotation.Nullable;
+
 import me.creepinson.blocks.base.ModBlocks;
 import me.creepinson.entities.tileentity.TESRPedastal_Magic;
 import me.creepinson.entities.tileentity.TileEntityPedastal_Magic;
@@ -10,17 +14,16 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionEffect;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
@@ -32,9 +35,15 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class Pedastal_Magic extends ModBlocks implements ITileEntityProvider{
+
+    public static final AxisAlignedBB BOUNDING = new AxisAlignedBB(0.0D, 0.0D, 0.D, 1.0D, 2.0D, 1.0D);
+
+	
 	public Pedastal_Magic(Material mat, String name, CreativeTabs tab, float hardness, float resistance, int harvest, String tool) {
 		  super(mat, name, tab, hardness, resistance, harvest, tool);
-		 }
+	
+	
+	}
 
 	@Override
 	public TileEntity createNewTileEntity(World worldIn, int meta) {
@@ -57,8 +66,26 @@ public class Pedastal_Magic extends ModBlocks implements ITileEntityProvider{
 			}
 		}
 		}
-	
-	
+	@Override
+	public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB entityBox,
+			java.util.List<AxisAlignedBB> collidingBoxes, Entity entityIn, boolean p_185477_7_) {
+
+		  addCollisionBoxToList(pos, entityBox, collidingBoxes, BOUNDING);
+		
+	}
+
+	 protected static void addCollisionBoxToList(BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, @Nullable AxisAlignedBB blockBox)
+	    {
+	        if (blockBox != NULL_AABB)
+	        {
+	            AxisAlignedBB axisalignedbb = blockBox.offset(pos);
+
+	            if (entityBox.intersectsWith(axisalignedbb))
+	            {
+	                collidingBoxes.add(axisalignedbb);
+	            }
+	        }
+	    }
 	
     @SideOnly(Side.CLIENT)
     public void initModel() {
@@ -96,41 +123,53 @@ public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, En
 		  
 		  TileEntityPedastal_Magic te = getTE(world, pos);
           
-		  if(player.getHeldItem(hand).getItem() == ItemHandler.upgrade && player.getHeldItem(hand).getMetadata() == 0){
-			if(!te.lockable){
-				NBTTagCompound comp = new NBTTagCompound();
-				comp.setUniqueId("playerUUID", player.getHeldItem(hand).getTagCompound().getUniqueId("playerUUID"));
-				ItemStack key = new ItemStack(ItemHandler.key, 1, 0);
-				key.setTagCompound(comp);
-				te.getTileData().setUniqueId("playerUUID", player.getHeldItem(hand).getTagCompound().getUniqueId("playerUUID"));
-				player.inventory.removeStackFromSlot(player.inventory.currentItem);
-				te.setLockable(true);
-			
-				  if (!player.inventory.addItemStackToInventory(key)) {
-	                  // Not possible. Throw item in the world
-	                  EntityItem entityItem = new EntityItem(world, pos.getX(), pos.getY()+1, pos.getZ(), key);
-	                  world.spawnEntity(entityItem);
-	              } 
-			}
-			else{
-				 player.sendMessage(new TextComponentTranslation(TextFormatting.AQUA + "[EssencePlus] " + TextFormatting.RED + "You have already applied this upgrade!"));
-	         	  	
-			}
-		  }
+		 
 			  
-		  if(player.getHeldItem(hand) == new ItemStack(ItemHandler.key, 1, 1) && player.getHeldItem(hand).getTagCompound().getUniqueId("playerUUID") == te.getTileData().getUniqueId("playerUUID")){
-	  
-				if(!te.isLocked()){
+		  if((player.getHeldItem(hand).getItem() == ItemHandler.key  && player.getHeldItem(hand).getMetadata() == 0 && player.getHeldItem(hand).getTagCompound().getUniqueId("playerUUID") == te.getTileData().getUniqueId("playerUUID"))){
+			  if(!te.isLockable()){ 
+					player.sendMessage(new TextComponentTranslation(TextFormatting.AQUA + "[EssencePlus] Block Update>" + TextFormatting.DARK_RED + "This pedestal does not have a locking upgrade applied, therefore you cannot lock it!"));	  
+			  }
+			  else{
+			  if(!te.isLocked()){
 					te.setLocked(true);
-					player.sendMessage(new TextComponentTranslation(TextFormatting.AQUA + "[EssencePlus] " + TextFormatting.DARK_RED + "This pedestal is locked!"));
+					player.sendMessage(new TextComponentTranslation(TextFormatting.AQUA + "[EssencePlus] Security> " + TextFormatting.DARK_RED + "This pedestal has been locked!"));
 				}
 				else {
-					player.sendMessage(new TextComponentTranslation(TextFormatting.AQUA + "[EssencePlus] " + TextFormatting.DARK_GREEN + "This pedestal is has been unlocked!"));
+					player.sendMessage(new TextComponentTranslation(TextFormatting.AQUA + "[EssencePlus] Security> " + TextFormatting.DARK_GREEN + "This pedestal has been unlocked!"));
 			  te.setLocked(false);
 				}
+		  
+			  }
+		  }
+		  else if (player.getHeldItem(hand).getItem() == ItemHandler.key && player.getHeldItem(hand).getMetadata() == 0){
+	
+
+				if(!te.isLockable()){
+					NBTTagCompound comp = new NBTTagCompound();
+					comp.setUniqueId("playerUUID", player.getHeldItem(hand).getTagCompound().getUniqueId("playerUUID"));
+					ItemStack key = new ItemStack(ItemHandler.key, 1, 0);
+					key.setTagCompound(comp);
+					te.getTileData().setUniqueId("playerUUID", player.getHeldItem(hand).getTagCompound().getUniqueId("playerUUID"));
+					player.inventory.removeStackFromSlot(player.inventory.currentItem);
+					te.setLockable(true);
+					player.sendMessage(new TextComponentTranslation(TextFormatting.AQUA + "[EssencePlus] Block Update>" + TextFormatting.DARK_GREEN + "A locking upgrade has just been applied to this pedestal!"));
+					  if (!player.inventory.addItemStackToInventory(key)) {
+		                  // Not possible. Throw item in the world
+		                  EntityItem entityItem = new EntityItem(world, pos.getX(), pos.getY()+1, pos.getZ(), key);
+		                  world.spawnEntity(entityItem);
+		              } 
+				}
+				else{
+					 player.sendMessage(new TextComponentTranslation(TextFormatting.AQUA + "[EssencePlus]  Block Error>" + TextFormatting.RED + "You have already applied this upgrade!"));
+		         	  	
+				}
+			  
+				  
+
+			  
 		  }
 		  else{
-	
+			
 		  
           if (te.getStack().isEmpty()) {
         	  if(te.isLocked()){
@@ -139,6 +178,7 @@ public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, En
          	  
          	  
            }
+        	  
            else{
         	  if (!player.getHeldItem(hand).isEmpty()) {
                   // There is no item in the pedestal and the player is holding an item. We move that item
@@ -168,15 +208,13 @@ public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, En
               } 
               te.setStack(ItemStack.EMPTY);
           }
-      }
-	  }
-	  }
-	  
+          
+          }
+          }
+          } 
       // Return true also on the client to make sure that MC knows we handled this and will not try to place
       // a block on the client
       return true;
   }
 
 }
-
-	

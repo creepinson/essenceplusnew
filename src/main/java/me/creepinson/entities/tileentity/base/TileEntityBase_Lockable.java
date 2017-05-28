@@ -25,7 +25,7 @@ public boolean isLockable() {
 
 public void setLockable(boolean lockable){
 	
-	
+	this.lockable = lockable;
 	
 }
 
