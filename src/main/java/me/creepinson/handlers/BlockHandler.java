@@ -38,8 +38,8 @@ public class BlockHandler {
 	 
 	 public static void register(){
 	
-		  GameRegistry.register(BlockMobChamberCore);
-		  GameRegistry.register(MobChamberCore, BlockMobChamberCore.getRegistryName());
+		  //GameRegistry.register(BlockMobChamberCore);
+		 // GameRegistry.register(MobChamberCore, BlockMobChamberCore.getRegistryName());
 		  GameRegistry.register(BlockPedastal_Magic);
 		  GameRegistry.register(Pedastal_Magic, BlockPedastal_Magic.getRegistryName());
 	 
@@ -49,7 +49,7 @@ public class BlockHandler {
 	 public static void registerRenders(){
 	 
 		 registerRender(BlockMobChamber);
-		 registerRender(BlockMobChamberCore);
+		 // registerRender(BlockMobChamberCore);
 		 registerRender(BlockPedastal_Magic);
 	
 	 }

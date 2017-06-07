@@ -56,7 +56,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SuppressWarnings("unchecked")
 public class Creepino {
-
 	public int mobid = 0;
 	public static Object instance;
 
@@ -71,8 +70,10 @@ public class Creepino {
 	
 	@SideOnly(Side.CLIENT)
 	public void registerRenderers(){
-		RenderLiving customRender = new RenderLiving(Minecraft.getMinecraft().getRenderManager(), new Creepino.ModelCreepino(), 0){protected ResourceLocation getEntityTexture(Entity par1Entity){return new ResourceLocation(RefStrings.MODID + ":" + "textures/entity/Creepino-texturemap.png");}};
-		RenderingRegistry.registerEntityRenderingHandler(EntityCreepino.class, new RenderCreepino(Minecraft.getMinecraft().getRenderManager()));
+	
+			
+	
+		RenderingRegistry.registerEntityRenderingHandler(EntityCreepino.class, new RenderCreepino(Minecraft.getMinecraft().getRenderManager(), new Creepino.ModelCreepino(), 0));
 		RenderingRegistry.registerEntityRenderingHandler(EntityArrowCustom.class, new RenderSnowball(Minecraft.getMinecraft().getRenderManager(), new ItemStack(Bullet.block).getItem() ,Minecraft.getMinecraft().getRenderItem()));
 
 	}
@@ -107,14 +108,20 @@ public EntityArrowCustom(World worldIn, EntityLivingBase shooter) {super(worldIn
    public static class EntityCreepino extends EntityMob  implements IRangedAttackMob 
 	{
 
-	   
 	    private static final DataParameter<Integer> SPOT_COLOR = EntityDataManager.<Integer>createKey(EntityCreepino.class, DataSerializers.VARINT);
-	    private static final String[] TEXTURES = new String[] {"creepino_white.png", "creepino_red.png"};
-	    private final String[] TexturesArray = new String[3];
+	    private static final String[] TEXTURES = new String[] {RefStrings.MODID + "textures/entity/creepino/creepino_white.png", RefStrings.MODID + "textures/entity/creepino/creepino_red.png"};
 	    private String texturePrefix;
 	    private static final String[] TEXTURES_ABBR = new String[] {"cw", "cr"};
+		
 	    
-	   
+	  
+ 
+    public int getTextureType()
+    {
+        return this.dataManager.get(SPOT_COLOR);
+    }
+ 
+	    
 		World world = null;
 	    public EntityCreepino(World var1)
 	    {
@@ -152,8 +159,12 @@ this.tasks.addTask(1, new EntityAIAttackRanged(this, 1.25D, 20, 10.0F));
 
 	    protected void entityInit()
 	    {
+	    	Random rand = new Random();
+
+	    	int  n = rand.nextInt(1) + 0;
 	        super.entityInit();
-	        this.dataManager.register(SPOT_COLOR, Integer.valueOf(0));
+	        this.dataManager.register(SPOT_COLOR, n);
+
 	    }
 	    public void writeEntityToNBT(NBTTagCompound compound)
 	    {
@@ -177,24 +188,14 @@ this.tasks.addTask(1, new EntityAIAttackRanged(this, 1.25D, 20, 10.0F));
 	        int i = this.getSpot();
 
 	     
-	        this.TexturesArray[0] = TexturesArray[i];
-	        this.texturePrefix = "textures/entity/creepino/" + TEXTURES[i];
+	        this.texturePrefix = TEXTURES[i];
 	        
 	       
 	     
 	    }
 
 
-	    @SideOnly(Side.CLIENT)
-	    public String[] getVariantTexturePaths()
-	    {
-	        if (this.texturePrefix == null)
-	        {
-	            this.setTexturePaths();
-	        }
-
-	        return this.TexturesArray;
-	    }
+	 
 
 	    @SideOnly(Side.CLIENT)
 	    public String getTexture()
