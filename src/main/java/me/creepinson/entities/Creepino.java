@@ -385,7 +385,7 @@ public static class ModelCreepino extends ModelBase {
     @Override
     public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw,
     		float headPitch, float scaleFactor, Entity entityIn) {
-    
+    	   this.Head.rotateAngleX = headPitch / (180F / (float)Math.PI);
     	this.Leg.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 1.2F * limbSwingAmount;
     	super.setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scaleFactor, entityIn);
     }

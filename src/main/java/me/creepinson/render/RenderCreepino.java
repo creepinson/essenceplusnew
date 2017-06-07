@@ -33,7 +33,7 @@ public class RenderCreepino extends RenderLiving<EntityCreepino>{
 			case 1:
 			return creepinoRed;
 			default:
-			return creepinoWhite;
+			return creepinoRed;
 			}
 		
 		}

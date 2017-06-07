@@ -136,7 +136,7 @@ this.dropItem(new ItemStack(Items.GOLD_INGOT).getItem(), 1);
 	    @Override
 	    protected net.minecraft.util.SoundEvent getAmbientSound()
 	    {
-			return (net.minecraft.util.SoundEvent)net.minecraft.util.SoundEvent.REGISTRY.getObject(new ResourceLocation("meepersplus:neote.living"));
+			return (net.minecraft.util.SoundEvent)net.minecraft.util.SoundEvent.REGISTRY.getObject(new ResourceLocation("meepersplus:neote.ambient"));
 	    }
 
 	    @Override
@@ -253,6 +253,19 @@ modelRenderer.rotateAngleX = x;
 modelRenderer.rotateAngleY = y;
 modelRenderer.rotateAngleZ = z;
 }
+
+@Override
+   public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw,
+             float headPitch, float scaleFactor, Entity entityIn) {
+	   this.Head.rotateAngleX = headPitch / (180F / (float)Math.PI);
+this.LegL.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 1.2F * limbSwingAmount;
+this.LegR.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float)Math.PI) * 1.2F * limbSwingAmount;
+    
+    
+
+super.setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scaleFactor, entityIn);
+   }
+
 }
 
 }
