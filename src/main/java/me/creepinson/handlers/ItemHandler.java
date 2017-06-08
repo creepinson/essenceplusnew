@@ -82,7 +82,7 @@ public class ItemHandler {
 		 
 		 GameRegistry.register(Core);
 		 GameRegistry.register(key);	
-		 GameRegistry.register(upgrade);	
+		// GameRegistry.register(upgrade);	
 		 GameRegistry.register(Chip);
 		 GameRegistry.register(Wire);
 		 GameRegistry.register(Essence);

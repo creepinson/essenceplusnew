@@ -1,5 +1,5 @@
 {
     "variants": {
-        "meepinosize=3x3": { "model": "meepersplus:meepino" }
+        "meepino_3x3": { "model": "meepersplus:meepino" }
     }
 }

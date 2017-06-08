@@ -61,13 +61,15 @@ public class TileEntityPedastal_Magic extends TileEntityBase_Lockable {
         }
         if (compound.hasKey("locked")) {
         	this.setLocked(compound.getBoolean("locked"));
-        } else {
-        	   this.setLocked(false);
+        } 
+        else{
+        	compound.setBoolean("locked", false);
         }
         if (compound.hasKey("lockable")) {
         	this.setLockable(compound.getBoolean("lockable"));
-        } else {
-        	   this.setLockable(false);
+        } 
+        else{
+        	compound.setBoolean("lockable", false);
         }
     }
 

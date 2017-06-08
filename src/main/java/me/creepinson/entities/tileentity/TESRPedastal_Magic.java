@@ -103,9 +103,9 @@ public class TESRPedastal_Magic  extends TileEntitySpecialRenderer<TileEntityPed
             GlStateManager.enableLighting();
             GlStateManager.pushMatrix();
             // Translate to the center of the block and .9 points higher
-            GlStateManager.translate(.5, 2.4, .5);
+            GlStateManager.translate(.5, 1.5, .5);
             GlStateManager.scale(.4f, .4f, .4f);
-            GlStateManager.translate(.5, 2.4, .5);
+
             GlStateManager.rotate(angle, te.getPos().getX(), te.getPos().getY(), te.getPos().getZ());
           
             Minecraft.getMinecraft().getRenderItem().renderItem(stack, ItemCameraTransforms.TransformType.NONE);
