@@ -3,7 +3,7 @@
   "modid": "meepersplus",
   "name": EssencePlus,
   "description": "My first amazing, random mod",
-  "version": "1.0.0-Alpha",
+  "version": "0.0.1-Alpha",
   "mcversion": "1.11.2",
   "url": "",
   "updateUrl": "",
