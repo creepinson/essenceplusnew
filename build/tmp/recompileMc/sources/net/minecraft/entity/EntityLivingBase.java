@@ -1199,7 +1199,7 @@ public abstract class EntityLivingBase extends Entity
      */
     public void renderBrokenItemStack(ItemStack stack)
     {
-        this.playSound(SoundEvents.ENTITY_ITEM_BREAK, 0.8F, 0.8F + this.world.rand.nextFloat() * 0.4F);
+        this.world.playSound(null, this.posX, this.posY, this.posZ, SoundEvents.ENTITY_ITEM_BREAK, this.getSoundCategory(), 0.8F, 0.8F + this.world.rand.nextFloat() * 0.4F); //Forge: Fix MC-2518 Items are not damaged on the client so client needs packet as well.
 
         for (int i = 0; i < 5; ++i)
         {
@@ -1211,7 +1211,10 @@ public abstract class EntityLivingBase extends Entity
             vec3d1 = vec3d1.rotatePitch(-this.rotationPitch * 0.017453292F);
             vec3d1 = vec3d1.rotateYaw(-this.rotationYaw * 0.017453292F);
             vec3d1 = vec3d1.addVector(this.posX, this.posY + (double)this.getEyeHeight(), this.posZ);
-            this.world.spawnParticle(EnumParticleTypes.ITEM_CRACK, vec3d1.xCoord, vec3d1.yCoord, vec3d1.zCoord, vec3d.xCoord, vec3d.yCoord + 0.05D, vec3d.zCoord, new int[] {Item.getIdFromItem(stack.getItem())});
+            if (this.world instanceof WorldServer) //Forge: Fix MC-2518 spawnParticle is nooped on server, need to use server specific variant
+                ((WorldServer)this.world).spawnParticle(EnumParticleTypes.ITEM_CRACK, vec3d1.xCoord, vec3d1.yCoord, vec3d1.zCoord, 0,  vec3d.xCoord, vec3d.yCoord + 0.05D, vec3d.zCoord, 0.0D, Item.getIdFromItem(stack.getItem()), stack.getMetadata());
+            else //Fix the fact that spawning ItemCrack uses TWO arguments.
+                this.world.spawnParticle(EnumParticleTypes.ITEM_CRACK, vec3d1.xCoord, vec3d1.yCoord, vec3d1.zCoord, vec3d.xCoord, vec3d.yCoord + 0.05D, vec3d.zCoord, Item.getIdFromItem(stack.getItem()), stack.getMetadata());
         }
     }
 
@@ -3113,8 +3116,8 @@ public abstract class EntityLivingBase extends Entity
     }
 
     // FORGE
-    private final net.minecraftforge.items.IItemHandlerModifiable handHandler = new net.minecraftforge.items.ItemStackHandler(handInventory);
-    private final net.minecraftforge.items.IItemHandlerModifiable armorHandler = new net.minecraftforge.items.ItemStackHandler(armorArray);
+    private final net.minecraftforge.items.IItemHandlerModifiable handHandler = new net.minecraftforge.items.wrapper.EntityHandsInvWrapper(this);
+    private final net.minecraftforge.items.IItemHandlerModifiable armorHandler = new net.minecraftforge.items.wrapper.EntityArmorInvWrapper(this);
     private final net.minecraftforge.items.IItemHandler joinedHandler = new net.minecraftforge.items.wrapper.CombinedInvWrapper(armorHandler, handHandler);
 
     @SuppressWarnings("unchecked")

@@ -8,7 +8,7 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class NBTTagList extends NBTBase
+public class NBTTagList extends NBTBase implements java.lang.Iterable<NBTBase>
 {
     private static final Logger LOGGER = LogManager.getLogger();
     /** The array list containing the tags encapsulated in this list. */
@@ -318,4 +318,5 @@ public class NBTTagList extends NBTBase
     {
         return this.tagType;
     }
+    @Override public java.util.Iterator<NBTBase> iterator() {return tagList.iterator();}
 }

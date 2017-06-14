@@ -82,7 +82,7 @@ public class EntityAIRunAroundLikeCrazy extends EntityAIBase
                 int i = this.horseHost.getTemper();
                 int j = this.horseHost.getMaxTemper();
 
-                if (j > 0 && this.horseHost.getRNG().nextInt(j) < i)
+                if (j > 0 && this.horseHost.getRNG().nextInt(j) < i && !net.minecraftforge.event.ForgeEventFactory.onAnimalTame(horseHost, (EntityPlayer)entity))
                 {
                     this.horseHost.setTamedBy((EntityPlayer)entity);
                     return;

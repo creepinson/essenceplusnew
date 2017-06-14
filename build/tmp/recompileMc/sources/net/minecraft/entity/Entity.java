@@ -222,6 +222,10 @@ public abstract class Entity implements ICommandSender, net.minecraftforge.commo
     private boolean isPositionDirty;
     private double[] field_191505_aI;
     private long field_191506_aJ;
+    /**
+     * Setting this to true will prevent the world from calling {@link #onUpdate()} for this entity. 
+     */
+    public boolean updateBlocked;
 
     public Entity(World worldIn)
     {
@@ -1890,6 +1894,7 @@ public abstract class Entity implements ICommandSender, net.minecraftforge.commo
             {
                 compound.setBoolean("Glowing", this.glowing);
             }
+            compound.setBoolean("UpdateBlocked", updateBlocked);
 
             if (this.tags.size() > 0)
             {
@@ -2015,6 +2020,7 @@ public abstract class Entity implements ICommandSender, net.minecraftforge.commo
             this.setSilent(compound.getBoolean("Silent"));
             this.setNoGravity(compound.getBoolean("NoGravity"));
             this.setGlowing(compound.getBoolean("Glowing"));
+            updateBlocked = compound.getBoolean("UpdateBlocked");
 
             if (compound.hasKey("ForgeData")) customEntityData = compound.getCompoundTag("ForgeData");
             if (this.capabilities != null && compound.hasKey("ForgeCaps")) this.capabilities.deserializeNBT(compound.getCompoundTag("ForgeCaps"));
@@ -2211,6 +2217,7 @@ public abstract class Entity implements ICommandSender, net.minecraftforge.commo
             this.motionX = 0.0D;
             this.motionY = 0.0D;
             this.motionZ = 0.0D;
+            if(!updateBlocked)
             this.onUpdate();
 
             if (this.isRiding())

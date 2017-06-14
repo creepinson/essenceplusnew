@@ -548,7 +548,7 @@ public class EntityDragon extends EntityLiving implements IEntityMultiPart, IMob
                         {
                             flag = true;
                         }
-                        else if (block.canEntityDestroy(iblockstate, this.world, blockpos, this))
+                        else if (block.canEntityDestroy(iblockstate, this.world, blockpos, this) && net.minecraftforge.event.ForgeEventFactory.onEntityDestroyBlock(this, blockpos, iblockstate))
                         {
                             if (block != Blocks.COMMAND_BLOCK && block != Blocks.REPEATING_COMMAND_BLOCK && block != Blocks.CHAIN_COMMAND_BLOCK && block != Blocks.IRON_BARS && block != Blocks.END_GATEWAY)
                             {

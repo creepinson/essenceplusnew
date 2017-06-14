@@ -47,7 +47,7 @@ public class CPacketCreativeInventoryAction implements Packet<INetHandlerPlaySer
     public void writePacketData(PacketBuffer buf) throws IOException
     {
         buf.writeShort(this.slotId);
-        buf.writeItemStack(this.stack);
+        net.minecraftforge.common.util.PacketUtil.writeItemStackFromClientToServer(buf, this.stack);
     }
 
     public int getSlotId()

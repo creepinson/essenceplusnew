@@ -521,6 +521,7 @@ public class EntityFishHook extends Entity
         {
             int i = 0;
 
+            net.minecraftforge.event.entity.player.ItemFishedEvent event = null;
             if (this.caughtEntity != null)
             {
                 this.bringInHookedEntity();
@@ -531,8 +532,16 @@ public class EntityFishHook extends Entity
             {
                 LootContext.Builder lootcontext$builder = new LootContext.Builder((WorldServer)this.world);
                 lootcontext$builder.withLuck((float)this.field_191518_aw + this.angler.getLuck());
+                List<ItemStack> result = this.world.getLootTableManager().getLootTableFromLocation(LootTableList.GAMEPLAY_FISHING).generateLootForPools(this.rand, lootcontext$builder.build());
+                event = new net.minecraftforge.event.entity.player.ItemFishedEvent(result, this.inGround ? 2 : 1, this);
+                net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(event);
+                if (event.isCanceled())
+                {
+                    this.setDead();
+                    return event.getRodDamage();
+                }
 
-                for (ItemStack itemstack : this.world.getLootTableManager().getLootTableFromLocation(LootTableList.GAMEPLAY_FISHING).generateLootForPools(this.rand, lootcontext$builder.build()))
+                for (ItemStack itemstack : result)
                 {
                     EntityItem entityitem = new EntityItem(this.world, this.posX, this.posY, this.posZ, itemstack);
                     double d0 = this.angler.posX - this.posX;
@@ -562,7 +571,7 @@ public class EntityFishHook extends Entity
             }
 
             this.setDead();
-            return i;
+            return event == null ? i : event.getRodDamage();
         }
         else
         {

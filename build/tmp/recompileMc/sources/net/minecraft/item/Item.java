@@ -661,6 +661,13 @@ public class Item extends net.minecraftforge.fml.common.registry.IForgeRegistryE
      * Override this method to change the NBT data being sent to the client.
      * You should ONLY override this when you have no other choice, as this might change behavior client side!
      *
+     * Note that this will sometimes be applied multiple times, the following MUST be supported:
+     * Item item = stack.getItem();
+     * NBTTagCompound nbtShare1 = item.getNBTShareTag(stack);
+     * stack.setTagCompound(nbtShare1);
+     * NBTTagCompound nbtShare2 = item.getNBTShareTag(stack);
+     * assert nbtShare1.equals(nbtShare2);
+     *
      * @param stack The stack to send the NBT tag for
      * @return The NBT tag
      */
@@ -1023,6 +1030,18 @@ public class Item extends net.minecraftforge.fml.common.registry.IForgeRegistryE
         {
             stack.itemDamage = 0;
         }
+    }
+
+    /**
+     * Checked from {@link net.minecraft.client.multiplayer.PlayerControllerMP#onPlayerDestroyBlock(BlockPos pos) PlayerControllerMP.onPlayerDestroyBlock()}
+     * when a creative player left-clicks a block with this item.
+     * Also checked from {@link net.minecraftforge.common.ForgeHooks#onBlockBreakEvent(World, GameType, EntityPlayerMP, BlockPos)  ForgeHooks.onBlockBreakEvent()}
+     * to prevent sending an event.
+     * @return true if the given player can destroy specified block in creative mode with this item
+     */
+    public boolean canDestroyBlockInCreative(World world, BlockPos pos, ItemStack stack, EntityPlayer player)
+    {
+        return !(this instanceof ItemSword);
     }
 
     /**

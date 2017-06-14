@@ -70,7 +70,7 @@ public class CPacketClickWindow implements Packet<INetHandlerPlayServer>
         buf.writeByte(this.packedClickData);
         buf.writeShort(this.actionNumber);
         buf.writeEnumValue(this.mode);
-        buf.writeItemStack(this.clickedItem);
+        net.minecraftforge.common.util.PacketUtil.writeItemStackFromClientToServer(buf, this.clickedItem);
     }
 
     public int getWindowId()

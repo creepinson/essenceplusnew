@@ -24,7 +24,7 @@ public class EntityAIBreakDoor extends EntityAIDoorInteract
         {
             return false;
         }
-        else if (!this.theEntity.world.getGameRules().getBoolean("mobGriefing"))
+        else if (!this.theEntity.world.getGameRules().getBoolean("mobGriefing") || !this.theEntity.world.getBlockState(this.doorPosition).getBlock().canEntityDestroy(this.theEntity.world.getBlockState(this.doorPosition), this.theEntity.world, this.doorPosition, this.theEntity) || !net.minecraftforge.event.ForgeEventFactory.onEntityDestroyBlock(this.theEntity, this.doorPosition, this.theEntity.world.getBlockState(this.doorPosition)))
         {
             return false;
         }

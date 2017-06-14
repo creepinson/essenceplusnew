@@ -78,7 +78,7 @@ public class EntitySelector
      */
     private static final Set<String> WORLD_BINDING_ARGS = Sets.newHashSet(new String[] {ARGUMENT_COORDINATE_X, ARGUMENT_COORDINATE_Y, ARGUMENT_COORDINATE_Z, ARGUMENT_DELTA_X, ARGUMENT_DELTA_Y, ARGUMENT_DELTA_Z, ARGUMENT_RANGE_MIN, ARGUMENT_RANGE_MAX});
 
-    private static String addArgument(String argument)
+    public static String addArgument(String argument)
     {
         VALID_ARGUMENTS.add(argument);
         return argument;
@@ -163,7 +163,7 @@ public class EntitySelector
                         list2.addAll(getTagPredicates(map));
                         list2.addAll(getRadiusPredicates(map, vec3d));
                         list2.addAll(getRotationsPredicates(map));
-                        list2.addAll(net.minecraftforge.event.ForgeEventFactory.gatherEntitySelectors(map, s, sender, vec3d));
+                        list2.addAll(net.minecraftforge.fml.common.registry.GameRegistry.createEntitySelectors(map, s, sender, vec3d));
                         list1.addAll(filterResults(map, targetClass, list2, s, world, blockpos));
                     }
                 }

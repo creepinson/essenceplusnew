@@ -1069,7 +1069,7 @@ public class NetHandlerPlayServer implements INetHandlerPlayServer, ITickable
                 else if (packetIn.getAction() == CPacketUseEntity.Action.INTERACT_AT)
                 {
                     EnumHand enumhand1 = packetIn.getHand();
-                    if(net.minecraftforge.common.ForgeHooks.onInteractEntityAt(playerEntity, entity, packetIn.getHitVec(), enumhand1)) return;
+                    if(net.minecraftforge.common.ForgeHooks.onInteractEntityAtAction(playerEntity, entity, packetIn.getHitVec(), enumhand1) != null) return;
                     entity.applyPlayerInteraction(this.playerEntity, packetIn.getHitVec(), enumhand1);
                 }
                 else if (packetIn.getAction() == CPacketUseEntity.Action.ATTACK)
@@ -1167,7 +1167,7 @@ public class NetHandlerPlayServer implements INetHandlerPlayServer, ITickable
             {
                 ItemStack itemstack2 = this.playerEntity.openContainer.slotClick(packetIn.getSlotId(), packetIn.getUsedButton(), packetIn.getClickType(), this.playerEntity);
 
-                if (ItemStack.areItemStacksEqual(packetIn.getClickedItem(), itemstack2))
+                if (ItemStack.areItemStacksEqualUsingNBTShareTag(packetIn.getClickedItem(), itemstack2))
                 {
                     this.playerEntity.connection.sendPacket(new SPacketConfirmTransaction(packetIn.getWindowId(), packetIn.getActionNumber(), true));
                     this.playerEntity.isChangingQuantityOnly = true;

@@ -465,6 +465,8 @@ public abstract class GuiScreen extends Gui implements GuiYesNoCallback
 
     public void sendChatMessage(String msg, boolean addToChat)
     {
+        msg = net.minecraftforge.event.ForgeEventFactory.onClientSendMessage(msg);
+        if (msg.isEmpty()) return;
         if (addToChat)
         {
             this.mc.ingameGUI.getChatGUI().addToSentMessages(msg);

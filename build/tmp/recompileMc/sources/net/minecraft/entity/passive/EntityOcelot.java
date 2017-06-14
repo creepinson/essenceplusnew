@@ -224,7 +224,7 @@ public class EntityOcelot extends EntityTameable
 
             if (!this.world.isRemote)
             {
-                if (this.rand.nextInt(3) == 0)
+                if (this.rand.nextInt(3) == 0 && !net.minecraftforge.event.ForgeEventFactory.onAnimalTame(this, player))
                 {
                     this.setTamed(true);
                     this.setTameSkin(1 + this.world.rand.nextInt(3));

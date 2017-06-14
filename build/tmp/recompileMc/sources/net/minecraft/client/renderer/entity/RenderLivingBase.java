@@ -120,6 +120,7 @@ public abstract class RenderLivingBase<T extends EntityLivingBase> extends Rende
                 {
                     f += f3 * 0.2F;
                 }
+                f2 = f1 - f; // Forge: Fix MC-1207
             }
 
             float f7 = entity.prevRotationPitch + (entity.rotationPitch - entity.prevRotationPitch) * partialTicks;

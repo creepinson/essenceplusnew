@@ -71,7 +71,7 @@ public class EntityWitherSkull extends EntityFireball
         float f = super.getExplosionResistance(explosionIn, worldIn, pos, blockStateIn);
         Block block = blockStateIn.getBlock();
 
-        if (this.isInvulnerable() && block.canEntityDestroy(blockStateIn, worldIn, pos, this))
+        if (this.isInvulnerable() && block.canEntityDestroy(blockStateIn, worldIn, pos, this) && net.minecraftforge.event.ForgeEventFactory.onEntityDestroyBlock(this.shootingEntity, pos, blockStateIn))
         {
             f = Math.min(0.8F, f);
         }

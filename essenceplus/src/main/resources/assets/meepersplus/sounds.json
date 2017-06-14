@@ -1,0 +1,14 @@
+{
+"creepinoDeath": {"category": "hostile","sounds": [{"name": "meepersplus:mob/creepino/creepinoDeath","stream": false}]},
+"creepinoHurt": {"category": "hostile","sounds": [{"name": "meepersplus:mob/creepino/creepinoHurt","stream": false}]},
+"creepinoScreech": {"category": "hostile","sounds": [{"name": "meepersplus:mob/creepino/creepinoScreech","stream": false}]},
+"alexion.death": {"category": "hostile","sounds": [{"name": "meepersplus:mob/alexion/alexiondeath","stream": false}]},
+"alexion.ambient": {"category": "hostile","sounds": [{"name": "meepersplus:mob/alexion/alexionliving","stream": false}]},
+"alexion.hurt": {"category": "hostile","sounds": [{"name": "meepersplus:mob/alexion/alexionhurt","stream": false}]},
+"neote.death": {"category": "hostile","sounds": [{"name": "meepersplus:mob/neote/neotedeath","stream": false}]},
+"neote.ambient": {"category": "hostile","sounds": [{"name": "meepersplus:mob/neote/neoteliving-1","stream": false},{"name": "meepersplus:mob/neote/neoteliving-2","stream": false}]},
+"neote.hurt": {"category": "hostile","sounds": [{"name": "meepersplus:mob/neote/neotehurt","stream": false}]},
+"craeol.death": {"category": "master","sounds": [{"name": "meepersplus:mob/craeol/craeol-death","stream": false}]},
+"craeol.hurt": {"category": "master","sounds": [{"name": "meepersplus:mob/craeol/craeol-hurt","stream": false}]},
+"craeol.ambient": {"category": "master","sounds": [{"name": "meepersplus:mob/craeol/craeol-living","stream": false}]}
+}

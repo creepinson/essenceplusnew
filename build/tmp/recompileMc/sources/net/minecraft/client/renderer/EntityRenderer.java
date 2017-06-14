@@ -446,7 +446,7 @@ public class EntityRenderer implements IResourceManagerReloadListener
 
                         if (d3 < d2 || d2 == 0.0D)
                         {
-                            if (entity1.getLowestRidingEntity() == entity.getLowestRidingEntity() && !entity.canRiderInteract())
+                            if (entity1.getLowestRidingEntity() == entity.getLowestRidingEntity() && !entity1.canRiderInteract())
                             {
                                 if (d2 == 0.0D)
                                 {

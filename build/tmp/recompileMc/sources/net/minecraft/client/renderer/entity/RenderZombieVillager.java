@@ -28,6 +28,7 @@ public class RenderZombieVillager extends RenderBiped<EntityZombieVillager>
      */
     protected ResourceLocation getEntityTexture(EntityZombieVillager entity)
     {
+        if (true) return entity.getForgeProfession().getZombieSkin();
         switch (entity.getProfession())
         {
             case 0:

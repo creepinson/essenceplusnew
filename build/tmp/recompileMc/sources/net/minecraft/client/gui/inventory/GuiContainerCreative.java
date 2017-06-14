@@ -294,7 +294,7 @@ public class GuiContainerCreative extends InventoryEffectRenderer
             {
                 buttonList.add(new GuiButton(101, guiLeft,              guiTop - 50, 20, 20, "<"));
                 buttonList.add(new GuiButton(102, guiLeft + xSize - 20, guiTop - 50, 20, 20, ">"));
-                maxPages = ((tabCount - 12) / 10) + 1;
+                maxPages = (int) Math.ceil((tabCount - 12) / 10D);
             }
         }
         else

@@ -52,9 +52,11 @@ public class EntityZombieVillager extends EntityZombie
         net.minecraftforge.fml.common.registry.VillagerRegistry.onSetProfession(this, profession);
     }
 
+    //Use Forge Variant below
+    @Deprecated
     public int getProfession()
     {
-        return Math.max(((Integer)this.dataManager.get(PROFESSION)).intValue() % 6, 0);
+        return Math.max(((Integer)this.dataManager.get(PROFESSION)).intValue(), 0);
     }
 
     public static void registerFixesZombieVillager(DataFixer fixer)
@@ -69,6 +71,7 @@ public class EntityZombieVillager extends EntityZombie
     {
         super.writeEntityToNBT(compound);
         compound.setInteger("Profession", this.getProfession());
+        compound.setString("ProfessionName", this.getForgeProfession().getRegistryName().toString());
         compound.setInteger("ConversionTime", this.isConverting() ? this.conversionTime : -1);
     }
 
@@ -79,6 +82,12 @@ public class EntityZombieVillager extends EntityZombie
     {
         super.readEntityFromNBT(compound);
         this.setProfession(compound.getInteger("Profession"));
+        if (compound.hasKey("ProfessionName"))
+        {
+            net.minecraftforge.fml.common.registry.VillagerRegistry.VillagerProfession p = net.minecraftforge.fml.common.registry.VillagerRegistry.instance().getRegistry().getValue(new net.minecraft.util.ResourceLocation(compound.getString("ProfessionName")));
+            if (p == null) p = net.minecraftforge.fml.common.registry.VillagerRegistry.FARMER;
+            this.setForgeProfession(p);
+        }
 
         if (compound.hasKey("ConversionTime", 99) && compound.getInteger("ConversionTime") > -1)
         {
@@ -96,21 +105,6 @@ public class EntityZombieVillager extends EntityZombie
         this.setProfession(this.world.rand.nextInt(6));
         return super.onInitialSpawn(difficulty, livingdata);
     }
-
-    @Nullable
-    private net.minecraftforge.fml.common.registry.VillagerRegistry.VillagerProfession prof;
-    public void setForgeProfession(net.minecraftforge.fml.common.registry.VillagerRegistry.VillagerProfession prof)
-    {
-        this.prof = prof;
-        this.setProfession(net.minecraftforge.fml.common.registry.VillagerRegistry.getId(prof));
-    }
-
-    @Nullable
-    public net.minecraftforge.fml.common.registry.VillagerRegistry.VillagerProfession getForgeProfession()
-    {
-        return this.prof;
-    }
-
 
     /**
      * Called to update the entity's position/logic.
@@ -200,7 +194,7 @@ public class EntityZombieVillager extends EntityZombie
     {
         EntityVillager entityvillager = new EntityVillager(this.world);
         entityvillager.copyLocationAndAnglesFrom(this);
-        entityvillager.setProfession(this.getProfession());
+        entityvillager.setProfession(this.getForgeProfession());
         entityvillager.finalizeMobSpawn(this.world.getDifficultyForLocation(new BlockPos(entityvillager)), (IEntityLivingData)null, false);
         entityvillager.setLookingForHome();
 
@@ -295,4 +289,37 @@ public class EntityZombieVillager extends EntityZombie
     {
         return ItemStack.EMPTY;
     }
+
+    /* ======================================== FORGE START =====================================*/
+
+    @Nullable
+    private net.minecraftforge.fml.common.registry.VillagerRegistry.VillagerProfession prof;
+    public void setForgeProfession(net.minecraftforge.fml.common.registry.VillagerRegistry.VillagerProfession prof)
+    {
+        this.prof = prof;
+        this.setProfession(net.minecraftforge.fml.common.registry.VillagerRegistry.getId(prof));
+    }
+
+    public net.minecraftforge.fml.common.registry.VillagerRegistry.VillagerProfession getForgeProfession()
+    {
+        if (this.prof == null)
+        {
+            this.prof = net.minecraftforge.fml.common.registry.VillagerRegistry.getById(this.getProfession());
+            if (this.prof == null)
+                return net.minecraftforge.fml.common.registry.VillagerRegistry.FARMER;
+        }
+        return this.prof;
+    }
+
+    @Override
+    public void notifyDataManagerChange(DataParameter<?> key)
+    {
+        super.notifyDataManagerChange(key);
+        if (key.equals(PROFESSION))
+        {
+            net.minecraftforge.fml.common.registry.VillagerRegistry.onSetProfession(this, this.dataManager.get(PROFESSION));
+        }
+    }
+
+    /* ======================================== FORGE END =====================================*/
 }

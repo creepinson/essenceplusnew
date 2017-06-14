@@ -688,7 +688,8 @@ public class Block extends net.minecraftforge.fml.common.registry.IForgeRegistry
     {
         if (!worldIn.isRemote && !worldIn.restoringBlockSnapshots) // do not drop items while restoring blockstates, prevents item dupe
         {
-            java.util.List<ItemStack> items = getDrops(worldIn, pos, state, fortune);
+            List<ItemStack> items = NonNullList.create();
+            items.addAll(getDrops(worldIn, pos, state, fortune));
             chance = net.minecraftforge.event.ForgeEventFactory.fireBlockHarvesting(items, worldIn, pos, state, fortune, chance, false, harvesters.get());
 
             for (ItemStack item : items)
@@ -751,6 +752,7 @@ public class Block extends net.minecraftforge.fml.common.registry.IForgeRegistry
     /**
      * Returns how much this block can resist explosions from the passed in entity.
      */
+    @Deprecated //Forge: State sensitive version
     public float getExplosionResistance(Entity exploder)
     {
         return this.blockResistance / 5.0F;
@@ -1669,7 +1671,7 @@ public class Block extends net.minecraftforge.fml.common.registry.IForgeRegistry
     }
 
     /**
-     * Location sensitive version of getExplosionRestance
+     * Location sensitive version of getExplosionResistance
      *
      * @param world The current world
      * @param pos Block position in world
@@ -1677,7 +1679,7 @@ public class Block extends net.minecraftforge.fml.common.registry.IForgeRegistry
      * @param explosion The explosion
      * @return The amount of the explosion absorbed.
      */
-    public float getExplosionResistance(World world, BlockPos pos, Entity exploder, Explosion explosion)
+    public float getExplosionResistance(World world, BlockPos pos, @Nullable Entity exploder, Explosion explosion)
     {
         return getExplosionResistance(exploder);
     }

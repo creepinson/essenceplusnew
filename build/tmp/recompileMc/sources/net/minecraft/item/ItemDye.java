@@ -59,7 +59,7 @@ public class ItemDye extends Item
 
             if (enumdyecolor == EnumDyeColor.WHITE)
             {
-                if (applyBonemeal(itemstack, worldIn, pos, player))
+                if (applyBonemeal(itemstack, worldIn, pos, player, hand))
                 {
                     if (!worldIn.isRemote)
                     {
@@ -107,15 +107,24 @@ public class ItemDye extends Item
     public static boolean applyBonemeal(ItemStack stack, World worldIn, BlockPos target)
     {
         if (worldIn instanceof net.minecraft.world.WorldServer)
-            return applyBonemeal(stack, worldIn, target, net.minecraftforge.common.util.FakePlayerFactory.getMinecraft((net.minecraft.world.WorldServer)worldIn));
+            return applyBonemeal(stack, worldIn, target, net.minecraftforge.common.util.FakePlayerFactory.getMinecraft((net.minecraft.world.WorldServer)worldIn), null);
         return false;
     }
 
+    /**
+     * @deprecated Use {@link #applyBonemeal(ItemStack, World, BlockPos, EntityPlayer, EnumHand)} instead.
+     */
+    @Deprecated
     public static boolean applyBonemeal(ItemStack stack, World worldIn, BlockPos target, EntityPlayer player)
+    {
+        return applyBonemeal(stack, worldIn, target, player, null);
+    }
+
+    public static boolean applyBonemeal(ItemStack stack, World worldIn, BlockPos target, EntityPlayer player, @javax.annotation.Nullable EnumHand hand)
     {
         IBlockState iblockstate = worldIn.getBlockState(target);
 
-        int hook = net.minecraftforge.event.ForgeEventFactory.onApplyBonemeal(player, worldIn, target, iblockstate, stack);
+        int hook = net.minecraftforge.event.ForgeEventFactory.onApplyBonemeal(player, worldIn, target, iblockstate, stack, hand);
         if (hook != 0) return hook > 0;
 
         if (iblockstate.getBlock() instanceof IGrowable)

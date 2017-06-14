@@ -179,7 +179,8 @@ public class ShaderGroup
 
                         if (framebuffer2 == null)
                         {
-                            ResourceLocation resourcelocation = new ResourceLocation("textures/effect/" + s3 + ".png");
+                            String[] rl = ResourceLocation.splitObjectName(s3);
+                            ResourceLocation resourcelocation = new ResourceLocation(rl[0], "textures/effect/" + rl[1] + ".png");
                             IResource iresource = null;
 
                             try

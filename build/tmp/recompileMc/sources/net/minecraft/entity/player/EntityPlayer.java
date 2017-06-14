@@ -1146,13 +1146,14 @@ public abstract class EntityPlayer extends EntityLivingBase
     {
         if (damage >= 3.0F && this.activeItemStack.getItem() == Items.SHIELD)
         {
+            ItemStack copyBeforeUse = this.activeItemStack.copy();
             int i = 1 + MathHelper.floor(damage);
             this.activeItemStack.damageItem(i, this);
 
             if (this.activeItemStack.isEmpty())
             {
                 EnumHand enumhand = this.getActiveHand();
-                net.minecraftforge.event.ForgeEventFactory.onPlayerDestroyItem(this, this.activeItemStack, enumhand);
+                net.minecraftforge.event.ForgeEventFactory.onPlayerDestroyItem(this, copyBeforeUse, enumhand);
 
                 if (enumhand == EnumHand.MAIN_HAND)
                 {
@@ -1272,7 +1273,8 @@ public abstract class EntityPlayer extends EntityLivingBase
         }
         else
         {
-            if (net.minecraftforge.common.ForgeHooks.onInteractEntity(this, p_190775_1_, p_190775_2_)) return EnumActionResult.PASS;
+            EnumActionResult cancelResult = net.minecraftforge.common.ForgeHooks.onInteractEntityAction(this, p_190775_1_, p_190775_2_);
+            if (cancelResult != null) return cancelResult;
             ItemStack itemstack = this.getHeldItem(p_190775_2_);
             ItemStack itemstack1 = itemstack.isEmpty() ? ItemStack.EMPTY : itemstack.copy();
 
@@ -1512,8 +1514,8 @@ public abstract class EntityPlayer extends EntityLivingBase
 
                             if (itemstack1.isEmpty())
                             {
-                                this.setHeldItem(EnumHand.MAIN_HAND, ItemStack.EMPTY);
                                 net.minecraftforge.event.ForgeEventFactory.onPlayerDestroyItem(this, beforeHitCopy, EnumHand.MAIN_HAND);
+                                this.setHeldItem(EnumHand.MAIN_HAND, ItemStack.EMPTY);
                             }
                         }
 

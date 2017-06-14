@@ -61,7 +61,8 @@ public class ShaderLoader
 
         if (shaderloader == null)
         {
-            ResourceLocation resourcelocation = new ResourceLocation("shaders/program/" + filename + type.getShaderExtension());
+            String[] rl = ResourceLocation.splitObjectName(filename);
+            ResourceLocation resourcelocation = new ResourceLocation(rl[0], "shaders/program/" + rl[1] + type.getShaderExtension());
             IResource iresource = resourceManager.getResource(resourcelocation);
 
             try

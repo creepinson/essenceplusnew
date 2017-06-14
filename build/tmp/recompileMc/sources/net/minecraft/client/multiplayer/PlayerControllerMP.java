@@ -148,7 +148,7 @@ public class PlayerControllerMP
             return false;
         }
 
-        if (this.currentGameType.isCreative() && !this.mc.player.getHeldItemMainhand().isEmpty() && this.mc.player.getHeldItemMainhand().getItem() instanceof ItemSword)
+        if (this.currentGameType.isCreative() && !stack.isEmpty() && !stack.getItem().canDestroyBlockInCreative(mc.world, pos, stack, mc.player))
         {
             return false;
         }
@@ -422,7 +422,7 @@ public class PlayerControllerMP
             {
                 // Give the server a chance to fire event as well. That way server event is not dependant on client event.
                 this.connection.sendPacket(new CPacketPlayerTryUseItemOnBlock(stack, pos, vec, f, f1, f2));
-                return EnumActionResult.PASS;
+                return event.getCancellationResult();
             }
             EnumActionResult result = EnumActionResult.PASS;
 
@@ -522,7 +522,8 @@ public class PlayerControllerMP
             }
             else
             {
-                if (net.minecraftforge.common.ForgeHooks.onItemRightClick(player, stack)) return net.minecraft.util.EnumActionResult.PASS;
+                EnumActionResult cancelResult = net.minecraftforge.common.ForgeHooks.onItemRightClickAction(player, stack);
+                if (cancelResult != null) return cancelResult;
                 int i = itemstack.getCount();
                 ActionResult<ItemStack> actionresult = itemstack.useItemRightClick(worldIn, player, stack);
                 ItemStack itemstack1 = (ItemStack)actionresult.getResult();
@@ -579,7 +580,9 @@ public class PlayerControllerMP
         this.syncCurrentPlayItem();
         Vec3d vec3d = new Vec3d(raytrace.hitVec.xCoord - target.posX, raytrace.hitVec.yCoord - target.posY, raytrace.hitVec.zCoord - target.posZ);
         this.connection.sendPacket(new CPacketUseEntity(target, heldItem, vec3d));
-        if(net.minecraftforge.common.ForgeHooks.onInteractEntityAt(player, target, raytrace, heldItem)) return EnumActionResult.PASS;
+        if (this.currentGameType == GameType.SPECTATOR) return EnumActionResult.PASS; // don't fire for spectators to match non-specific EntityInteract
+        EnumActionResult cancelResult = net.minecraftforge.common.ForgeHooks.onInteractEntityAtAction(player, target, raytrace, heldItem);
+        if(cancelResult != null) return cancelResult;
         return this.currentGameType == GameType.SPECTATOR ? EnumActionResult.PASS : target.applyPlayerInteraction(player, vec3d, heldItem);
     }
 

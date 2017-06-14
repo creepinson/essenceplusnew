@@ -170,7 +170,7 @@ public class EntityFallingBlock extends Entity
                                     ((BlockFalling)block).onEndFalling(this.world, blockpos1);
                                 }
 
-                                if (this.tileEntityData != null && block instanceof ITileEntityProvider)
+                                if (this.tileEntityData != null && block.hasTileEntity(this.fallTile))
                                 {
                                     TileEntity tileentity = this.world.getTileEntity(blockpos1);
 

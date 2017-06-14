@@ -307,7 +307,7 @@ public class EntityIronGolem extends EntityGolem
     {
         if (!this.isPlayerCreated() && this.attackingPlayer != null && this.villageObj != null)
         {
-            this.villageObj.modifyPlayerReputation(this.attackingPlayer.getName(), -5);
+            this.villageObj.modifyPlayerReputation(this.attackingPlayer.getUniqueID(), -5);
         }
 
         super.onDeath(cause);

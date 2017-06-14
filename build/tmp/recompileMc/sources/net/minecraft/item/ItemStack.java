@@ -121,7 +121,7 @@ public final class ItemStack implements net.minecraftforge.common.capabilities.I
     public ItemStack(NBTTagCompound compound)
     {
         this.capNBT = compound.hasKey("ForgeCaps") ? compound.getCompoundTag("ForgeCaps") : null;
-        this.item = Item.getByNameOrId(compound.getString("id"));
+        this.item = compound.hasKey("id", 8) ? Item.getByNameOrId(compound.getString("id")) : Item.getItemFromBlock(Blocks.AIR); //Forge fix tons of NumberFormatExceptions that are caused by deserializing EMPTY ItemStacks.
         this.stackSize = compound.getByte("Count");
         this.itemDamage = Math.max(0, compound.getShort("Damage"));
 
@@ -1243,5 +1243,43 @@ public final class ItemStack implements net.minecraftforge.common.capabilities.I
     private Item getItemRaw()
     {
         return this.item;
+    }
+
+    /**
+     * Modeled after ItemStack.areItemStacksEqual
+     * Uses Item.getNBTShareTag for comparison instead of NBT and capabilities.
+     * Only used for comparing itemStacks that were transferred from server to client using Item.getNBTShareTag.
+     */
+    public static boolean areItemStacksEqualUsingNBTShareTag(ItemStack stackA, ItemStack stackB)
+    {
+        if (stackA.isEmpty())
+            return stackB.isEmpty();
+        else
+            return !stackB.isEmpty() && stackA.isItemStackEqualUsingNBTShareTag(stackB);
+    }
+
+    /**
+     * Modeled after ItemStack.isItemStackEqual
+     * Uses Item.getNBTShareTag for comparison instead of NBT and capabilities.
+     * Only used for comparing itemStacks that were transferred from server to client using Item.getNBTShareTag.
+     */
+    private boolean isItemStackEqualUsingNBTShareTag(ItemStack other)
+    {
+        return this.stackSize == other.stackSize && this.getItem() == other.getItem() && this.itemDamage == other.itemDamage && areItemStackShareTagsEqual(this, other);
+    }
+
+    /**
+     * Modeled after ItemStack.areItemStackTagsEqual
+     * Uses Item.getNBTShareTag for comparison instead of NBT and capabilities.
+     * Only used for comparing itemStacks that were transferred from server to client using Item.getNBTShareTag.
+     */
+    public static boolean areItemStackShareTagsEqual(ItemStack stackA, ItemStack stackB)
+    {
+        NBTTagCompound shareTagA = stackA.getItem().getNBTShareTag(stackA);
+        NBTTagCompound shareTagB = stackB.getItem().getNBTShareTag(stackB);
+        if (shareTagA == null)
+            return shareTagB == null;
+        else
+            return shareTagB != null && shareTagA.equals(shareTagB);
     }
 }

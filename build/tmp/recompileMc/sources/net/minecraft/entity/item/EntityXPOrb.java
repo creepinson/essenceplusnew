@@ -192,6 +192,7 @@ public class EntityXPOrb extends Entity
      */
     public boolean attackEntityFrom(DamageSource source, float amount)
     {
+        if (this.world.isRemote || this.isDead) return false; //Forge: Fixes MC-53850
         if (this.isEntityInvulnerable(source))
         {
             return false;

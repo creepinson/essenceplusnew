@@ -398,7 +398,7 @@ public class EntityWither extends EntityMob implements IRangedAttackMob
                                 IBlockState iblockstate = this.world.getBlockState(blockpos);
                                 Block block = iblockstate.getBlock();
 
-                                if (!block.isAir(iblockstate, this.world, blockpos) && block.canEntityDestroy(iblockstate, world, blockpos, this))
+                                if (!block.isAir(iblockstate, this.world, blockpos) && block.canEntityDestroy(iblockstate, world, blockpos, this) && net.minecraftforge.event.ForgeEventFactory.onEntityDestroyBlock(this, blockpos, iblockstate))
                                 {
                                     flag = this.world.destroyBlock(blockpos, true) || flag;
                                 }

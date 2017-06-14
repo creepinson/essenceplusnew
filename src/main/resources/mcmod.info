@@ -11,6 +11,6 @@
   "credits": "Alex Couch, bright_spark (provided so much help than the others), Spyeedy, UpcraftLP, TheUnderTaker11, Minecraft Forge Creators Themselves",
   "logoFile": "",
   "screenshots": [],
-  "dependencies": [mod_minecraftForge]
+  "dependencies": ["mod_minecraftForge","mod_cjcore"]
 }
 ]
