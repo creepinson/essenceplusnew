@@ -1,44 +1,40 @@
 package me.creepinson.entities;
 
-import net.minecraftforge.fml.relauncher.SideOnly;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.common.registry.EntityRegistry;
-import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.client.registry.RenderingRegistry;
-
-import net.minecraft.world.biome.Biome;
-import net.minecraft.world.World;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.DamageSource;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Item;
-import net.minecraft.init.Biomes;
-import net.minecraft.init.Items;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.monster.EntityMob;
-import net.minecraft.entity.effect.EntityLightningBolt;
-import net.minecraft.entity.ai.EntityAIWander;
-import net.minecraft.entity.ai.EntityAISwimming;
-import net.minecraft.entity.ai.EntityAIPanic;
-import net.minecraft.entity.ai.EntityAILookIdle;
-import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.EnumCreatureType;
-import net.minecraft.entity.Entity;
-import net.minecraft.client.renderer.entity.RenderLiving;
-import net.minecraft.client.model.ModelRenderer;
-import net.minecraft.client.model.ModelBase;
-import net.minecraft.client.Minecraft;
-
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Random;
 
 import me.creepinson.lib.RefStrings;
-
-import java.util.Iterator;
-import java.util.ArrayList;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.entity.RenderLiving;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityCreature;
+import net.minecraft.entity.EnumCreatureType;
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.EntityAILookIdle;
+import net.minecraft.entity.ai.EntityAIPanic;
+import net.minecraft.entity.ai.EntityAISwimming;
+import net.minecraft.entity.ai.EntityAIWander;
+import net.minecraft.entity.effect.EntityLightningBolt;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Biomes;
+import net.minecraft.init.Items;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.world.World;
+import net.minecraft.world.biome.Biome;
+import net.minecraftforge.fml.client.registry.RenderingRegistry;
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
+import net.minecraftforge.fml.common.registry.EntityRegistry;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SuppressWarnings("unchecked")
 public class Loukatorin {
@@ -61,8 +57,8 @@ public class Loukatorin {
 
 	@SideOnly(Side.CLIENT)
 	public void registerRenderers() {
-		RenderLiving customRender = new RenderLiving(Minecraft.getMinecraft().getRenderManager(),
-				new ModelLoukatorin(), 0) {
+		RenderLiving customRender = new RenderLiving(Minecraft.getMinecraft().getRenderManager(), new ModelLoukatorin(),
+				0) {
 			protected ResourceLocation getEntityTexture(Entity par1Entity) {
 				return new ResourceLocation(RefStrings.MODID + ":" + "textures/entity/loukatorin.png");
 			}
@@ -77,9 +73,11 @@ public class Loukatorin {
 	public void preInit(FMLPreInitializationEvent event) {
 		int entityID = MathHelper.getRandomUUID().hashCode();
 		mobid = entityID;
-		EntityRegistry.registerModEntity(new ResourceLocation("meepersplus:loukatorin"), Loukatorin.EntityLukatorin.class, "loukatorin",
-				entityID, instance, 64, 1, true, (0 << 16) + (0 << 8) + 115, (100 << 16) + (0 << 8) + 102);
-		EntityRegistry.addSpawn(Loukatorin.EntityLukatorin.class, 8, 4, 8, EnumCreatureType.CREATURE, Biomes.COLD_TAIGA);
+		EntityRegistry.registerModEntity(new ResourceLocation("meepersplus:loukatorin"),
+				Loukatorin.EntityLukatorin.class, "loukatorin", entityID, instance, 64, 1, true,
+				(0 << 16) + (0 << 8) + 115, (100 << 16) + (0 << 8) + 102);
+		EntityRegistry.addSpawn(Loukatorin.EntityLukatorin.class, 10, 1, 5, EnumCreatureType.CREATURE,
+				Biomes.COLD_TAIGA);
 
 	}
 
@@ -92,7 +90,7 @@ public class Loukatorin {
 		return ls.toArray(new Biome[ls.size()]);
 	}
 
-	public static class EntityLukatorin extends EntityMob {
+	public static class EntityLukatorin extends EntityCreature {
 		World world = null;
 
 		public EntityLukatorin(World var1) {
@@ -103,15 +101,41 @@ public class Loukatorin {
 			addRandomArmor();
 			setNoAI(!true);
 			this.tasks.addTask(0, new EntityAISwimming(this));
+
 			this.tasks.addTask(6, new EntityAIWander(this, 1.0D));
+
 			this.tasks.addTask(8, new EntityAILookIdle(this));
+
 			this.tasks.addTask(7, new EntityAIWander(this, 0.8D));
+
 			this.tasks.addTask(3, new EntityAILookIdle(this));
+
 			this.tasks.addTask(2, new EntityAISwimming(this));
+
 			this.tasks.addTask(10, new EntityAIPanic(this, 1.2D));
+
 
 		}
 
+		public void onLivingUpdate() {
+
+			super.onLivingUpdate();
+			World par1World = this.world;
+			int par2 = (int) this.posX;
+			int par3 = (int) this.posY;
+			int par4 = (int) this.posZ;
+			Random par5Random = this.rand;
+			if (true)
+				for (int l = 0; l < 4; ++l) {
+					double d0 = (double) ((float) par2 + par5Random.nextFloat());
+					double d1 = (double) ((float) par3 + par5Random.nextFloat());
+					double d2 = (double) ((float) par4 + par5Random.nextFloat());
+					double d3 = 0.0D;
+					double d4 = 0.0D;
+					double d5 = 0.0D;
+					par1World.spawnParticle(EnumParticleTypes.CLOUD, d0, d1, d2, d3, d4, d5);
+				}
+		}
 		protected void applyEntityAttributes() {
 			super.applyEntityAttributes();
 			this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.15D);
@@ -123,7 +147,6 @@ public class Loukatorin {
 		protected void addRandomArmor() {
 
 		}
-
 
 		@Override
 		protected Item getDropItem() {
@@ -195,7 +218,5 @@ public class Loukatorin {
 		}
 
 	}
-
-
 
 }

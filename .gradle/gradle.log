@@ -15,13 +15,13 @@ This mapping 'snapshot_20161220' was designed for MC 1.11! Use at your own peril
 :compileApiJava UP-TO-DATE
 :processApiResources UP-TO-DATE
 :apiClasses UP-TO-DATE
-:sourceMainJava UP-TO-DATE
+:sourceMainJava
 :compileJavaNote: Some input files use or override a deprecated API.
 Note: Recompile with -Xlint:deprecation for details.
 Note: Some input files use unchecked or unsafe operations.
 Note: Recompile with -Xlint:unchecked for details.
 
-:processResources
+:processResources UP-TO-DATE
 :classes
 :jar
 :sourceTestJava UP-TO-DATE
@@ -37,7 +37,8 @@ Note: Recompile with -Xlint:unchecked for details.
 :reobfJar
 :extractRangemapReplacedMain
 D:\modding~creepinson\essenceplusnew\build\sources\main\java
-:retromapReplacedMain UP-TO-DATE
+:retromapReplacedMain
+remapping source...
 :sourceJar
 :assemble
 :check UP-TO-DATE
@@ -45,4 +46,4 @@ D:\modding~creepinson\essenceplusnew\build\sources\main\java
 
 BUILD SUCCESSFUL
 
-Total time: 17.552 secs
+Total time: 16.578 secs

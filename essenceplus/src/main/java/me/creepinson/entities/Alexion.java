@@ -1,53 +1,49 @@
 package me.creepinson.entities;
 
-import net.minecraftforge.fml.relauncher.SideOnly;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.common.registry.EntityRegistry;
-import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.client.registry.RenderingRegistry;
-
-import net.minecraft.world.biome.Biome;
-import net.minecraft.world.World;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.EnumParticleTypes;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.DamageSource;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Item;
-import net.minecraft.init.Items;
-import net.minecraft.entity.projectile.EntityTippedArrow;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.monster.EntityMob;
-import net.minecraft.entity.effect.EntityLightningBolt;
-import net.minecraft.entity.ai.EntityAIWander;
-import net.minecraft.entity.ai.EntityAISwimming;
-import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
-import net.minecraft.entity.ai.EntityAILookIdle;
-import net.minecraft.entity.ai.EntityAIHurtByTarget;
-import net.minecraft.entity.ai.EntityAIAttackRanged;
-import net.minecraft.entity.ai.EntityAIAttackMelee;
-import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.IRangedAttackMob;
-import net.minecraft.entity.EnumCreatureType;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.Entity;
-import net.minecraft.client.renderer.entity.RenderSnowball;
-import net.minecraft.client.renderer.entity.RenderLiving;
-import net.minecraft.client.model.ModelRenderer;
-import net.minecraft.client.model.ModelBase;
-import net.minecraft.client.Minecraft;
-
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Random;
 
 import me.creepinson.handlers.ItemHandler;
 import me.creepinson.lib.RefStrings;
-
-import java.util.Iterator;
-import java.util.ArrayList;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.model.ModelBase;
+import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.client.renderer.entity.RenderLiving;
+import net.minecraft.client.renderer.entity.RenderSnowball;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityCreature;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.EnumCreatureType;
+import net.minecraft.entity.IRangedAttackMob;
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.EntityAIEatGrass;
+import net.minecraft.entity.ai.EntityAIHurtByTarget;
+import net.minecraft.entity.ai.EntityAILookIdle;
+import net.minecraft.entity.ai.EntityAIPanic;
+import net.minecraft.entity.ai.EntityAISwimming;
+import net.minecraft.entity.ai.EntityAIWander;
+import net.minecraft.entity.effect.EntityLightningBolt;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.projectile.EntityTippedArrow;
+import net.minecraft.init.Biomes;
+import net.minecraft.init.Items;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.world.World;
+import net.minecraft.world.biome.Biome;
+import net.minecraftforge.fml.client.registry.RenderingRegistry;
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
+import net.minecraftforge.fml.common.registry.EntityRegistry;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SuppressWarnings("unchecked")
 public class Alexion {
@@ -92,8 +88,7 @@ public class Alexion {
 		EntityRegistry.registerModEntity(new ResourceLocation("meepersplus:alexion"), Alexion.Entityalexion.class,
 				"alexion", entityID, instance, 64, 1, true, (204 << 16) + (0 << 8) + 204,
 				(255 << 16) + (51 << 8) + 102);
-		EntityRegistry.addSpawn(Alexion.Entityalexion.class, 17, 3, 25, EnumCreatureType.MONSTER,
-				Biome.REGISTRY.getObject(new ResourceLocation("forest")));
+		EntityRegistry.addSpawn(Alexion.Entityalexion.class, 10, 1, 5, EnumCreatureType.CREATURE, Biomes.BEACH);
 
 		int entityID2 = MathHelper.getRandomUUID().hashCode();
 		EntityRegistry.registerModEntity(new ResourceLocation("meepersplus:entitybulletalexion"),
@@ -124,7 +119,7 @@ public class Alexion {
 		}
 	}
 
-	public static class Entityalexion extends EntityMob implements IRangedAttackMob {
+	public static class Entityalexion extends EntityCreature implements IRangedAttackMob {
 		World world = null;
 
 		public Entityalexion(World var1) {
@@ -135,18 +130,21 @@ public class Alexion {
 			addRandomArmor();
 			setNoAI(!true);
 			this.tasks.addTask(0, new EntityAISwimming(this));
-			this.tasks.addTask(6, new EntityAIWander(this, 1.0D));
-			this.tasks.addTask(8, new EntityAILookIdle(this));
-			this.targetTasks.addTask(6, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
-			this.targetTasks.addTask(7, new EntityAIHurtByTarget(this, false));
-			this.targetTasks.addTask(6, new EntityAINearestAttackableTarget(this, EntityPlayerMP.class, true));
-			this.targetTasks.addTask(7, new EntityAIHurtByTarget(this, false));
-			this.tasks.addTask(3, new EntityAIWander(this, 0.8D));
-			this.tasks.addTask(1, new EntityAISwimming(this));
-			this.tasks.addTask(6, new EntityAIAttackMelee(this, 1.0D, false));
-			this.tasks.addTask(1, new EntityAIAttackRanged(this, 1.25D, 20, 10.0F));
 
-		}
+			this.tasks.addTask(6, new EntityAIWander(this, 1.0D));
+
+			this.tasks.addTask(8, new EntityAILookIdle(this));
+
+			this.targetTasks.addTask(7, new EntityAIHurtByTarget(this, false));
+
+			this.tasks.addTask(3, new EntityAIWander(this, 0.8D));
+
+			this.tasks.addTask(1, new EntityAISwimming(this));
+
+			this.tasks.addTask(3, new EntityAIEatGrass(this));
+
+			this.tasks.addTask(10, new EntityAIPanic(this, 1.2D));
+}
 
 		protected void applyEntityAttributes() {
 			super.applyEntityAttributes();
@@ -176,11 +174,7 @@ public class Alexion {
 					double d3 = 0.0D;
 					double d4 = 0.0D;
 					double d5 = 0.0D;
-					int i1 = par5Random.nextInt(2) * 2 - 1;
-					d3 = ((double) par5Random.nextFloat() - 0.5D) * 0.2999999985098839D;
-					d4 = ((double) par5Random.nextFloat() - 0.5D) * 0.2999999985098839D;
-					d5 = ((double) par5Random.nextFloat() - 0.5D) * 0.2999999985098839D;
-					par1World.spawnParticle(EnumParticleTypes.CRIT_MAGIC, d0, d1, d2, d3, d4, d5);
+					par1World.spawnParticle(EnumParticleTypes.PORTAL, d0, d1, d2, d3, d4, d5);
 				}
 		}
 

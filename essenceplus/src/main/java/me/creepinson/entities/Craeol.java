@@ -1,54 +1,52 @@
 package me.creepinson.entities;
 
-import net.minecraftforge.fml.relauncher.SideOnly;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.common.registry.EntityRegistry;
-import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.client.registry.RenderingRegistry;
-
-import net.minecraft.world.biome.Biome;
-import net.minecraft.world.World;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.EnumParticleTypes;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.DamageSource;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Item;
-import net.minecraft.init.Items;
-import net.minecraft.entity.projectile.EntityTippedArrow;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.monster.EntityMob;
-import net.minecraft.entity.effect.EntityLightningBolt;
-import net.minecraft.entity.boss.EntityDragon;
-import net.minecraft.entity.ai.EntityAIWatchClosest;
-import net.minecraft.entity.ai.EntityAIWander;
-import net.minecraft.entity.ai.EntityAISwimming;
-import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
-import net.minecraft.entity.ai.EntityAILookIdle;
-import net.minecraft.entity.ai.EntityAIHurtByTarget;
-import net.minecraft.entity.ai.EntityAIAttackRanged;
-import net.minecraft.entity.ai.EntityAIAttackMelee;
-import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.IRangedAttackMob;
-import net.minecraft.entity.EnumCreatureType;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.Entity;
-import net.minecraft.client.renderer.entity.RenderSnowball;
-import net.minecraft.client.renderer.entity.RenderLiving;
-import net.minecraft.client.model.ModelRenderer;
-import net.minecraft.client.model.ModelBase;
-import net.minecraft.client.Minecraft;
-
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Random;
 
 import me.creepinson.lib.RefStrings;
-
-import java.util.Iterator;
-import java.util.ArrayList;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.model.ModelBase;
+import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.client.renderer.entity.RenderLiving;
+import net.minecraft.client.renderer.entity.RenderSnowball;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityCreature;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.EnumCreatureType;
+import net.minecraft.entity.IRangedAttackMob;
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.EntityAIAttackMelee;
+import net.minecraft.entity.ai.EntityAIHurtByTarget;
+import net.minecraft.entity.ai.EntityAILookIdle;
+import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
+import net.minecraft.entity.ai.EntityAISwimming;
+import net.minecraft.entity.ai.EntityAIWander;
+import net.minecraft.entity.ai.EntityAIWatchClosest;
+import net.minecraft.entity.boss.EntityDragon;
+import net.minecraft.entity.effect.EntityLightningBolt;
+import net.minecraft.entity.monster.EntityCreeper;
+import net.minecraft.entity.monster.EntityZombie;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.projectile.EntityTippedArrow;
+import net.minecraft.init.Biomes;
+import net.minecraft.init.Items;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.world.World;
+import net.minecraft.world.biome.Biome;
+import net.minecraftforge.fml.client.registry.RenderingRegistry;
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
+import net.minecraftforge.fml.common.registry.EntityRegistry;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SuppressWarnings("unchecked")
 
@@ -93,8 +91,7 @@ public class Craeol {
 		mobid = entityID;
 		EntityRegistry.registerModEntity(new ResourceLocation("meepersplus:craeol"), Craeol.Entitycraeol.class,
 				"craeol", entityID, instance, 64, 1, true, (255 << 16) + (0 << 8) + 0, (204 << 16) + (204 << 8) + 204);
-		EntityRegistry.addSpawn(Craeol.Entitycraeol.class, 19, 3, 30, EnumCreatureType.MONSTER,
-				Biome.REGISTRY.getObject(new ResourceLocation("desert")));
+		EntityRegistry.addSpawn(Craeol.Entitycraeol.class, 10, 1, 5, EnumCreatureType.CREATURE, Biomes.BEACH);
 
 		int entityID2 = MathHelper.getRandomUUID().hashCode();
 		EntityRegistry.registerModEntity(new ResourceLocation("meepersplus:entitybulletcraeol"),
@@ -125,7 +122,7 @@ public class Craeol {
 		}
 	}
 
-	public static class Entitycraeol extends EntityMob implements IRangedAttackMob {
+	public static class Entitycraeol extends EntityCreature implements IRangedAttackMob {
 		World world = null;
 
 		public Entitycraeol(World var1) {
@@ -136,19 +133,33 @@ public class Craeol {
 			addRandomArmor();
 			setNoAI(!true);
 			this.tasks.addTask(0, new EntityAISwimming(this));
+
 			this.tasks.addTask(6, new EntityAIWander(this, 1.0D));
+
 			this.tasks.addTask(8, new EntityAILookIdle(this));
-			this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityDragon.class, true));
+
 			this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, false));
+
 			this.tasks.addTask(1, new EntityAILookIdle(this));
+
 			this.tasks.addTask(1, new EntityAISwimming(this));
+
 			this.tasks.addTask(4, new EntityAIWatchClosest(this, EntityDragon.class, 6.0F));
+
 			this.tasks.addTask(3, new EntityAIAttackMelee(this, 1.0D, false));
-			this.targetTasks.addTask(9, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
+
+			this.targetTasks.addTask(9, new EntityAINearestAttackableTarget(this, EntityZombie.class, true));
+
+			this.targetTasks.addTask(9, new EntityAINearestAttackableTarget(this, EntityCreeper.class, true));
+
 			this.targetTasks.addTask(10, new EntityAIHurtByTarget(this, false));
-			this.targetTasks.addTask(9, new EntityAINearestAttackableTarget(this, EntityPlayerMP.class, true));
+
 			this.targetTasks.addTask(10, new EntityAIHurtByTarget(this, false));
-			this.tasks.addTask(1, new EntityAIAttackRanged(this, 1.25D, 20, 10.0F));
+
+			this.tasks.addTask(6, new EntityAIAttackMelee(this, 1.0D, false));
+
+
+
 
 		}
 
@@ -180,11 +191,7 @@ public class Craeol {
 					double d3 = 0.0D;
 					double d4 = 0.0D;
 					double d5 = 0.0D;
-					int i1 = par5Random.nextInt(2) * 2 - 1;
-					d3 = ((double) par5Random.nextFloat() - 0.5D) * 0.3999999985098839D;
-					d4 = ((double) par5Random.nextFloat() - 0.5D) * 0.3999999985098839D;
-					d5 = ((double) par5Random.nextFloat() - 0.5D) * 0.3999999985098839D;
-					par1World.spawnParticle(EnumParticleTypes.SPIT, d0, d1, d2, d3, d4, d5);
+					par1World.spawnParticle(EnumParticleTypes.LAVA, d0, d1, d2, d3, d4, d5);
 				}
 		}
 

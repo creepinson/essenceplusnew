@@ -1,44 +1,42 @@
 package me.creepinson.entities;
 
-import net.minecraftforge.fml.relauncher.SideOnly;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.common.registry.EntityRegistry;
-import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.client.registry.RenderingRegistry;
-
-import net.minecraft.world.biome.Biome;
-import net.minecraft.world.World;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.DamageSource;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Item;
-import net.minecraft.init.Biomes;
-import net.minecraft.init.Items;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.monster.EntityMob;
-import net.minecraft.entity.effect.EntityLightningBolt;
-import net.minecraft.entity.ai.EntityAIWander;
-import net.minecraft.entity.ai.EntityAISwimming;
-import net.minecraft.entity.ai.EntityAIPanic;
-import net.minecraft.entity.ai.EntityAILookIdle;
-import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.EnumCreatureType;
-import net.minecraft.entity.Entity;
-import net.minecraft.client.renderer.entity.RenderLiving;
-import net.minecraft.client.model.ModelRenderer;
-import net.minecraft.client.model.ModelBase;
-import net.minecraft.client.Minecraft;
-
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Random;
 
 import me.creepinson.lib.RefStrings;
-
-import java.util.Iterator;
-import java.util.ArrayList;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.model.ModelBase;
+import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.client.renderer.entity.RenderLiving;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityCreature;
+import net.minecraft.entity.EnumCreatureType;
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.EntityAILookIdle;
+import net.minecraft.entity.ai.EntityAIPanic;
+import net.minecraft.entity.ai.EntityAISwimming;
+import net.minecraft.entity.ai.EntityAIWander;
+import net.minecraft.entity.effect.EntityLightningBolt;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Biomes;
+import net.minecraft.init.Items;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.world.World;
+import net.minecraft.world.biome.Biome;
+import net.minecraftforge.fml.client.registry.RenderingRegistry;
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
+import net.minecraftforge.fml.common.registry.EntityRegistry;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SuppressWarnings("unchecked")
 public class Neote {
@@ -79,7 +77,7 @@ public class Neote {
 		mobid = entityID;
 		EntityRegistry.registerModEntity(new ResourceLocation("meepersplus:neote"), Neote.Entityneote.class, "neote",
 				entityID, instance, 64, 1, true, (0 << 16) + (0 << 8) + 153, (204 << 16) + (0 << 8) + 102);
-		EntityRegistry.addSpawn(Neote.Entityneote.class, 8, 4, 5, EnumCreatureType.CREATURE, Biomes.MESA);
+		EntityRegistry.addSpawn(Neote.Entityneote.class, 10, 1, 5, EnumCreatureType.CREATURE, Biomes.DESERT);
 
 	}
 
@@ -92,7 +90,7 @@ public class Neote {
 		return ls.toArray(new Biome[ls.size()]);
 	}
 
-	public static class Entityneote extends EntityMob {
+	public static class Entityneote extends EntityCreature {
 		World world = null;
 
 		public Entityneote(World var1) {
@@ -103,15 +101,40 @@ public class Neote {
 			addRandomArmor();
 			setNoAI(!true);
 			this.tasks.addTask(0, new EntityAISwimming(this));
+
 			this.tasks.addTask(6, new EntityAIWander(this, 1.0D));
+
 			this.tasks.addTask(8, new EntityAILookIdle(this));
+
 			this.tasks.addTask(7, new EntityAIWander(this, 0.8D));
+
 			this.tasks.addTask(3, new EntityAILookIdle(this));
+
 			this.tasks.addTask(2, new EntityAISwimming(this));
+
 			this.tasks.addTask(10, new EntityAIPanic(this, 1.2D));
 
 		}
 
+		public void onLivingUpdate() {
+
+			super.onLivingUpdate();
+			World par1World = this.world;
+			int par2 = (int) this.posX;
+			int par3 = (int) this.posY;
+			int par4 = (int) this.posZ;
+			Random par5Random = this.rand;
+			if (true)
+				for (int l = 0; l < 4; ++l) {
+					double d0 = (double) ((float) par2 + par5Random.nextFloat());
+					double d1 = (double) ((float) par3 + par5Random.nextFloat());
+					double d2 = (double) ((float) par4 + par5Random.nextFloat());
+					double d3 = 0.0D;
+					double d4 = 0.0D;
+					double d5 = 0.0D;
+					par1World.spawnParticle(EnumParticleTypes.LAVA, d0, d1, d2, d3, d4, d5);
+				}
+		}
 		protected void applyEntityAttributes() {
 			super.applyEntityAttributes();
 			this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.65D);
@@ -124,13 +147,10 @@ public class Neote {
 
 		}
 
-		protected void dropRareDrop(int par1) {
-			this.dropItem(new ItemStack(Items.GOLD_INGOT).getItem(), 1);
-		}
 
 		@Override
 		protected Item getDropItem() {
-			return new ItemStack(Items.IRON_INGOT).getItem();
+			return new ItemStack(Items.BEEF).getItem();
 		}
 
 		@Override

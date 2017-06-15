@@ -31,6 +31,7 @@ import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.passive.EntityChicken;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.projectile.EntityTippedArrow;
 import net.minecraft.init.Biomes;
 import net.minecraft.item.Item;
@@ -90,8 +91,7 @@ public class Creepino {
 		int entityID = MathHelper.getRandomUUID().hashCode();
 		mobid = entityID;
 
-		EntityRegistry.addSpawn(EntityCreepino.class, 5, 4, 5, EnumCreatureType.MONSTER, Biomes.FOREST);
-
+		
 		int entityID2 = MathHelper.getRandomUUID().hashCode();
 
 	}
@@ -142,19 +142,35 @@ public class Creepino {
 			this.isImmuneToFire = false;
 			addRandomArmor();
 			setNoAI(!true);
-
 			this.tasks.addTask(0, new EntityAISwimming(this));
+
 			this.tasks.addTask(6, new EntityAIWander(this, 1.0D));
+
 			this.tasks.addTask(8, new EntityAILookIdle(this));
+
 			this.tasks.addTask(2, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
+
 			this.tasks.addTask(3, new EntityAIAttackMelee(this, 1.0D, false));
+
 			this.tasks.addTask(4, new EntityAILeapAtTarget(this, 0.8F));
+
+			this.targetTasks.addTask(4, new EntityAINearestAttackableTarget(this, EntityPlayerMP.class, true));
+
 			this.targetTasks.addTask(4, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
+
 			this.targetTasks.addTask(6, new EntityAINearestAttackableTarget(this, EntityChicken.class, true));
+
 			this.targetTasks.addTask(5, new EntityAIHurtByTarget(this, false));
+
 			this.tasks.addTask(1, new EntityAILookIdle(this));
+
 			this.tasks.addTask(1, new EntityAIWander(this, 0.8D));
-			this.tasks.addTask(1, new EntityAIAttackRanged(this, 1.25D, 20, 10.0F));
+
+			this.tasks.addTask(6, new EntityAIAttackMelee(this, 1.0D, false));
+
+this.targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
+
+this.targetTasks.addTask(2, new EntityAIHurtByTarget(this, false));
 
 		}
 
@@ -234,10 +250,6 @@ public class Creepino {
 					double d3 = 0.0D;
 					double d4 = 0.0D;
 					double d5 = 0.0D;
-					int i1 = par5Random.nextInt(2) * 2 - 1;
-					d3 = ((double) par5Random.nextFloat() - 0.5D) * 0.49999999850988386D;
-					d4 = ((double) par5Random.nextFloat() - 0.5D) * 0.49999999850988386D;
-					d5 = ((double) par5Random.nextFloat() - 0.5D) * 0.49999999850988386D;
 					par1World.spawnParticle(EnumParticleTypes.SLIME, d0, d1, d2, d3, d4, d5);
 				}
 		}

@@ -17,6 +17,8 @@ import me.creepinson.handlers.MobDropsHandler;
 import me.creepinson.item.Bullet;
 import me.creepinson.item.ButtKicker;
 import me.creepinson.lib.RefStrings;
+import net.minecraft.entity.EnumCreatureType;
+import net.minecraft.init.Biomes;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
@@ -168,7 +170,9 @@ GameRegistry.register(new net.minecraft.util.SoundEvent(sound8).setRegistryName(
     		GameRegistry.register(new net.minecraft.util.SoundEvent(sound2).setRegistryName(sound2));
 //END SOUNDS
         	registerEntity(EntityCreepino.class, "Creepino", 0, (0 << 16) + (255 << 8) + 51, (204 << 16) + (0 << 8) + 0);
-        registerEntityNoEgg(EntityArrowCustom.class, "entityBullet", 1);
+        	EntityRegistry.addSpawn(EntityCreepino.class, 10, 1, 5, EnumCreatureType.MONSTER, Biomes.JUNGLE);
+
+        	registerEntityNoEgg(EntityArrowCustom.class, "entityBullet", 1);
 		proxy.preInit();
      
     }
