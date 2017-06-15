@@ -170,7 +170,8 @@ GameRegistry.register(new net.minecraft.util.SoundEvent(sound8).setRegistryName(
     		GameRegistry.register(new net.minecraft.util.SoundEvent(sound2).setRegistryName(sound2));
 //END SOUNDS
         	registerEntity(EntityCreepino.class, "Creepino", 0, (0 << 16) + (255 << 8) + 51, (204 << 16) + (0 << 8) + 0);
-        	EntityRegistry.addSpawn(EntityCreepino.class, 10, 1, 5, EnumCreatureType.MONSTER, Biomes.JUNGLE);
+        	EntityRegistry.addSpawn(EntityCreepino.class, 12, 1, 5, EnumCreatureType.MONSTER, Biomes.JUNGLE);
+        	EntityRegistry.addSpawn(EntityCreepino.class, 12, 1, 5, EnumCreatureType.MONSTER, Biomes.JUNGLE_HILLS);
 
         	registerEntityNoEgg(EntityArrowCustom.class, "entityBullet", 1);
 		proxy.preInit();

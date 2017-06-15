@@ -91,7 +91,7 @@ public class Craeol {
 		mobid = entityID;
 		EntityRegistry.registerModEntity(new ResourceLocation("meepersplus:craeol"), Craeol.Entitycraeol.class,
 				"craeol", entityID, instance, 64, 1, true, (255 << 16) + (0 << 8) + 0, (204 << 16) + (204 << 8) + 204);
-		EntityRegistry.addSpawn(Craeol.Entitycraeol.class, 10, 1, 5, EnumCreatureType.CREATURE, Biomes.BEACH);
+		EntityRegistry.addSpawn(Craeol.Entitycraeol.class, 9, 4, 8, EnumCreatureType.CREATURE, Biomes.PLAINS);
 
 		int entityID2 = MathHelper.getRandomUUID().hashCode();
 		EntityRegistry.registerModEntity(new ResourceLocation("meepersplus:entitybulletcraeol"),
@@ -191,7 +191,7 @@ public class Craeol {
 					double d3 = 0.0D;
 					double d4 = 0.0D;
 					double d5 = 0.0D;
-					par1World.spawnParticle(EnumParticleTypes.LAVA, d0, d1, d2, d3, d4, d5);
+					par1World.spawnParticle(EnumParticleTypes.DRIP_LAVA, d0, d1, d2, d3, d4, d5);
 				}
 		}
 

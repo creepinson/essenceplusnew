@@ -78,6 +78,7 @@ public class Neote {
 		EntityRegistry.registerModEntity(new ResourceLocation("meepersplus:neote"), Neote.Entityneote.class, "neote",
 				entityID, instance, 64, 1, true, (0 << 16) + (0 << 8) + 153, (204 << 16) + (0 << 8) + 102);
 		EntityRegistry.addSpawn(Neote.Entityneote.class, 10, 1, 5, EnumCreatureType.CREATURE, Biomes.DESERT);
+		EntityRegistry.addSpawn(Neote.Entityneote.class, 10, 1, 5, EnumCreatureType.CREATURE, Biomes.DESERT_HILLS);
 
 	}
 
@@ -132,7 +133,7 @@ public class Neote {
 					double d3 = 0.0D;
 					double d4 = 0.0D;
 					double d5 = 0.0D;
-					par1World.spawnParticle(EnumParticleTypes.LAVA, d0, d1, d2, d3, d4, d5);
+					par1World.spawnParticle(EnumParticleTypes.DRIP_LAVA, d0, d1, d2, d3, d4, d5);
 				}
 		}
 		protected void applyEntityAttributes() {

@@ -190,7 +190,11 @@ this.targetTasks.addTask(2, new EntityAIHurtByTarget(this, false));
 			this.dataManager.register(SPOT_COLOR, n);
 
 		}
-
+		@Override
+		protected boolean isValidLightLevel()
+		{
+		    return true; //lets it spawn during the day
+		}
 		public void writeEntityToNBT(NBTTagCompound compound) {
 			super.writeEntityToNBT(compound);
 			compound.setInteger("Variant", this.getSpot());
