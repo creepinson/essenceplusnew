@@ -43,6 +43,7 @@ public class ClientProxy extends CommonProxy {
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityPedastal_Magic.class, new TESRPedastal_Magic());
 
 		NetworkRegistry.INSTANCE.registerGuiHandler(Main.instance, new GuiHandler());
+	
 	}
 
 	@Override

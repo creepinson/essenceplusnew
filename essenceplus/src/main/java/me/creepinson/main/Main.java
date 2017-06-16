@@ -4,6 +4,7 @@ package me.creepinson.main;
 
 import java.util.Random;
 
+import me.creepinson.capability.CapabilityHandler;
 import me.creepinson.entities.Alexion;
 import me.creepinson.entities.Craeol;
 import me.creepinson.entities.Creepino;
@@ -201,7 +202,8 @@ GameRegistry.register(new net.minecraft.util.SoundEvent(sound8).setRegistryName(
 		proxy.init();
     	MinecraftForge.EVENT_BUS.register(new EventHandlerMOD());
     	MinecraftForge.EVENT_BUS.register(new MobDropsHandler());
-    
+    	MinecraftForge.EVENT_BUS.register(new CapabilityHandler());
+        
     	
     }
     @EventHandler

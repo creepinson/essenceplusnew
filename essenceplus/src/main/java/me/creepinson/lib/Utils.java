@@ -11,7 +11,7 @@ import net.minecraftforge.oredict.OreDictionary;
 
 public class Utils {
 
-	public static Logger logger;
+	private static Logger logger;
 
 	public static Logger getLogger() {
 		if (logger == null) {

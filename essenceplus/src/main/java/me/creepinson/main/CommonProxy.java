@@ -1,17 +1,21 @@
 package me.creepinson.main;
 
-import me.creepinson.entities.tileentity.TileEntityMeepino;
+import java.util.concurrent.Callable;
+
+import me.creepinson.capability.IMagicalDust;
+import me.creepinson.capability.MagicDustStorage;
+import me.creepinson.capability.MagicalDust;
 import me.creepinson.entities.tileentity.TileEntityPedastal_Magic;
 import me.creepinson.handlers.BlockHandler;
 import me.creepinson.handlers.CraftingHandler;
 import me.creepinson.handlers.ItemHandler;
 import me.creepinson.lib.IProxy;
 import me.creepinson.lib.RefStrings;
-import me.creepinson.packet.CustomPacket;
-import me.creepinson.packet.CustomPacket2;
-
+import me.creepinson.packet.GetManaHandler;
+import me.creepinson.packet.PacketGetMana;
 import net.minecraft.client.renderer.block.model.ModelBakery;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -29,6 +33,7 @@ public class CommonProxy implements IProxy {
 		ItemHandler.init();
 		ItemHandler.register();
 
+		
 	}
 
 	public static final SimpleNetworkWrapper INSTANCE = NetworkRegistry.INSTANCE.newSimpleChannel("meepersplus");
@@ -38,9 +43,21 @@ public class CommonProxy implements IProxy {
 
 		GameRegistry.registerTileEntity(TileEntityPedastal_Magic.class,
 				RefStrings.MODID + ":" + "tileEntityPedastalMagic");
-
+		CapabilityManager.INSTANCE.register(IMagicalDust.class, new MagicDustStorage(),  new Factory());
+		INSTANCE.registerMessage(GetManaHandler.class, PacketGetMana.class, 0, Side.SERVER);
+		
+	
 	}
+	
+	private static class Factory implements Callable<IMagicalDust> {
 
+		  @Override
+		  public IMagicalDust call() throws Exception {
+		    return new MagicalDust();
+		  }
+		}
+	
+	
 	@Override
 	public void postInit() {
 

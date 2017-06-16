@@ -124,8 +124,8 @@ public class Creepino {
 		private static final DataParameter<Integer> SPOT_COLOR = EntityDataManager
 				.<Integer>createKey(EntityCreepino.class, DataSerializers.VARINT);
 		private static final String[] TEXTURES = new String[] {
-				RefStrings.MODID + "textures/entity/creepino/creepino_white.png",
-				RefStrings.MODID + "textures/entity/creepino/creepino_red.png" };
+				RefStrings.MODID, "textures/entity/creepino/creepino_white.png",
+				RefStrings.MODID, "textures/entity/creepino/creepino_red.png" };
 		private String texturePrefix;
 		private static final String[] TEXTURES_ABBR = new String[] { "cw", "cr" };
 
@@ -185,7 +185,7 @@ this.targetTasks.addTask(2, new EntityAIHurtByTarget(this, false));
 		protected void entityInit() {
 			Random rand = new Random();
 
-			int n = rand.nextInt(1) + 0;
+			int n = rand.nextInt(2);
 			super.entityInit();
 			this.dataManager.register(SPOT_COLOR, n);
 

@@ -191,7 +191,7 @@ public class Alexion {
 
 		@Override
 		protected Item getDropItem() {
-			return new ItemStack(ItemHandler.Essence, 3).getItem();
+			return new ItemStack(ItemHandler.Essence, 3, 4).getItem();
 		}
 
 		@Override
