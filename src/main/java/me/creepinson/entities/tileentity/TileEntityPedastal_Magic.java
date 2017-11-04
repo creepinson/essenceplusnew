@@ -12,7 +12,7 @@ public class TileEntityPedastal_Magic extends TileEntityBase_Lockable {
 	private ItemStack stack = ItemStack.EMPTY;
 
 	public ItemStack getStack() {
-		return stack;
+		return this.stack;
 	}
 
 	public void setStack(ItemStack stack) {
@@ -58,9 +58,9 @@ public class TileEntityPedastal_Magic extends TileEntityBase_Lockable {
 	public void readFromNBT(NBTTagCompound compound) {
 		super.readFromNBT(compound);
 		if (compound.hasKey("item")) {
-			stack = new ItemStack(compound.getCompoundTag("item"));
+			setStack(new ItemStack(compound.getCompoundTag("item")));
 		} else {
-			stack = ItemStack.EMPTY;
+			setStack(ItemStack.EMPTY);
 		}
 		if (compound.hasKey("locked")) {
 			this.setLocked(compound.getBoolean("locked"));
@@ -73,14 +73,15 @@ public class TileEntityPedastal_Magic extends TileEntityBase_Lockable {
 	@Override
 	public NBTTagCompound writeToNBT(NBTTagCompound compound) {
 
-		if (stack.isEmpty()) {
-
-			stack.writeToNBT(compound);
+		if (!getStack().isEmpty()) {
+			NBTTagCompound item = new NBTTagCompound();
+			getStack().writeToNBT(item);
+			compound.setTag("item", item);
 
 		}
 		compound.setBoolean("locked", this.isLocked());
 	
-		return super.writeToNBT(compound);
+		return compound;
 	}
 
 }
